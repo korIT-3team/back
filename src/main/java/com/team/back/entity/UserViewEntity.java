@@ -11,10 +11,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "employee")
-@Table(name = "employee")
-public class EmployeeEntity {
+@Entity(name = "user_view")
+@Table(name = "user_view")
+public class UserViewEntity {
      @Id
-     private Integer employeeCode;
-     private String password;
+     private int employeeCode;
+     private String employeeName;
+     private int departmentCode;
+     private String departmentName;
 }
