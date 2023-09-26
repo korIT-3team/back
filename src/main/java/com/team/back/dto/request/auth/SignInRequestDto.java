@@ -1,4 +1,4 @@
-package com.team.back.dto.request;
+package com.team.back.dto.request.auth;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
