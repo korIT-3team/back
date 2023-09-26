@@ -19,10 +19,12 @@ public class MainServiceImplement implements MainService {
      @Override
     //!       로그인 메서드            //
     public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {
-       
+        int employeeCode;
         try{
+            employeeCode =dto.getEmployeeCode();
             // 이메일로 entity 조회 //
-            boolean hasSucess = mainRepository.existsByEmployeeCode(dto.getEmployeeCode());
+            boolean hasSucess = mainRepository.existsByEmployeeCode(employeeCode);
+            
             System.out.println(hasSucess);
 
         } catch(Exception exception){
@@ -30,6 +32,6 @@ public class MainServiceImplement implements MainService {
             return ResponseDto.databaseError();
         }
 
-        return SignInResponseDto.success();
+        return SignInResponseDto.success(employeeCode);
     }
 }
