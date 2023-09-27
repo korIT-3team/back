@@ -5,4 +5,6 @@ public interface ResponseCode {
      String DATABASE_ERROR = "DE";
      String SIGN_IN_FAIL = "SF";
      String NO_EXISTED_USER = "NU";
+     String VALIDATE_FAIL = "VF";
+     String NO_PERMISSION = "NP";
 }

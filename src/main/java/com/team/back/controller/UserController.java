@@ -34,7 +34,7 @@ public class UserController {
      }
 
      // API : 로그인 유저 정보 불러오기 메서드 //
-     @GetMapping("")
+     @GetMapping("/user")
      public ResponseEntity<? super GetSignInUserResponseDto> getSignInUser(
      @AuthenticationPrincipal Integer employeeCode
      ) {
