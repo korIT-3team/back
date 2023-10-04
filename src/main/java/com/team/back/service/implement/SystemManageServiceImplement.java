@@ -8,13 +8,17 @@ import org.springframework.stereotype.Service;
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
+import com.team.back.dto.response.system.CustomerListResponseDto;
 import com.team.back.dto.response.system.DepartmentListResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
+import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
 import com.team.back.entity.CompanyEntity;
 import com.team.back.entity.DepartmentEntity;
+import com.team.back.entity.resultSets.CustomerListResultSet;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
 import com.team.back.repository.CompanyRepository;
+import com.team.back.repository.CustomerRepository;
 import com.team.back.repository.DepartmentRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.service.SystemManageService;
@@ -28,6 +32,7 @@ public class SystemManageServiceImplement implements SystemManageService{
      private final CompanyRepository companyRepository;
      private final UserRepository userRepository;
      private final DepartmentRepository departmentRepository;
+     private final CustomerRepository customerRepository;
 
      @Override
      public ResponseEntity<? super GetCompanyInfoResponseDto> getCompanyInfo() {
@@ -81,5 +86,21 @@ public class SystemManageServiceImplement implements SystemManageService{
                return ResponseDto.databaseError();
           }
           return GetDepartmentInfoResponseDto.success(departmentList);
+     }
+
+     @Override
+     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo() {
+
+          List<CustomerListResponseDto> customerList = null;
+
+          try {
+               List<CustomerListResultSet> resultSets = customerRepository.getCustomerList();
+               customerList = CustomerListResponseDto.copyList(resultSets);
+          } catch (Exception exception) {
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+          return GetCustomerInfoResponseDto.success(customerList);
+
      }
 }
