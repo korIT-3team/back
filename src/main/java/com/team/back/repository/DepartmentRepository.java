@@ -17,7 +17,7 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, In
 
   @Query(
     value=
-    "SELECT ROW_NUMBER() OVER(ORDER BY department_code) AS No, " + 
+    "SELECT ROW_NUMBER() OVER(ORDER BY department_code) AS no, " + 
     "department_code AS departmentCode, " + 
     "company_code AS companyCode, " + 
     "department_name AS departmentName, " + 
@@ -27,8 +27,8 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, In
     "department_fax AS departmentFax " + 
     "FROM department AS D " + 
     "WHERE department_code != 9999 " + 
-    "ORDER BY department_code " + 
-    "LIMIT ?1, 50",
+    "ORDER BY department_code ",
+    
     nativeQuery = true
   )
   List<DepartmentListResultSet> getDepartmentList();

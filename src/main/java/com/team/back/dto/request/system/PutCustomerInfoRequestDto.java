@@ -1,7 +1,5 @@
 package com.team.back.dto.request.system;
 
-import java.util.Date;
-
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.UniqueElements;
@@ -13,30 +11,32 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PutDepartmentInfoRequestDto {
-  private int no;
+public class PutCustomerInfoRequestDto {
   
-  @NotBlank
-  private int departmentCode;
+  private Integer no;
 
   @NotBlank
-  private int companyCode;
+  private Integer companyCode;
+
+  @NotBlank
+  private Integer customerCode;
 
   @NotBlank
   @UniqueElements
-  private String departmentName;
+  private String customerName;
 
   @NotBlank
-  private String departmentStartDate;
+  @UniqueElements
+  private String businessNumber;
+
+  @NotBlank
+  private String customerAddress;
+
+  @NotBlank
+  private String customerAddressDetail;
+
+  @NotBlank
+  @UniqueElements
+  private String customerTelNumber;
   
-  private String departmentEndDate;
-
-  @NotBlank
-  @UniqueElements
-  private String departmetTelnumber;
-
-  @NotBlank
-  @UniqueElements
-  private String departmentFax;
-
 }
