@@ -39,14 +39,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
                 return;
             }
 
-            Integer employeeCode = jwtProvider.validate(token); //? todo : employeeCode는 INTEGER인데 JwtProvider.create랑 같이 확인해볼것.
-            if(employeeCode == null){ //? todo
+            Integer employeeCode = jwtProvider.validate(token);
+            if(employeeCode == null){
                 filterChain.doFilter(request, response);
                 return;
             }
 
             AbstractAuthenticationToken authenticationToken = 
-                new UsernamePasswordAuthenticationToken(employeeCode, null, AuthorityUtils.NO_AUTHORITIES); //? todo
+                new UsernamePasswordAuthenticationToken(employeeCode, null, AuthorityUtils.NO_AUTHORITIES);
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
             SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
