@@ -12,6 +12,9 @@ import com.team.back.dto.response.ResponseDto;
 import com.team.back.entity.CompanyEntity;
 import com.team.back.entity.DepartmentEntity;
 
+import lombok.Getter;
+
+@Getter
 public class GetDepartmentInfoResponseDto extends ResponseDto{
     private List<DepartmentListResponseDto> departmentList;
   // private String no;
