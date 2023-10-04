@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
+import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.service.SystemManageService;
@@ -48,6 +49,14 @@ public class SystemManageController {
      public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(
      ) {
           ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo();
+          return response;
+     }
+
+     // API: 거래처 불러오기 //
+     @GetMapping("/customer-info")
+     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(
+     ) {
+          ResponseEntity<? super GetCustomerInfoResponseDto> response = systemManageService.getCustomerInfo();
           return response;
      }
 }
