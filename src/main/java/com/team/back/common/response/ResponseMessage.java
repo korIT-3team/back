@@ -8,4 +8,5 @@ public interface ResponseMessage {
      String NO_EXISTED_COMPANY_INFO = "No Existed Company Info";
      String VALIDATE_FAIL = "Validation Fail";
      String NO_PERMISSION = "No Permission";
+     String NO_EXISTED_DEPARTMENT_INFO = "No Existed Department Info";
 }
