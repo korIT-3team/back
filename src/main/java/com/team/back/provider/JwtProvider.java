@@ -16,7 +16,7 @@ public class JwtProvider {
     @Value("${secret-key}") //? todo : 이거 현직에선 어떤 방법을 쓰는지.
     private String secretKey;
 
-    public String create(Integer employeeCode){ //? todo : 토큰문제 생기면 setSubject 쪽 tostring 한번 보기
+    public String create(Integer employeeCode){
 
         
         // 토큰 만료 기간 : 8시간 //
