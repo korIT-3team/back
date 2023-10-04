@@ -22,8 +22,8 @@ public class DepartmentListResponseDto {
 
   public DepartmentListResponseDto (DepartmentListResultSet resultSet) {
     this.no = resultSet.getNo();
-    this.companyCode = resultSet.getCompanyCode();
     this.departmentCode = resultSet.getDepartmentCode();
+    this.companyCode = resultSet.getCompanyCode();
     this.departmentName = resultSet.getDepartmentName();
     this.departmentStartDate = resultSet.getDepartmentStartDate();
     this.departmentEndDate = resultSet.getDepartmentEndDate();

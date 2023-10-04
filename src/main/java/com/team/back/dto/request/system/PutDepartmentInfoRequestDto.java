@@ -17,10 +17,10 @@ public class PutDepartmentInfoRequestDto {
   private int no;
   
   @NotBlank
-  private int companyCode;
+  private int departmentCode;
 
   @NotBlank
-  private int departmentCode;
+  private int companyCode;
 
   @NotBlank
   @UniqueElements
