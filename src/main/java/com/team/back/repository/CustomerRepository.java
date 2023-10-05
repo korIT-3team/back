@@ -9,5 +9,5 @@ import com.team.back.entity.CustomerEntity;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
-  CustomerEntity findByCustomerCode(Integer customerCode);
+  CustomerEntity findByCustomerCode(Integer CustomerCode);
 }

@@ -22,7 +22,7 @@ public class DepartmentEntity {
   private String departmentName;
   private String departmentStartDate;
   private String departmentEndDate;
-  private String departmetTelnumber;
+  private String departmentTelNumber;
   private String departmentFax;
 
   public DepartmentEntity(PutDepartmentInfoRequestDto dto) {
@@ -31,7 +31,7 @@ public class DepartmentEntity {
     this.departmentName = dto.getDepartmentName();
     this.departmentStartDate = dto.getDepartmentStartDate();
     this.departmentEndDate = dto.getDepartmentEndDate();
-    this.departmetTelnumber = dto.getDepartmetTelnumber();
+    this.departmentTelNumber = dto.getDepartmentTelNumber();
     this.departmentFax = dto.getDepartmentFax();
   }
 }

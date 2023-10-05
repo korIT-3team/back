@@ -12,6 +12,7 @@ import com.team.back.entity.resultSets.DepartmentListResultSet;
 @Repository
 public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Integer> {
   boolean existsByDepartmentCode(Integer departmentCode);
+  boolean existsByDepartmentName(String departmentName);
 
   DepartmentEntity findByDepartmentCode(Integer DepartmentCode);
 
@@ -23,13 +24,14 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, In
     "department_name AS departmentName, " + 
     "department_start_date AS departmentStartDate, " + 
     "department_end_date AS departmentEndDate, " + 
-    "department_tel_number AS departmentTelnumber, " + 
+    "department_tel_number AS departmentTelNumber, " + 
     "department_fax AS departmentFax " + 
     "FROM department AS D " + 
     "WHERE department_code != 9999 " + 
+    "AND (department_name LIKE %?1% OR ?1 IS null) " +
     "ORDER BY department_code ",
     
     nativeQuery = true
   )
-  List<DepartmentListResultSet> getDepartmentList();
+  List<DepartmentListResultSet> getDepartmentList(String departmentName);
 }

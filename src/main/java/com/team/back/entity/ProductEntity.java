@@ -21,7 +21,7 @@ public class ProductEntity {
   private int companyCode;
   private int productCode;
   private String productName;
-  private String procurementCategory;
+  private int procurementCategory;
   private double productPrice;
 
   public ProductEntity(PutProductInfoRequestDto dto) {

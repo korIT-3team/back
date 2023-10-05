@@ -13,8 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PutProductInfoRequestDto {
 
-  private Integer no;
-
   @NotBlank
   private Integer companyCode;
 
@@ -26,7 +24,7 @@ public class PutProductInfoRequestDto {
   private String productName;
 
   @NotBlank
-  private String procurementCategory;
+  private Integer procurementCategory;
 
   @NotBlank
   private Double productPrice;

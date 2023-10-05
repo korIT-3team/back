@@ -22,5 +22,25 @@ public class PutDepartmentInfoResponseDto extends ResponseDto {
     PutDepartmentInfoResponseDto result = new PutDepartmentInfoResponseDto(ResponseCode.Success, ResponseMessage.Success);
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
+
+  public static ResponseEntity<ResponseDto> noPermission() {
+    ResponseDto result = new ResponseDto(ResponseCode.NO_PERMISSION, ResponseMessage.NO_PERMISSION);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+  }
+
+  public static ResponseEntity<ResponseDto> noExistedUser() {
+    ResponseDto result = new ResponseDto(ResponseCode.NO_EXISTED_USER, ResponseMessage.NO_EXISTED_USER);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+  } 
+
+  public static ResponseEntity<ResponseDto> noExistedDepartmentCode() {
+    ResponseDto result = new ResponseDto(ResponseCode.NO_EXISTED_DEPARTMENT_CODE, ResponseMessage.NO_EXISTED_DEPARTMENT_CODE);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+  }
+
+  public static ResponseEntity<ResponseDto> existedDeptname() {
+    ResponseDto result = new ResponseDto(ResponseCode.EXISTED_DEPARTMENT_NAME, ResponseMessage.EXISTED_DEPARTMENT_NAME);
+    return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
+  }
   
 }

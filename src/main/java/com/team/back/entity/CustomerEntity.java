@@ -22,6 +22,7 @@ public class CustomerEntity {
   private int customerCode;
   private String customerName;
   private String businessNumber;
+  private String postCode;
   private String customerAddress;
   private String customerAddressDetail;
   private String customerTelNumber;
@@ -31,6 +32,7 @@ public class CustomerEntity {
     this.customerCode = dto.getCustomerCode();
     this.customerName = dto.getCustomerName();
     this.businessNumber = dto.getBusinessNumber();
+    this.postCode = dto.getPostCode();
     this.customerAddress = dto.getCustomerAddress();
     this.customerAddressDetail = dto.getCustomerAddressDetail();
     this.customerTelNumber = dto.getCustomerTelNumber();
