@@ -13,12 +13,12 @@ public interface InvoiceRepository extends JpaRepository<InvoiceEntity, Integer>
 
      @Query(
           value=
-               "SELECT *" +
+               "SELECT * " +
                "FROM invoice " +
-               "WHERE invoice_type LIKE '%?5 %' " +
-               "AND invoice_date BETWEEN '?3 ' AND '?4 ' " +
-               "AND worker_code LIKE '%?2 %' " +
-               "AND worker_department_code LIKE '%?1 %';",
+               "WHERE invoice_type LIKE %?5% " +
+               "AND invoice_date BETWEEN ?3 AND ?4 " +
+               "AND worker_code LIKE %?2% " +
+               "AND worker_department_code LIKE %?1%; ",
                nativeQuery=true 
      )
      List<InvoiceEntity> getInvoiceList(int departmentCode, int employeeCode, String invoiceDateStart, String invoiceDateEnd, int invoiceType);

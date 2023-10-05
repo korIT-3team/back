@@ -22,13 +22,12 @@ public class AccountingController {
 
      private final AccountingService accountingService;
 
-     // API : 회사 정보 불러오기 메서드 //
+     // API : 전표 목록 조회 메서드 //
      @GetMapping("/invoice")
      public ResponseEntity<? super GetInvoiceListResponseDto> getInvoiceList(
-          @AuthenticationPrincipal Integer employeeCode,
           @RequestBody @Valid GetInvoiceListRequestDto requestBody
      ) {
-          ResponseEntity<? super GetInvoiceListResponseDto> response = accountingService.getInvoiceList(employeeCode, requestBody);
+          ResponseEntity<? super GetInvoiceListResponseDto> response = accountingService.getInvoiceList(requestBody);
           return response;
      }
 }

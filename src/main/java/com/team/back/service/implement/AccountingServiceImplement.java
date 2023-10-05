@@ -22,7 +22,7 @@ public class AccountingServiceImplement implements AccountingService {
      private final InvoiceRepository invoiceRepository;
      
      @Override
-     public ResponseEntity<? super GetInvoiceListResponseDto> getInvoiceList(Integer employeeCode, GetInvoiceListRequestDto dto) {
+     public ResponseEntity<? super GetInvoiceListResponseDto> getInvoiceList(GetInvoiceListRequestDto dto) {
           List<InvoiceResponseDto> invoiceList = null;
           int emCode = dto.getEmployeeCode();
           int deCode = dto.getDepartmentCode();
@@ -32,13 +32,11 @@ public class AccountingServiceImplement implements AccountingService {
           
 
           try{
+               // description : db 조회
                List<InvoiceEntity> invoiceEntities = invoiceRepository.getInvoiceList(emCode, deCode, start, end, type);
                
                // description : entity 를 dto 로 변환 //
                invoiceList = InvoiceResponseDto.copyEntityList(invoiceEntities);
-
-               // invoiceList = invoiceRepository.getInvoiceList(dto);
-               // invoiceList = InvoiceResponseDto.copyList(resultSets);
 
           } catch(Exception exception){
                exception.printStackTrace();
