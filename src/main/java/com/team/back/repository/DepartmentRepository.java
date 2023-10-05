@@ -32,5 +32,5 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, In
     nativeQuery = true
   )
   List<DepartmentListResultSet> getDepartmentList();
-  List<DepartmentListResultSet> findbyDepartmentList(String departmentName);
+  // List<DepartmentListResultSet> findbyDepartmentList(String departmentName);
 }
