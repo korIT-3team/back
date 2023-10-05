@@ -7,7 +7,7 @@ public interface DepartmentListResultSet {
   String getDepartmentName();
   String getDepartmentStartDate();
   String getDepartmentEndDate();
-  String getDepartmentTelnumber();
+  String getDepartmentTelNumber();
   String getDepartmentFax();
   
 }
