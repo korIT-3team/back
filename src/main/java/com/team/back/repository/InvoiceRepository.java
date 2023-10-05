@@ -11,6 +11,8 @@ import com.team.back.entity.InvoiceEntity;
 @Repository
 public interface InvoiceRepository extends JpaRepository<InvoiceEntity, Integer> {
 
+     InvoiceEntity findByInvoiceCode(Integer invoiceCode);
+
      @Query(
           value=
                "SELECT * " +
@@ -21,5 +23,5 @@ public interface InvoiceRepository extends JpaRepository<InvoiceEntity, Integer>
                "AND worker_department_code LIKE %?1%; ",
                nativeQuery=true 
      )
-     List<InvoiceEntity> getInvoiceList(int departmentCode, int employeeCode, String invoiceDateStart, String invoiceDateEnd, int invoiceType);
+     List<InvoiceEntity> getInvoiceList(String departmentCode, String employeeCode, String invoiceDateStart, String invoiceDateEnd, String invoiceType);
 }

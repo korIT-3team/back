@@ -9,6 +9,6 @@ public interface ResponseCode {
      String VALIDATE_FAIL = "VF";
      String NO_PERMISSION = "NP";
      String NO_EXISTED_DEPARTMENT_INFO = "ND";
-
+     String NO_EXISTED_INVOICE = "NI";
      String NO_EXISTED_CUSTOMER_INFO = "NEC";
 }

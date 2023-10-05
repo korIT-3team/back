@@ -24,16 +24,20 @@ public class AccountingServiceImplement implements AccountingService {
      @Override
      public ResponseEntity<? super GetInvoiceListResponseDto> getInvoiceList(GetInvoiceListRequestDto dto) {
           List<InvoiceResponseDto> invoiceList = null;
-          int emCode = dto.getEmployeeCode();
-          int deCode = dto.getDepartmentCode();
+          Integer emCode = dto.getEmployeeCode();
+          Integer deCode = dto.getDepartmentCode();
           String start = dto.getInvoiceDateStart();
           String end = dto.getInvoiceDateEnd();
-          int type = dto.getInvoiceType();
+          Integer type = dto.getInvoiceType();
           
-
           try{
+               // description : string으로 변환시키지않으면, "null" 문자열이 들어가게 된다.
+               String strEmCode = emCode == null ? "" : Integer.toString(emCode);
+               String strDeCode = deCode == null ? "" : Integer.toString(deCode);
+               String strType = type == null ? "" : Integer.toString(type);
+               
                // description : db 조회
-               List<InvoiceEntity> invoiceEntities = invoiceRepository.getInvoiceList(emCode, deCode, start, end, type);
+               List<InvoiceEntity> invoiceEntities = invoiceRepository.getInvoiceList(strEmCode, strDeCode, start, end, strType);
                
                // description : entity 를 dto 로 변환 //
                invoiceList = InvoiceResponseDto.copyEntityList(invoiceEntities);
@@ -44,5 +48,21 @@ public class AccountingServiceImplement implements AccountingService {
           }
 
           return GetInvoiceListResponseDto.success(invoiceList);
+     }
+
+     @Override
+     public ResponseEntity<? super InvoiceResponseDto> getInvoiceDetail(Integer invoiceCode) {
+          InvoiceEntity invoiceEntity;
+
+          try{ 
+               // description : db 조회
+               invoiceEntity = invoiceRepository.findByInvoiceCode(invoiceCode);
+
+          } catch(Exception exception){
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+
+          return InvoiceResponseDto.success(invoiceEntity);
      }
 }
