@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.team.back.dto.request.accounting.GetInvoiceListRequestDto;
+import com.team.back.dto.request.system.GetDepartmentListRequestDto;
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
+import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
-import com.team.back.dto.response.system.GetSearchDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
 import com.team.back.service.SystemManageService;
@@ -49,13 +51,13 @@ public class SystemManageController {
      }
 
      // API : 부서 정보 불러오기
-     @GetMapping("/dept-info")
-     public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(
-     ) {
-          ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo();
-          return response;
-     }
-
+     // @GetMapping("/dept-info")
+     // public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(
+     // ) {
+     //      ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo();
+     //      return response;
+     // }
+//
      // API : 부서 정보 등록 메서드 //
      @PutMapping("/dept-info")
      public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo (
@@ -67,12 +69,12 @@ public class SystemManageController {
      }
 
      // API : 검색 부서 정보 불러오기 메서드 //
-     @GetMapping(value={"/dept-info/{departmentName}"})
-     public ResponseEntity<? super GetSearchDepartmentInfoResponseDto> getSearchDepartment(
-     @PathVariable(value="departmentName", required=true) String departmentName
+     @GetMapping(value={"/dept-info"})
+     public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @RequestBody @Valid GetDepartmentListRequestDto requestBody
      ) {
-     ResponseEntity<? super GetSearchDepartmentInfoResponseDto> response = 
-          systemManageService.getSearchDepartment(departmentName);
+     ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo(employeeCode, requestBody);
      return response;
      }
 
