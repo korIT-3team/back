@@ -26,7 +26,7 @@ public interface SystemManageService {
      ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(Integer employeeCode, PutDepartmentInfoRequestDto dto);
      
      // API : 부서명 검색 정보 불러오기 //
-     ResponseEntity<? super GetSearchDepartmentInfoResponseDto> getSearchDepartment(String departmentName);
+     // ResponseEntity<? super GetSearchDepartmentInfoResponseDto> getSearchDepartment(String departmentName);
   
      // API : 거래처 불러오기 메서드 //
      ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo();

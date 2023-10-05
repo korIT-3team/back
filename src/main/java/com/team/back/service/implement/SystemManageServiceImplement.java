@@ -97,8 +97,8 @@ public class SystemManageServiceImplement implements SystemManageService{
           
           try{
                // description: 부서명 중복 확인
-               boolean hasDeptName = userRepository.existsByDepartmentName(departmentName);
-               if (hasDeptName) return PutDepartmentInfoResponseDto.existedDeptname();
+               // boolean hasDeptName = userRepository.existsByDepartmentName(departmentName);
+               // if (hasDeptName) return PutDepartmentInfoResponseDto.existedDeptname();
 
                // description: 존재하는 사원번호인지 확인 //
                boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
@@ -123,23 +123,23 @@ public class SystemManageServiceImplement implements SystemManageService{
         return PutDepartmentInfoResponseDto.success();
      }
 
-     @Override
-     public ResponseEntity<? super GetSearchDepartmentInfoResponseDto> getSearchDepartment(String departmentName) {
-          List<DepartmentListResponseDto> departmentList = null;
-          try{
+     // @Override
+     // public ResponseEntity<? super GetSearchDepartmentInfoResponseDto> getSearchDepartment(String departmentName) {
+     //      List<DepartmentListResponseDto> departmentList = null;
+     //      try{
 
-               // description: 검색어가 부서명에 포함되어 있는 데이터 조회 //
-               List<DepartmentListResultSet> departmentEntities = departmentRepository.findbyDepartmentList(departmentName);
+     //           // description: 검색어가 부서명에 포함되어 있는 데이터 조회 //
+     //           List<DepartmentListResultSet> departmentEntities = departmentRepository.findbyDepartmentList(departmentName);
          
-               // description: entity를 dto형태로 변환 //
-               departmentList = DepartmentListResponseDto.copyEntityList(departmentEntities);
+     //           // description: entity를 dto형태로 변환 //
+     //           departmentList = DepartmentListResponseDto.copyEntityList(departmentEntities);
          
-             } catch(Exception exception) {
-               exception.printStackTrace();
-               return ResponseDto.databaseError();
-             }
-             return GetSearchDepartmentInfoResponseDto.success(departmentList);
-     }
+     //         } catch(Exception exception) {
+     //           exception.printStackTrace();
+     //           return ResponseDto.databaseError();
+     //         }
+     //         return GetSearchDepartmentInfoResponseDto.success(departmentList);
+     // }
 
      @Override
      public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo() {
