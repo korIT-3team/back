@@ -3,6 +3,7 @@ package com.team.back.dto.response.system;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.team.back.entity.DepartmentEntity;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class DepartmentListResponseDto {
   private String departmentName;
   private String departmentStartDate;
   private String departmentEndDate;
-  private String departmetTelnumber;
+  private String departmentTelNumber;
   private String departmentFax;
 
   public DepartmentListResponseDto (DepartmentListResultSet resultSet) {
@@ -27,7 +28,7 @@ public class DepartmentListResponseDto {
     this.departmentName = resultSet.getDepartmentName();
     this.departmentStartDate = resultSet.getDepartmentStartDate();
     this.departmentEndDate = resultSet.getDepartmentEndDate();
-    this.departmetTelnumber = resultSet.getDepartmentTelnumber();
+    this.departmentTelNumber = resultSet.getDepartmentTelNumber();
     this.departmentFax = resultSet.getDepartmentFax();
   }
 
@@ -40,10 +41,6 @@ public class DepartmentListResponseDto {
     }
 
     return departmentList;
-  }
-
-  public static List<DepartmentListResponseDto> copyEntityList(List<DepartmentListResultSet> departmentEntities) {
-    return null;
   }
 
 }
