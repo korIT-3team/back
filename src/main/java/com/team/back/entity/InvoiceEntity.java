@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.team.back.dto.request.accounting.GetInvoiceListRequestDto;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +19,7 @@ public class InvoiceEntity {
      private int productCode;
      private int customerCode;
      private int workerCode;
+     private int workerDepartmentCode;
      private String productDetails;
      private String invoiceDate;
      private int invoiceType;

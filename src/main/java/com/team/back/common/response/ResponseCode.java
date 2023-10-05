@@ -10,6 +10,7 @@ public interface ResponseCode {
      String NO_PERMISSION = "NP";
 
      String NO_EXISTED_DEPARTMENT_INFO = "ND";
+     String NO_EXISTED_INVOICE = "NI";
      String EXISTED_DEPARTMENT_NAME = "ED";
      String NO_EXISTED_DEPARTMENT_CODE = "NDC";
 

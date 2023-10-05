@@ -11,26 +11,17 @@ import com.team.back.entity.InvoiceEntity;
 @Repository
 public interface InvoiceRepository extends JpaRepository<InvoiceEntity, Integer> {
 
-     // todo : 쿼리 수정
+     InvoiceEntity findByInvoiceCode(Integer invoiceCode);
+
      @Query(
           value=
-               "SELECT " +
-                    "B.board_number AS boardNumber, " +
-                    "B.title AS title, " +
-                    "B.contents AS contents, " +
-                    "B.image_url AS imageUrl, " +
-                    "B.view_count AS viewCount, " +
-                    "B.comment_count AS commentCount, " +
-                    "B.favorite_count AS favoriteCount, " +
-                    "B.write_datetime AS writeDatetime, " +
-                    "U.profile_image_url AS writerProfileImage, " +
-                    "U.nickname AS writerNickname " +
-               "FROM board AS B " +
-               "INNER JOIN user AS U " +
-               "ON B.writer_email = U.email " +
-               "ORDER BY B.write_datetime DESC " +
-               "LIMIT ?1, 50",
+               "SELECT * " +
+               "FROM invoice " +
+               "WHERE invoice_type LIKE %?5% " +
+               "AND invoice_date BETWEEN ?3 AND ?4 " +
+               "AND worker_code LIKE %?2% " +
+               "AND worker_department_code LIKE %?1%; ",
                nativeQuery=true 
      )
-     List<InvoiceEntity> getInvoiceList(int departmentCode, int employeeCode, String invoiceDateStart, String invoiceDateEnd, int invoiceType);
+     List<InvoiceEntity> getInvoiceList(String departmentCode, String employeeCode, String invoiceDateStart, String invoiceDateEnd, String invoiceType);
 }

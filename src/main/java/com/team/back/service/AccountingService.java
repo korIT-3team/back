@@ -4,7 +4,9 @@ import org.springframework.http.ResponseEntity;
 
 import com.team.back.dto.request.accounting.GetInvoiceListRequestDto;
 import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
+import com.team.back.dto.response.accounting.InvoiceResponseDto;
 
 public interface AccountingService {
-     ResponseEntity<? super GetInvoiceListResponseDto> getInvoiceList(Integer employeeCode, GetInvoiceListRequestDto dto);
+     ResponseEntity<? super GetInvoiceListResponseDto> getInvoiceList(GetInvoiceListRequestDto dto);
+     ResponseEntity<? super InvoiceResponseDto> getInvoiceDetail(Integer invoiceCode);
 }

@@ -10,6 +10,7 @@ public interface ResponseMessage {
      String NO_PERMISSION = "No Permission";
 
      String NO_EXISTED_DEPARTMENT_INFO = "No Existed Department Info";
+     String NO_EXISTED_INVOICE = "No Existed Invoice";
      String EXISTED_DEPARTMENT_NAME = "Existed Department Name";
      String NO_EXISTED_DEPARTMENT_CODE = "No Existed Department Code";
 

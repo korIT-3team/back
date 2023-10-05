@@ -34,7 +34,7 @@ public class WebSecurityConfig {
             .csrf().disable()
             .httpBasic().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeRequests().antMatchers("/", "/auth/**", "/system/**").permitAll()
+            .authorizeRequests().antMatchers("/", "/auth/**", "/system/**", "/accounting/**", "/file/**").permitAll()
             .anyRequest().authenticated().and()
             .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
 		

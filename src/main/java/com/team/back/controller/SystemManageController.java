@@ -69,7 +69,6 @@ public class SystemManageController {
      }
 
      // API : 검색 부서 정보 불러오기 메서드 //
-<<<<<<< HEAD
      // @GetMapping(value={"/dept-info/{departmentName}"})
      // public ResponseEntity<? super GetSearchDepartmentInfoResponseDto> getSearchDepartment(
      // @PathVariable(value="departmentName", required=true) String departmentName
@@ -78,7 +77,6 @@ public class SystemManageController {
      //      systemManageService.getSearchDepartment(departmentName);
      // return response;
      // }
-=======
      @GetMapping(value={"/dept-info"})
      public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(
           @AuthenticationPrincipal Integer employeeCode,
@@ -87,7 +85,6 @@ public class SystemManageController {
      ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo(employeeCode, requestBody);
      return response;
      }
->>>>>>> 09f7b466063b9a5c203238a83669cdfad2eafe9a
 
      // API: 거래처 불러오기 //
      @GetMapping("/customer-info")
