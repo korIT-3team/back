@@ -17,6 +17,7 @@ import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.GetSearchDepartmentInfoResponseDto;
 import com.team.back.entity.CompanyEntity;
+import com.team.back.entity.CustomerEntity;
 import com.team.back.entity.DepartmentEntity;
 import com.team.back.entity.resultSets.CustomerListResultSet;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
@@ -35,7 +36,6 @@ public class SystemManageServiceImplement implements SystemManageService{
      private final CompanyRepository companyRepository;
      private final UserRepository userRepository;
      private final DepartmentRepository departmentRepository;
-     private final CustomerRepository customerRepository;
 
      @Override
      public ResponseEntity<? super GetCompanyInfoResponseDto> getCompanyInfo() {
@@ -92,22 +92,6 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo() {
-
-          List<CustomerListResponseDto> customerList = null;
-
-          try {
-               List<CustomerListResultSet> resultSets = customerRepository.getCustomerList();
-               customerList = CustomerListResponseDto.copyList(resultSets);
-          } catch (Exception exception) {
-               exception.printStackTrace();
-               return ResponseDto.databaseError();
-          }
-          return GetCustomerInfoResponseDto.success(customerList);
-
-     }
-
-     @Override
      public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(Integer employeeCode, PutDepartmentInfoRequestDto dto) {
           String departmentName = dto.getDepartmentName();
           
@@ -155,6 +139,12 @@ public class SystemManageServiceImplement implements SystemManageService{
                return ResponseDto.databaseError();
              }
              return GetSearchDepartmentInfoResponseDto.success(departmentList);
+     }
+
+     @Override
+     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo() {
+          // TODO Auto-generated method stub
+          throw new UnsupportedOperationException("Unimplemented method 'getCustomerInfo'");
      }
 
 }
