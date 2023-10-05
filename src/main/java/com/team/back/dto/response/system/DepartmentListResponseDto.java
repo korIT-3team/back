@@ -42,4 +42,8 @@ public class DepartmentListResponseDto {
     return departmentList;
   }
 
+  public static List<DepartmentListResponseDto> copyEntityList(List<DepartmentListResultSet> departmentEntities) {
+    return null;
+  }
+
 }

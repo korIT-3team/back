@@ -48,9 +48,9 @@ public class GetDepartmentInfoResponseDto extends ResponseDto{
   //   return ResponseEntity.status(HttpStatus.OK).body(result);
   // }
 
-  // public static ResponseEntity<ResponseDto> noExistedDepartmentInfo() {
-  //   ResponseDto result = new ResponseDto(ResponseCode.NO_EXISTED_DEPARTMENT_INFO, ResponseMessage.NO_EXISTED_DEPARTMENT_INFO);
-  //   return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
-  // }
+  public static ResponseEntity<ResponseDto> noExistedDepartmentInfo() {
+    ResponseDto result = new ResponseDto(ResponseCode.NO_EXISTED_DEPARTMENT_INFO, ResponseMessage.NO_EXISTED_DEPARTMENT_INFO);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+  }
   
 }

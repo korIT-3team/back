@@ -1,7 +1,5 @@
 package com.team.back.dto.request.system;
 
-import java.util.Date;
-
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.UniqueElements;
