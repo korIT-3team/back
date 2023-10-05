@@ -6,13 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
+import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
+import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.CustomerListResponseDto;
 import com.team.back.dto.response.system.DepartmentListResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.GetSearchDepartmentInfoResponseDto;
 import com.team.back.entity.CompanyEntity;
 import com.team.back.entity.CustomerEntity;
 import com.team.back.entity.DepartmentEntity;
@@ -93,5 +96,4 @@ public class SystemManageServiceImplement implements SystemManageService{
           // TODO Auto-generated method stub
           throw new UnsupportedOperationException("Unimplemented method 'getCustomerInfo'");
      }
-
 }
