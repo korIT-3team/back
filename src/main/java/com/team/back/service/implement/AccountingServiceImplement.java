@@ -10,7 +10,9 @@ import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
 import com.team.back.dto.response.accounting.InvoiceResponseDto;
 
 import com.team.back.entity.InvoiceEntity;
+import com.team.back.entity.UserEntity;
 import com.team.back.repository.InvoiceRepository;
+import com.team.back.repository.UserRepository;
 import com.team.back.service.AccountingService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class AccountingServiceImplement implements AccountingService {
      
      private final InvoiceRepository invoiceRepository;
+     private final UserRepository userRepository;
      
      @Override
      public ResponseEntity<? super GetInvoiceListResponseDto> getInvoiceList(GetInvoiceListRequestDto dto) {
@@ -35,6 +38,7 @@ public class AccountingServiceImplement implements AccountingService {
                String strEmCode = emCode == null ? "" : Integer.toString(emCode);
                String strDeCode = deCode == null ? "" : Integer.toString(deCode);
                String strType = type == null ? "" : Integer.toString(type);
+               // String emName = 
                
                // description : db 조회
                List<InvoiceEntity> invoiceEntities = invoiceRepository.getInvoiceList(strEmCode, strDeCode, start, end, strType);
