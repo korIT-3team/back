@@ -11,10 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GetCustomerListRequestDto {
 
-  private int companyCode;
-
-  private int customerCode;
-
   @NotBlank
   private String customerName;
 

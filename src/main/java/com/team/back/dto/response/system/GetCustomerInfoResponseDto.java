@@ -15,8 +15,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetCustomerInfoResponseDto extends ResponseDto {
 
-  private int companyCode;
-  private int customerCode;
   private String customerName;
   private String businessNumber;
   private String postCode;
@@ -26,8 +24,6 @@ public class GetCustomerInfoResponseDto extends ResponseDto {
 
   private GetCustomerInfoResponseDto(String code, String message, CustomerEntity customerEntity) {
     super(code, message);
-    this.companyCode = customerEntity.getCompanyCode();
-    this.customerCode = customerEntity.getCustomerCode();
     this.customerName = customerEntity.getCustomerName();
     this.businessNumber = customerEntity.getBusinessNumber();
     this.postCode = customerEntity.getPostCode();

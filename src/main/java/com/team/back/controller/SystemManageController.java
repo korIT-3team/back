@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.team.back.dto.request.accounting.GetInvoiceListRequestDto;
 import com.team.back.dto.request.system.GetDepartmentListRequestDto;
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
+import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
 import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
+import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
 import com.team.back.service.SystemManageService;
 
@@ -86,11 +89,21 @@ public class SystemManageController {
      return response;
      }
 
-     // API: 거래처 불러오기 //
+     // API: 거래처 정보 불러오기 //
      @GetMapping("/customer-info")
-     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(
-     ) {
+     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo() {
           ResponseEntity<? super GetCustomerInfoResponseDto> response = systemManageService.getCustomerInfo();
           return response;
      }
+
+     // API : 거래처 정보 등록 메서드 //
+     @PutMapping("/customer-info")
+     public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @RequestBody @Valid PutCustomerInfoRequestDto requestBody
+     ) {
+          ResponseEntity<? super PutCustomerInfoResponseDto> response = systemManageService.putCustomerInfo(employeeCode, requestBody);
+          return response;
+     }
+     
 }

@@ -26,7 +26,7 @@ public class ProductEntity {
 
   public ProductEntity(PutProductInfoRequestDto dto) {
     this.companyCode = 1;
-    this.productCode = dto.getProductCode();
+    this.productCode = 2000;
     this.productName = dto.getProductName();
     this.procurementCategory = dto.getProcurementCategory();
     this.productPrice = dto.getProductPrice();
