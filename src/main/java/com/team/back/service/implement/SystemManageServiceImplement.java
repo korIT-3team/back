@@ -123,11 +123,11 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(Integer employeeCode, GetDepartmentListRequestDto dto) {
+     public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(Integer employeeCode, String departmentName) {
           List<DepartmentListResponseDto> departmentList = null;
-          String departmentName = dto.getDepartmentName();
           try{
 
+               departmentName = departmentName == null ? "" : departmentName;
                // description: 검색어가 부서명에 포함되어 있는 데이터 조회 //
                List<DepartmentListResultSet> departmentEntities = departmentRepository.getDepartmentList(departmentName);
          

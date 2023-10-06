@@ -53,14 +53,6 @@ public class SystemManageController {
           return response;
      }
 
-     // API : 부서 정보 불러오기
-     // @GetMapping("/dept-info")
-     // public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(
-     // ) {
-     //      ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo();
-     //      return response;
-     // }
-//
      // API : 부서 정보 등록 메서드 //
      @PutMapping("/dept-info")
      public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo (
@@ -72,20 +64,12 @@ public class SystemManageController {
      }
 
      // API : 검색 부서 정보 불러오기 메서드 //
-     // @GetMapping(value={"/dept-info/{departmentName}"})
-     // public ResponseEntity<? super GetSearchDepartmentInfoResponseDto> getSearchDepartment(
-     // @PathVariable(value="departmentName", required=true) String departmentName
-     // ) {
-     // ResponseEntity<? super GetSearchDepartmentInfoResponseDto> response = 
-     //      systemManageService.getSearchDepartment(departmentName);
-     // return response;
-     // }
-     @GetMapping(value={"/dept-info"})
+     @GetMapping(value={"/dept-info/{departmentName}", "/dept-info"})
      public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(
           @AuthenticationPrincipal Integer employeeCode,
-          @RequestBody @Valid GetDepartmentListRequestDto requestBody
+          @PathVariable(value="departmentName", required=false) String departmentName
      ) {
-     ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo(employeeCode, requestBody);
+     ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo(employeeCode, departmentName);
      return response;
      }
 
