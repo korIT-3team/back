@@ -9,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
 import com.team.back.dto.response.ResponseDto;
-import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
-import com.team.back.entity.CompanyEntity;
 import com.team.back.entity.InvoiceEntity;
 
 import lombok.AllArgsConstructor;
@@ -20,41 +18,38 @@ import lombok.Getter;
 @AllArgsConstructor
 public class InvoiceResponseDto extends ResponseDto {
      private int invoiceCode;
-     private int productCode;
-     private int customerCode;
-     private int workerCode;
-     private int workerDepartmentCode;
-     private String productDetails;
      private String invoiceDate;
      private int invoiceType;
-     private String customerName;
+     private int invoiceDetailPk;
+     private String workerName;
+     private int workerCode;
+     private int workerDepartmentCode;
      private int price;
+     private String priceDetail;
      
      public InvoiceResponseDto(String code, String message, InvoiceEntity invoiceEntity) {
           super(code, message);
           this.invoiceCode = invoiceEntity.getInvoiceCode();
-          this.productCode = invoiceEntity.getProductCode();
-          this.customerCode = invoiceEntity.getCustomerCode();
+          this.workerName = invoiceEntity.getWorkerName();
           this.workerCode = invoiceEntity.getWorkerCode();
           this.workerDepartmentCode = invoiceEntity.getWorkerDepartmentCode();
-          this.productDetails = invoiceEntity.getProductDetails();
           this.invoiceDate = invoiceEntity.getInvoiceDate();
           this.invoiceType = invoiceEntity.getInvoiceType();
-          this.customerName = invoiceEntity.getCustomerName();
+          this.invoiceDetailPk = invoiceEntity.getInvoiceDetailPk();
           this.price = invoiceEntity.getPrice();
+          this.priceDetail = invoiceEntity.getPriceDetail();
      }
 
      public InvoiceResponseDto(InvoiceEntity invoiceEntity) {
           this.invoiceCode = invoiceEntity.getInvoiceCode();
-          this.productCode = invoiceEntity.getProductCode();
-          this.customerCode = invoiceEntity.getCustomerCode();
+          this.workerName = invoiceEntity.getWorkerName();
           this.workerCode = invoiceEntity.getWorkerCode();
           this.workerDepartmentCode = invoiceEntity.getWorkerDepartmentCode();
-          this.productDetails = invoiceEntity.getProductDetails();
           this.invoiceDate = invoiceEntity.getInvoiceDate();
           this.invoiceType = invoiceEntity.getInvoiceType();
-          this.customerName = invoiceEntity.getCustomerName();
+          this.invoiceDetailPk = invoiceEntity.getInvoiceDetailPk();
           this.price = invoiceEntity.getPrice();
+          this.priceDetail = invoiceEntity.getPriceDetail();
      }
 
      public static List<InvoiceResponseDto> copyEntityList(List<InvoiceEntity> invoiceEntities) {
