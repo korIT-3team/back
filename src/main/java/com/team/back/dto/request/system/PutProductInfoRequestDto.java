@@ -14,12 +14,6 @@ import lombok.Setter;
 public class PutProductInfoRequestDto {
 
   @NotBlank
-  private Integer companyCode;
-
-  @NotBlank
-  private Integer productCode;
-
-  @NotBlank
   @UniqueElements
   private String productName;
 

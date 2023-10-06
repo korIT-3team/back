@@ -29,7 +29,7 @@ public class CustomerEntity {
 
   public CustomerEntity(PutCustomerInfoRequestDto dto) {
     this.companyCode = 1;
-    this.customerCode = dto.getCustomerCode();
+    this.customerCode = 4000;
     this.customerName = dto.getCustomerName();
     this.businessNumber = dto.getBusinessNumber();
     this.postCode = dto.getPostCode();
