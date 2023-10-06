@@ -147,7 +147,7 @@ public class SystemManageServiceImplement implements SystemManageService{
 
           try{
                // 데이터베이스에서 거래처 정보 불러오기 //
-               customerEntity = customerRepository.findByCustomerCode(2000); 
+               customerEntity = customerRepository.findByCustomerCode(4000); 
           } catch(Exception exception){
                exception.printStackTrace();
                return ResponseDto.databaseError();
@@ -221,6 +221,5 @@ public class SystemManageServiceImplement implements SystemManageService{
 
 
      }
-
      
 }
