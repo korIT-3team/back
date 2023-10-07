@@ -92,7 +92,7 @@ public class SystemManageServiceImplement implements SystemManageService{
 
      @Override
      public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(Integer employeeCode, PutDepartmentInfoRequestDto dto) {
-          String departmentName = dto.getDepartmentName();
+          String departmentName = dto.getDepartmentNameInfo();
           
           try{
                // description: 부서명 중복 확인
