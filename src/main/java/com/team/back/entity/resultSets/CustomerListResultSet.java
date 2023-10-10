@@ -1,11 +1,12 @@
 package com.team.back.entity.resultSets;
 
 public interface CustomerListResultSet {
+  int getNo();
   int getCompanyCode();
   int getCustomerCode();
   String getCustomerName();
   String getBusinessNumber();
-  String getPostCode();
+  String getCustomerPostCode();
   String getCustomerAddres();
   String getCustomerAddressDetail();
   String getCustomerTelNumber();
