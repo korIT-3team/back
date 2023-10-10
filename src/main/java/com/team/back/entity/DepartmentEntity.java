@@ -27,7 +27,9 @@ public class DepartmentEntity {
 
   public DepartmentEntity(PutDepartmentInfoRequestDto dto) {
     this.departmentCode = dto.getDepartmentCodeInfo();
-    this.companyCode = 1;
+    
+    this.companyCode = dto.getDepartmentCompanyCode();
+
     this.departmentName = dto.getDepartmentNameInfo();
     this.departmentStartDate = dto.getDepartmentStartDate();
     this.departmentEndDate = dto.getDepartmentEndDate();
