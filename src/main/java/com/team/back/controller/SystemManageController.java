@@ -73,14 +73,8 @@ public class SystemManageController {
      return response;
      }
 
-     // API: 거래처 정보 불러오기 //
-     @GetMapping("/customer-info")
-     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo() {
-          ResponseEntity<? super GetCustomerInfoResponseDto> response = systemManageService.getCustomerInfo();
-          return response;
-     }
 
-     // API : 거래처 정보 등록 메서드 //
+     //! API : 거래처 정보 등록 메서드 //
      @PutMapping("/customer-info")
      public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(
           @AuthenticationPrincipal Integer employeeCode,
@@ -89,5 +83,18 @@ public class SystemManageController {
           ResponseEntity<? super PutCustomerInfoResponseDto> response = systemManageService.putCustomerInfo(employeeCode, requestBody);
           return response;
      }
+
+
+     //! API: 거래처 정보 불러오기 //
+     @GetMapping(value={"/customer-info/{customerCode}", "/customer-info"})
+     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @PathVariable(value="customerCode", required=false) Integer customerCode
+     ) {
+          ResponseEntity<? super GetCustomerInfoResponseDto> response = systemManageService.getCustomerInfo(employeeCode, customerCode);
+          return response;
+     }
+
+     
      
 }

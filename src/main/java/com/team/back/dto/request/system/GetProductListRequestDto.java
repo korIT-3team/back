@@ -17,9 +17,6 @@ public class GetProductListRequestDto {
 
   @NotNull
   private int procurementCategory;
-  
-  @NotBlank
-  private double productPrice;
 
   
 }
