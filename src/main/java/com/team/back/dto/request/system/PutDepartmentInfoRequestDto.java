@@ -16,8 +16,10 @@ public class PutDepartmentInfoRequestDto {
   
   @NotNull
   private Integer departmentCodeInfo;
+  
   @NotNull
   private Integer departmentCompanyCode = 1;
+
 
   @NotBlank
   private String departmentNameInfo;
