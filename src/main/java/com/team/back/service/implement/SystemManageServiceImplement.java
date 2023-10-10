@@ -92,12 +92,16 @@ public class SystemManageServiceImplement implements SystemManageService{
 
      @Override
      public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(Integer employeeCode, PutDepartmentInfoRequestDto dto) {
-          String departmentName = dto.getDepartmentName();
+          String departmentName = dto.getDepartmentNameInfo();
+          int departmentCode = dto.getDepartmentCodeInfo();
           
           try{
                // description: 부서명 중복 확인
+               DepartmentEntity deptEntity = departmentRepository.findByDepartmentCode(departmentCode);
+               String getDeptEntityName = deptEntity.getDepartmentName();
+               boolean sameDeptInfo = getDeptEntityName.equals(departmentName);
                boolean hasDeptName = departmentRepository.existsByDepartmentName(departmentName);
-               if (hasDeptName) return PutDepartmentInfoResponseDto.existedDeptname();
+               if (!sameDeptInfo && hasDeptName) return PutDepartmentInfoResponseDto.existedDeptname();
 
                // description: 존재하는 사원번호인지 확인 //
                boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);

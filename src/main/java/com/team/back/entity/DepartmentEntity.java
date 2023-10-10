@@ -26,9 +26,9 @@ public class DepartmentEntity {
   private String departmentFax;
 
   public DepartmentEntity(PutDepartmentInfoRequestDto dto) {
-    this.departmentCode = dto.getDepartmentCode();
-    this.companyCode = 1;
-    this.departmentName = dto.getDepartmentName();
+    this.departmentCode = dto.getDepartmentCodeInfo();
+    this.companyCode = dto.getDepartmentCompanyCode();
+    this.departmentName = dto.getDepartmentNameInfo();
     this.departmentStartDate = dto.getDepartmentStartDate();
     this.departmentEndDate = dto.getDepartmentEndDate();
     this.departmentTelNumber = dto.getDepartmentTelNumber();

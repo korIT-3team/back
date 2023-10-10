@@ -15,13 +15,12 @@ import lombok.Setter;
 public class PutDepartmentInfoRequestDto {
   
   @NotNull
-  private Integer departmentCode;
-
+  private Integer departmentCodeInfo;
   @NotNull
-  private Integer companyCode;
+  private Integer departmentCompanyCode = 1;
 
   @NotBlank
-  private String departmentName;
+  private String departmentNameInfo;
 
   @NotBlank
   private String departmentStartDate;
