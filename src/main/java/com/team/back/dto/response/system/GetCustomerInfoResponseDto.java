@@ -1,5 +1,7 @@
 package com.team.back.dto.response.system;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -15,25 +17,15 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetCustomerInfoResponseDto extends ResponseDto {
 
-  private String customerName;
-  private String businessNumber;
-  private String postCode;
-  private String customerAddress;
-  private String customerAddressDetail;
-  private String customerTelNumber;
+  private List<CustomerListResponseDto> customerList;
 
-  private GetCustomerInfoResponseDto(String code, String message, CustomerEntity customerEntity) {
+  private GetCustomerInfoResponseDto(String code, String message, List<CustomerListResponseDto> customerList) {
     super(code, message);
-    this.customerName = customerEntity.getCustomerName();
-    this.businessNumber = customerEntity.getBusinessNumber();
-    this.postCode = customerEntity.getPostCode();
-    this.customerAddress = customerEntity.getCustomerAddress();
-    this.customerAddressDetail = customerEntity.getCustomerAddressDetail();
-    this.customerTelNumber = customerEntity.getCustomerTelNumber();
+    this.customerList = customerList;
   }
 
-  public static ResponseEntity<GetCustomerInfoResponseDto> success(CustomerEntity customerEntity) {
-    GetCustomerInfoResponseDto result = new GetCustomerInfoResponseDto(ResponseCode.Success, ResponseMessage.Success, customerEntity);
+  public static ResponseEntity<GetCustomerInfoResponseDto> success(List<CustomerListResponseDto> customerList) {
+    GetCustomerInfoResponseDto result = new GetCustomerInfoResponseDto(ResponseCode.Success, ResponseMessage.Success, customerList);
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
 

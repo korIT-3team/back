@@ -93,11 +93,15 @@ public class SystemManageServiceImplement implements SystemManageService{
      @Override
      public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(Integer employeeCode, PutDepartmentInfoRequestDto dto) {
           String departmentName = dto.getDepartmentNameInfo();
+          int departmentCode = dto.getDepartmentCodeInfo();
           
           try{
                // description: 부서명 중복 확인
+               DepartmentEntity deptEntity = departmentRepository.findByDepartmentCode(departmentCode);
+               String getDeptEntityName = deptEntity.getDepartmentName();
+               boolean sameDeptInfo = getDeptEntityName.equals(departmentName);
                boolean hasDeptName = departmentRepository.existsByDepartmentName(departmentName);
-               if (hasDeptName) return PutDepartmentInfoResponseDto.existedDeptname();
+               if (!sameDeptInfo && hasDeptName) return PutDepartmentInfoResponseDto.existedDeptname();
 
                // description: 존재하는 사원번호인지 확인 //
                boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
@@ -142,39 +146,59 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo() {
-          CustomerEntity customerEntity;
+     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, Integer customerCode) {
+          List<CustomerListResponseDto> customerList = null;
 
           try{
-               // 데이터베이스에서 거래처 정보 불러오기 //
-               customerEntity = customerRepository.findByCustomerCode(4000); 
+               
+               customerCode = customerCode == null ? null : customerCode;
+               // description: 검색어가 거레처 코드에 포함되어 있는 데이터 조회 //
+               List<CustomerListResultSet> customerEntities = customerRepository.getCustomerList(customerCode);
+
+               // description: entity를 dto형태로 변환 //
+               customerList = CustomerListResponseDto.copyList(customerEntities);
+
           } catch(Exception exception){
                exception.printStackTrace();
                return ResponseDto.databaseError();
           }
 
-          return GetCustomerInfoResponseDto.success(customerEntity);
+          return GetCustomerInfoResponseDto.success(customerList);
      }
 
      @Override
      public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(Integer employeeCode, PutCustomerInfoRequestDto dto) {
 
-          try{
-            // 존재하는 사원번호인지 확인 //
-            boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
-            if(!hasUser) return PutCompanyInfoResponseDto.noExistedUser();
-            // 권한 //
-            if(employeeCode != 9999) return PutCompanyInfoResponseDto.noPermission();
+          String customerName = dto.getCustomerNameInfo();
 
-            // entity 생성 //
-            CustomerEntity customerEntity = new CustomerEntity(dto);
+          try {
+
+               // description: 거래처 명 중복 확인
+               boolean hasCustomerName = customerRepository.existsByCustomerName(customerName);
+               if (hasCustomerName) return PutCustomerInfoResponseDto.existedCustomerName();
+
+               // description: 사업자 등록번호 중복 확인
+               boolean hasCustomerBusinessNumber = customerRepository.existsByCustomerName(customerName);
+               if (hasCustomerBusinessNumber) return PutCustomerInfoResponseDto.existedCustomerName();
             
-            // 데이터베이스에 저장 //
-            customerRepository.save(customerEntity);
-        } catch(Exception exception){
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
+               // description: 존재하는 사원번호인지 확인 //
+               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               if(!hasUser) return PutCustomerInfoResponseDto.noExistedUser();
+
+               // description:  권한 //
+               if(employeeCode != 9999) return PutCustomerInfoResponseDto.noPermission();
+
+               // description:  Entity 생성 //
+               CustomerEntity customerEntity = new CustomerEntity(dto);
+
+               // description:  DB에 저장 //
+               customerRepository.save(customerEntity);
+
+          } catch(Exception exception){
+               // description: 데이터베이스 에러 //
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
 
         return PutCustomerInfoResponseDto.success();
 

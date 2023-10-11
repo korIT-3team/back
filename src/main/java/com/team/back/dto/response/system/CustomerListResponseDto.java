@@ -12,19 +12,23 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CustomerListResponseDto {
 
+  private int no;
   private int companyCode;
   private int customerCode;
   private String customerName;
   private String businessNumber;
+  private String customerPostCode;
   private String customerAddress;
   private String customerAddressDetail;
   private String customerTelNumber;
   
   public CustomerListResponseDto (CustomerListResultSet resultSet) {
+    this.no = resultSet.getNo();
     this.companyCode = resultSet.getCompanyCode();
     this.customerCode = resultSet.getCustomerCode();
     this.customerName = resultSet.getCustomerName();
     this.businessNumber = resultSet.getBusinessNumber();
+    this.customerPostCode = resultSet.getCustomerPostCode();
     this.customerAddress = resultSet.getCustomerAddres();
     this.customerAddressDetail = resultSet.getCustomerAddressDetail();
     this.customerTelNumber = resultSet.getCustomerTelNumber();

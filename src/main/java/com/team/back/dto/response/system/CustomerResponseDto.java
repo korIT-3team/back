@@ -16,7 +16,7 @@ public class CustomerResponseDto extends ResponseDto {
   private int customerCode;
   private String customerName;
   private String businessNumber;
-  private String postCode;
+  private String customerPostCode;
   private String customerAddress;
   private String customerAddressDetail;
   private String customerTelNumber;
@@ -26,8 +26,8 @@ public class CustomerResponseDto extends ResponseDto {
     this.companyCode = customerEntity.getCompanyCode();
     this.customerCode = customerEntity.getCustomerCode();
     this.customerName = customerEntity.getCustomerName();
-    this.businessNumber = customerEntity.getBusinessNumber();
-    this.postCode = customerEntity.getPostCode();
+    this.businessNumber = customerEntity.getCustomerBusinessNumber();
+    this.customerPostCode = customerEntity.getCustomerPostCode();
     this.customerAddress = customerEntity.getCustomerAddress();
     this.customerAddressDetail = customerEntity.getCustomerAddressDetail();
     this.customerTelNumber = customerEntity.getCustomerTelNumber();
@@ -37,8 +37,8 @@ public class CustomerResponseDto extends ResponseDto {
     this.companyCode = customerEntity.getCompanyCode();
     this.customerCode = customerEntity.getCustomerCode();
     this.customerName = customerEntity.getCustomerName();
-    this.businessNumber = customerEntity.getBusinessNumber();
-    this.postCode = customerEntity.getPostCode();
+    this.businessNumber = customerEntity.getCustomerBusinessNumber();
+    this.customerPostCode = customerEntity.getCustomerPostCode();
     this.customerAddress = customerEntity.getCustomerAddress();
     this.customerAddressDetail = customerEntity.getCustomerAddressDetail();
     this.customerTelNumber = customerEntity.getCustomerTelNumber();

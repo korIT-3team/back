@@ -21,18 +21,18 @@ public class CustomerEntity {
   private int companyCode;
   private int customerCode;
   private String customerName;
-  private String businessNumber;
-  private String postCode;
+  private String customerBusinessNumber;
+  private String customerPostCode;
   private String customerAddress;
   private String customerAddressDetail;
   private String customerTelNumber;
 
   public CustomerEntity(PutCustomerInfoRequestDto dto) {
     this.companyCode = 1;
-    this.customerCode = 4000;
-    this.customerName = dto.getCustomerName();
-    this.businessNumber = dto.getBusinessNumber();
-    this.postCode = dto.getPostCode();
+    this.customerCode = dto.getCustomerCodeInfo();
+    this.customerName = dto.getCustomerNameInfo();
+    this.customerBusinessNumber = dto.getCustomerBusinessNumber();
+    this.customerPostCode = dto.getCustomerPostCode();
     this.customerAddress = dto.getCustomerAddress();
     this.customerAddressDetail = dto.getCustomerAddressDetail();
     this.customerTelNumber = dto.getCustomerTelNumber();

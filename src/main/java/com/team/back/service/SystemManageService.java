@@ -33,7 +33,7 @@ public interface SystemManageService {
      ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(Integer employeeCode, String departmentName);
   
      // API : 거래처 정보 불러오기 메서드 //
-     ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo();
+     ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, Integer customerCode);
 
      // API : 거래처 정보 등록 메서드 //
      ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(Integer employeeCode, PutCustomerInfoRequestDto dto);

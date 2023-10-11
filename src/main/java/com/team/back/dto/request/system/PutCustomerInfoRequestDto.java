@@ -1,7 +1,7 @@
 package com.team.back.dto.request.system;
 
 import javax.validation.constraints.NotBlank;
-
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,14 +12,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PutCustomerInfoRequestDto {
 
-  @NotBlank
-  private String customerName;
+  private Integer customerCodeInfo;
 
   @NotBlank
-  private String businessNumber;
+  private String customerNameInfo;
 
   @NotBlank
-  private String postCode;
+  private String customerBusinessNumber;
+
+  @NotBlank
+  private String customerPostCode;
 
   @NotBlank
   private String customerAddress;

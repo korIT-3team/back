@@ -12,20 +12,9 @@ import lombok.Setter;
 public class GetCustomerListRequestDto {
 
   @NotBlank
+  private Integer customerCode;
+
+  @NotBlank
   private String customerName;
-
-  @NotBlank
-  private String businessNumber;
-
-  @NotBlank
-  private String postCode;
-
-  @NotBlank
-  private String customerAddress;
-
-  private String customerAddressDetail;
-
-  @NotBlank
-  private String customerTelNumber;
 
 }
