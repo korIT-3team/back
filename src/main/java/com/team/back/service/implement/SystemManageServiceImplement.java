@@ -71,16 +71,16 @@ public class SystemManageServiceImplement implements SystemManageService{
      public ResponseEntity<? super PutCompanyInfoResponseDto> putCompanyInfo(Integer employeeCode, PutCompanyInfoRequestDto dto) {
 
         try{
-            // 존재하는 사원번호인지 확인 //
+            // description: 존재하는 사원번호인지 확인 //
             boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
             if(!hasUser) return PutCompanyInfoResponseDto.noExistedUser();
-            // 권한 //
+            // description: 권한 //
             if(employeeCode != 9999) return PutCompanyInfoResponseDto.noPermission();
 
-            // entity 생성 //
+            // description: entity 생성 //
             CompanyEntity companyEntity = new CompanyEntity(dto);
             
-            // 데이터베이스에 저장 //
+            // description: 데이터베이스에 저장 //
             companyRepository.save(companyEntity);
         } catch(Exception exception){
             exception.printStackTrace();

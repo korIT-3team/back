@@ -5,17 +5,24 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.team.back.dto.request.accounting.GetInOutComeListRequestDto;
 import com.team.back.dto.request.accounting.GetInvoiceDetailRequestDto;
 import com.team.back.dto.request.accounting.GetInvoiceListRequestDto;
 import com.team.back.dto.response.ResponseDto;
+import com.team.back.dto.response.accounting.GetInOutComeListResponseDto;
+import com.team.back.dto.response.accounting.GetInvoiceDetailIncentiveInfoResponseDto;
 import com.team.back.dto.response.accounting.GetInvoiceDetailOrderInfoResponseDto;
 import com.team.back.dto.response.accounting.GetInvoiceDetailSalesInfoResponseDto;
 import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
+import com.team.back.dto.response.accounting.InOutComeResponseDto;
 import com.team.back.dto.response.accounting.InvoiceResponseDto;
-
+import com.team.back.entity.InOutComeViewEntity;
+import com.team.back.entity.IncentiveViewEntity;
 import com.team.back.entity.InvoiceEntity;
 import com.team.back.entity.OrderViewEntity;
 import com.team.back.entity.SalesViewEntity;
+import com.team.back.repository.InOutComeViewRepository;
+import com.team.back.repository.IncentiveViewRepository;
 import com.team.back.repository.InvoiceRepository;
 import com.team.back.repository.OrderViewRepository;
 import com.team.back.repository.SalesViewRepository;
@@ -31,6 +38,8 @@ public class AccountingServiceImplement implements AccountingService {
      private final InvoiceRepository invoiceRepository;
      private final OrderViewRepository orderViewRepository;
      private final SalesViewRepository salesViewRepository;
+     private final IncentiveViewRepository incentiveViewRepository;
+     private final InOutComeViewRepository inOutComeViewRepository;
      private final UserRepository userRepository;
      
      @Override
@@ -96,7 +105,7 @@ public class AccountingServiceImplement implements AccountingService {
      public ResponseEntity<? super GetInvoiceDetailSalesInfoResponseDto> getInvoiceDetailSalesInfo(GetInvoiceDetailRequestDto requestBody) {
           SalesViewEntity salesViewEntity;
           try{ 
-               // description : 수주 번호로 데이터 조회 //
+               // description : 매출 번호로 데이터 조회 //
                salesViewEntity = salesViewRepository.findBySalesCode(requestBody.getPrimaryKey());
                if(salesViewEntity == null) return GetInvoiceDetailSalesInfoResponseDto.noExistedInvoice();
           } catch(Exception exception){
@@ -105,5 +114,43 @@ public class AccountingServiceImplement implements AccountingService {
           }
 
           return GetInvoiceDetailSalesInfoResponseDto.success(salesViewEntity);
+     }
+
+     @Override
+     public ResponseEntity<? super GetInvoiceDetailIncentiveInfoResponseDto> getInvoiceDetailIncentiveInfo(GetInvoiceDetailRequestDto requestBody) {
+          IncentiveViewEntity incentiveViewEntity;
+          try{ 
+               // description : 급/상여 코드로 데이터 조회 //
+               incentiveViewEntity = incentiveViewRepository.findByIncentiveCode(requestBody.getPrimaryKey());
+               if(incentiveViewEntity == null) return GetInvoiceDetailIncentiveInfoResponseDto.noExistedInvoice();
+          } catch(Exception exception){
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+
+          return GetInvoiceDetailIncentiveInfoResponseDto.success(incentiveViewEntity);
+     }
+
+     @Override
+     public ResponseEntity<? super GetInOutComeListResponseDto> getInOutComeList(GetInOutComeListRequestDto requestBody) {
+          List<InOutComeResponseDto> inOutComeList = null;
+          String start = requestBody.getFundDateStart();
+          String end = requestBody.getFundDateEnd();
+          Integer cmCode = requestBody.getCustomerCode();
+          Integer spCode = requestBody.getSalesPlanCode();
+
+          try{ 
+               String strCmCode = cmCode == null ? "" : Integer.toString(cmCode);
+               String strSpCode = spCode == null ? "" : Integer.toString(spCode);
+               
+               List<InOutComeViewEntity> inOutComeViewEntities = inOutComeViewRepository.getInOutComeList(strCmCode, strSpCode, start, end);
+               inOutComeList = InOutComeResponseDto.copyEntityList(inOutComeViewEntities);
+               
+          } catch(Exception exception){
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+
+          return GetInOutComeListResponseDto.success(inOutComeList);
      };
 }

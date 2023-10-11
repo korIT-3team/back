@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.team.back.dto.request.accounting.GetInOutComeListRequestDto;
 import com.team.back.dto.request.accounting.GetInvoiceDetailRequestDto;
 import com.team.back.dto.request.accounting.GetInvoiceListRequestDto;
 import com.team.back.dto.response.accounting.GetInvoiceDetailOrderInfoResponseDto;
 import com.team.back.dto.response.accounting.GetInvoiceDetailSalesInfoResponseDto;
+import com.team.back.dto.response.accounting.GetInvoiceDetailIncentiveInfoResponseDto;
+import com.team.back.dto.response.accounting.GetInOutComeListResponseDto;
 import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
 import com.team.back.dto.response.accounting.InvoiceResponseDto;
 import com.team.back.service.AccountingService;
@@ -60,6 +63,24 @@ public class AccountingController {
           @RequestBody @Valid GetInvoiceDetailRequestDto requestBody
      ) {
           ResponseEntity<? super GetInvoiceDetailSalesInfoResponseDto> response = accountingService.getInvoiceDetailSalesInfo(requestBody);
+          return response;
+     }
+
+     // API : 급/상여 전표 조회 메서드 //
+     @PostMapping("/invoice/{invoiceCode}/incentive")
+     public ResponseEntity<? super GetInvoiceDetailIncentiveInfoResponseDto> getInvoiceDetailIncentiveInfo(
+          @RequestBody @Valid GetInvoiceDetailRequestDto requestBody
+     ) {
+          ResponseEntity<? super GetInvoiceDetailIncentiveInfoResponseDto> response = accountingService.getInvoiceDetailIncentiveInfo(requestBody);
+          return response;
+     }
+
+     // API : 매입매출장 메서드 //
+     @PostMapping("/inout-come")
+     public ResponseEntity<? super GetInOutComeListResponseDto> getInOutComeList(
+          @RequestBody @Valid GetInOutComeListRequestDto requestBody
+     ) {
+          ResponseEntity<? super GetInOutComeListResponseDto> response = accountingService.getInOutComeList(requestBody);
           return response;
      }
 }

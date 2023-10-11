@@ -9,12 +9,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GetInvoiceListRequestDto {
-    private Integer departmentCode;
-    private Integer employeeCode;
+public class GetInOutComeListRequestDto {
     @NotBlank
-    private String invoiceDateStart;
+    private String fundDateStart;
     @NotBlank
-    private String invoiceDateEnd;
-    private Integer invoiceType;
+    private String fundDateEnd;
+    private Integer customerCode;
+    private Integer salesPlanCode;
 }
