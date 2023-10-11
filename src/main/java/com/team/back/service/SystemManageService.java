@@ -5,11 +5,11 @@ import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
 
 import com.team.back.dto.request.accounting.GetInvoiceListRequestDto;
-import com.team.back.dto.request.system.GetDepartmentListRequestDto;
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
 import com.team.back.dto.request.system.PutProductInfoRequestDto;
+import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.GetProductInfoResponseDto;
@@ -28,6 +28,9 @@ public interface SystemManageService {
 
      // API : 부서 정보 등록 메서드 //
      ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(Integer employeeCode, PutDepartmentInfoRequestDto dto);
+
+     // API : 부서 정보 삭제 메서드 //
+     ResponseEntity<? super DeleteDepartmentInfoResponseDto> deleteDepartmentInfo(Integer employeeCode, Integer deleteDepartmentCode);
      
      // API : 부서 정보 불러오기 //
      ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(Integer employeeCode, String departmentName);
