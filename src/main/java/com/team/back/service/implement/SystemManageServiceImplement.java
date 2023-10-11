@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.team.back.dto.request.system.GetDepartmentListRequestDto;
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
@@ -17,6 +16,7 @@ import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.PutProductInfoResponseDto;
 import com.team.back.dto.response.system.CustomerListResponseDto;
+import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.DepartmentListResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
@@ -93,15 +93,11 @@ public class SystemManageServiceImplement implements SystemManageService{
      @Override
      public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(Integer employeeCode, PutDepartmentInfoRequestDto dto) {
           String departmentName = dto.getDepartmentNameInfo();
-          int departmentCode = dto.getDepartmentCodeInfo();
           
           try{
                // description: 부서명 중복 확인
-               DepartmentEntity deptEntity = departmentRepository.findByDepartmentCode(departmentCode);
-               String getDeptEntityName = deptEntity.getDepartmentName();
-               boolean sameDeptInfo = getDeptEntityName.equals(departmentName);
                boolean hasDeptName = departmentRepository.existsByDepartmentName(departmentName);
-               if (!sameDeptInfo && hasDeptName) return PutDepartmentInfoResponseDto.existedDeptname();
+               if (hasDeptName) return PutDepartmentInfoResponseDto.existedDeptname();
 
                // description: 존재하는 사원번호인지 확인 //
                boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
@@ -125,6 +121,26 @@ public class SystemManageServiceImplement implements SystemManageService{
 
         return PutDepartmentInfoResponseDto.success();
      }
+
+     @Override
+     public ResponseEntity<? super DeleteDepartmentInfoResponseDto> deleteDepartmentInfo(Integer employeeCode, Integer departmentCode) {
+          System.out.println(departmentCode);
+          try {
+               // description: 존재하는 유저인지 확인 //
+               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               if (!hasUser) return DeleteDepartmentInfoResponseDto.noExistedUser();
+               // description: 존재하는 부서코드인지 확인 //
+               DepartmentEntity departmentEntity = departmentRepository.findByDepartmentCode(departmentCode);
+               if (departmentEntity == null) return DeleteDepartmentInfoResponseDto.noExistedDept();
+               // description: 부서 삭제 //
+               departmentRepository.delete(departmentEntity);
+          } catch (Exception exception) {
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+          return DeleteDepartmentInfoResponseDto.success();
+     }
+
 
      @Override
      public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(Integer employeeCode, String departmentName) {
