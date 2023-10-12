@@ -22,7 +22,7 @@ public class GetInvoiceDetailOrderInfoResponseDto extends ResponseDto {
      private Integer customerCode;
      private String employeeName;
      private String customerName;
-     // todo : 수정?
+     
      public GetInvoiceDetailOrderInfoResponseDto(String code, String message, OrderViewEntity orderViewEntity){
           super(code, message);
           this.orderCode = orderViewEntity.getOrderCode();

@@ -17,8 +17,8 @@ public class InOutComeResponseDto {
      private String customerName;
      private double price;
      private String priceDetail;
-     private String taxType;
-     private String fundBalance;
+     private int taxType;
+     private double fundBalance;
      
      public InOutComeResponseDto(InOutComeViewEntity inOutComeViewEntity){
           this.fundingCode = inOutComeViewEntity.getFundingCode();
