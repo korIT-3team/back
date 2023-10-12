@@ -97,12 +97,13 @@ public class SystemManageController {
 
 
      //! API: 거래처 정보 불러오기 //
-     @GetMapping(value={"/customer-info/{customerCode}", "/customer-info"})
+     @GetMapping(value={"/customer-info/{customerCode}/{customerName}", "/customer-info"})
      public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(
           @AuthenticationPrincipal Integer employeeCode,
-          @PathVariable(value="customerCode", required=false) Integer customerCode
+          @PathVariable(value="customerCode", required=false) Integer customerCode,
+          @PathVariable(value="customerName", required=false) String customerName
      ) {
-          ResponseEntity<? super GetCustomerInfoResponseDto> response = systemManageService.getCustomerInfo(employeeCode, customerCode);
+          ResponseEntity<? super GetCustomerInfoResponseDto> response = systemManageService.getCustomerInfo(employeeCode, customerCode, customerName);
           return response;
      }
 

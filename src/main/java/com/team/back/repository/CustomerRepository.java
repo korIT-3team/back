@@ -34,5 +34,5 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
 
     nativeQuery=true
   )
-  List<CustomerListResultSet> getCustomerList(Integer customerCode);
+  List<CustomerListResultSet> getCustomerList(Integer customerCode, String customerName);
 }
