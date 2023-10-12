@@ -152,7 +152,6 @@ public class SystemManageServiceImplement implements SystemManageService{
 
      @Override
      public ResponseEntity<? super DeleteDepartmentInfoResponseDto> deleteDepartmentInfo(Integer employeeCode, Integer departmentCode) {
-          System.out.println(departmentCode);
           try {
                // description: 존재하는 유저인지 확인 //
                boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
