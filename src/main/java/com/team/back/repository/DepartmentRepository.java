@@ -32,7 +32,7 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, In
     "department_tel_number AS departmentTelNumber, " + 
     "department_fax AS departmentFax " + 
     "FROM department AS D " + 
-    "WHERE department_code != 9999 " + 
+    "WHERE department_code != 999 " + 
     "AND department_name LIKE %?1% " +
     "ORDER BY department_code ",
     

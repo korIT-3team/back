@@ -21,6 +21,6 @@ public class InOutComeViewEntity {
      private String customerName;
      private double price;
      private String priceDetail;
-     private String taxType;
-     private String fundBalance;
+     private int taxType;
+     private double fundBalance;
 }
