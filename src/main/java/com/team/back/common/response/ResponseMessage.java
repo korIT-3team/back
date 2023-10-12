@@ -16,6 +16,7 @@ public interface ResponseMessage {
 
      String NO_EXISTED_CUSTOMER_INFO = "No Existed Customer Info";
      String EXISTED_CUSTOMER_NAME = "Existed Customer Name";
+     String EXISTED_CUSTOMER_CODE = "Existed Customer Code";
      String NO_EXISTED_CUSTOMER_CODE = "No Existed Customer Code";
      String EXISTED_CUSTOMER_BUSINESS_NUMBER = "Existed Customer Business Number";
 

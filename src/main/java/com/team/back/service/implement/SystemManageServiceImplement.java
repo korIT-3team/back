@@ -162,14 +162,15 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, Integer customerCode) {
+     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, Integer customerCode, String customerName) {
           List<CustomerListResponseDto> customerList = null;
 
           try{
                
                customerCode = customerCode == null ? null : customerCode;
-               // description: 검색어가 거레처 코드에 포함되어 있는 데이터 조회 //
-               List<CustomerListResultSet> customerEntities = customerRepository.getCustomerList(customerCode);
+               customerName = customerName == null ? "" : customerName;
+               // description: 검색어가 거레처 코드 및 거래처명에 포함되어 있는 데이터 조회 //
+               List<CustomerListResultSet> customerEntities = customerRepository.getCustomerList(customerCode, customerName);
 
                // description: entity를 dto형태로 변환 //
                customerList = CustomerListResponseDto.copyList(customerEntities);
@@ -186,8 +187,16 @@ public class SystemManageServiceImplement implements SystemManageService{
      public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(Integer employeeCode, PutCustomerInfoRequestDto dto) {
 
           String customerName = dto.getCustomerNameInfo();
+          int customerCode = dto.getCustomerCodeInfo();
 
           try {
+
+               // description: 거래처 코드 중복 확인
+               CustomerEntity custEntity = customerRepository.findByCustomerCode(customerCode);
+               int getCustEntityCode = custEntity.getCustomerCode();
+               boolean sameCustInfo = (getCustEntityCode == customerCode);
+               boolean hasCustCode = customerRepository.existsByCustomerCode(customerCode);
+               if (!sameCustInfo && hasCustCode) return PutCustomerInfoResponseDto.existedCustomerCode();
 
                // description: 거래처 명 중복 확인
                boolean hasCustomerName = customerRepository.existsByCustomerName(customerName);
