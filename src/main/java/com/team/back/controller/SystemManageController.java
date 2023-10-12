@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team.back.dto.request.accounting.GetInvoiceListRequestDto;
-import com.team.back.dto.request.system.GetDepartmentListRequestDto;
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
 import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
+import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
@@ -63,14 +64,24 @@ public class SystemManageController {
           return response;
      }
 
+     // API : 부서 정보 삭제 메서드 //
+     @DeleteMapping("/dept-info/{departmentCode}")
+     public ResponseEntity<? super DeleteDepartmentInfoResponseDto> deleteDepartmentInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @PathVariable(value="departmentCode", required = false) Integer departmnetCode
+     ) {
+          ResponseEntity<? super DeleteDepartmentInfoResponseDto> responese = systemManageService.deleteDepartmentInfo(employeeCode, departmnetCode);
+          return responese;
+     }
+
      // API : 검색 부서 정보 불러오기 메서드 //
      @GetMapping(value={"/dept-info/{departmentName}", "/dept-info"})
      public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(
           @AuthenticationPrincipal Integer employeeCode,
           @PathVariable(value="departmentName", required=false) String departmentName
      ) {
-     ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo(employeeCode, departmentName);
-     return response;
+          ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo(employeeCode, departmentName);
+          return response;
      }
 
 
