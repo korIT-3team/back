@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.team.back.common.constants.DepartmentCode;
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
@@ -37,6 +38,7 @@ import com.team.back.repository.CustomerRepository;
 import com.team.back.repository.DepartmentRepository;
 import com.team.back.repository.ProductRepository;
 import com.team.back.repository.UserRepository;
+import com.team.back.repository.UserViewRepository;
 import com.team.back.service.SystemManageService;
 
 import lombok.RequiredArgsConstructor;
@@ -47,6 +49,7 @@ public class SystemManageServiceImplement implements SystemManageService{
      
      private final CompanyRepository companyRepository;
      private final UserRepository userRepository;
+     private final UserViewRepository userViewRepository;
      private final DepartmentRepository departmentRepository;
      private final CustomerRepository customerRepository;
      private final ProductRepository productRepository;
@@ -75,7 +78,8 @@ public class SystemManageServiceImplement implements SystemManageService{
             boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
             if(!hasUser) return PutCompanyInfoResponseDto.noExistedUser();
             // description: 권한 //
-            if(employeeCode != 9999) return PutCompanyInfoResponseDto.noPermission();
+            Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+            if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutCompanyInfoResponseDto.noPermission();
 
             // description: entity 생성 //
             CompanyEntity companyEntity = new CompanyEntity(dto);
@@ -104,7 +108,8 @@ public class SystemManageServiceImplement implements SystemManageService{
                if(!hasUser) return PutDepartmentInfoResponseDto.noExistedUser();
 
                // description:  권한 //
-               if(employeeCode != 9999) return PutDepartmentInfoResponseDto.noPermission();
+               Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+               if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
 
                // description:  Entity 생성 //
                DepartmentEntity departmentEntity = new DepartmentEntity(dto);
@@ -211,7 +216,8 @@ public class SystemManageServiceImplement implements SystemManageService{
                if(!hasUser) return PutCustomerInfoResponseDto.noExistedUser();
 
                // description:  권한 //
-               if(employeeCode != 9999) return PutCustomerInfoResponseDto.noPermission();
+               Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+               if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutCustomerInfoResponseDto.noPermission();
 
                // description:  Entity 생성 //
                CustomerEntity customerEntity = new CustomerEntity(dto);
@@ -252,9 +258,11 @@ public class SystemManageServiceImplement implements SystemManageService{
           try{
             // 존재하는 사원번호인지 확인 //
             boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
-            if(!hasUser) return PutCompanyInfoResponseDto.noExistedUser();
+            if(!hasUser) return PutProductInfoResponseDto.noExistedUser();
+
             // 권한 //
-            if(employeeCode != 9999) return PutCompanyInfoResponseDto.noPermission();
+            Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+            if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutProductInfoResponseDto.noPermission();;
 
             // entity 생성 //
             ProductEntity productEntity = new ProductEntity(dto);
