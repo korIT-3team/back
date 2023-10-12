@@ -15,7 +15,8 @@ public interface ResponseCode {
      String NO_EXISTED_DEPARTMENT_CODE = "NDC";
 
      String NO_EXISTED_CUSTOMER_INFO = "NEC";
-     String EXISTED_CUSTOMER_NAME = "EC";
+     String EXISTED_CUSTOMER_NAME = "ECN";
+     String EXISTED_CUSTOMER_CODE = "ECC";
      String NO_EXISTED_CUSTOMER_CODE = "NCC";
      String EXISTED_CUSTOMER_BUSINESS_NUMBER = "ECB";
 

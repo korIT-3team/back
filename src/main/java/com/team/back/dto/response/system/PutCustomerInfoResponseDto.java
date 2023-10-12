@@ -43,6 +43,11 @@ public class PutCustomerInfoResponseDto extends ResponseDto {
     return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
   }
 
+  public static ResponseEntity<ResponseDto> existedCustomerCode() {
+    ResponseDto result = new ResponseDto(ResponseCode.EXISTED_CUSTOMER_CODE, ResponseMessage.EXISTED_CUSTOMER_CODE);
+    return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
+  }
+
   public static ResponseEntity<ResponseDto> existedCustomerBusinessNumber() {
     ResponseDto result = new ResponseDto(ResponseCode.EXISTED_CUSTOMER_BUSINESS_NUMBER, ResponseMessage.EXISTED_CUSTOMER_BUSINESS_NUMBER);
     return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
