@@ -96,12 +96,36 @@ public class SystemManageServiceImplement implements SystemManageService{
 
      @Override
      public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(Integer employeeCode, PutDepartmentInfoRequestDto dto) {
+          int departmentCode = dto.getDepartmentCodeInfo();
           String departmentName = dto.getDepartmentNameInfo();
-          
+          String departmentTelNumber = dto.getDepartmentTelNumber();
+          String departmentFax = dto.getDepartmentFax();
+
           try{
-               // description: 부서명 중복 확인
-               boolean hasDeptName = departmentRepository.existsByDepartmentName(departmentName);
-               if (hasDeptName) return PutDepartmentInfoResponseDto.existedDeptname();
+               // description: 신규입력의 경우
+               if (departmentCode == 0) {
+                    // description: 부서명 중복 확인
+                    boolean hasDeptName = departmentRepository.existsByDepartmentName(departmentName);
+                    if (hasDeptName) return PutDepartmentInfoResponseDto.existedDeptname();
+                    // description: 부서전화번호 중복 확인
+                    boolean hasTelNumber = departmentRepository.existsByDepartmentTelNumber(departmentTelNumber);
+                    if (hasTelNumber) return PutDepartmentInfoResponseDto.existedDeptTelNumber();
+                    // description: 부서FAX 중복 확인
+                    boolean hasFax = departmentRepository.existsByDepartmentFax(departmentFax);
+                    if (hasFax) return PutDepartmentInfoResponseDto.existedDeptFax();
+               } else {
+                    // description: 부서전화번호 중복 확인
+                    DepartmentEntity deptTelNumberEntity = departmentRepository.findByDepartmentTelNumber(departmentTelNumber);
+                    if (deptTelNumberEntity != null) {
+                         if (departmentCode != deptTelNumberEntity.getDepartmentCode()) return PutDepartmentInfoResponseDto.existedDeptTelNumber();
+                    }
+
+                    // description: 부서FAX 중복 확인
+                    DepartmentEntity deptFaxEntity = departmentRepository.findByDepartmentFax(departmentFax);
+                    if (deptFaxEntity != null) {
+                         if (departmentCode != deptFaxEntity.getDepartmentCode()) return PutDepartmentInfoResponseDto.existedDeptFax();                    
+                    }
+               }
 
                // description: 존재하는 사원번호인지 확인 //
                boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
@@ -115,7 +139,6 @@ public class SystemManageServiceImplement implements SystemManageService{
                DepartmentEntity departmentEntity = new DepartmentEntity(dto);
                
                // description:  DB에 저장 //
-               
                departmentRepository.save(departmentEntity);
 
           } catch(Exception exception){

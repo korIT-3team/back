@@ -13,9 +13,13 @@ import com.team.back.entity.resultSets.DepartmentListResultSet;
 public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Integer> {
   boolean existsByDepartmentCode(Integer departmentCode);
   boolean existsByDepartmentName(String departmentName);
+  boolean existsByDepartmentTelNumber(String departmentTelNumber);
+  boolean existsByDepartmentFax(String departmentFax);
 
   DepartmentEntity findByDepartmentCode(Integer DepartmentCode);
   DepartmentEntity findByDepartmentName(String DepartmentName);
+  DepartmentEntity findByDepartmentTelNumber(String DepartmentTelNumber);
+  DepartmentEntity findByDepartmentFax(String DepartmentFax);
 
   @Query(
     value=
