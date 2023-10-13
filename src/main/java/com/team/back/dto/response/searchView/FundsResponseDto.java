@@ -1,16 +1,15 @@
-package com.team.back.dto.response.accounting;
+package com.team.back.dto.response.searchView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.team.back.entity.FundsViewEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class InOutComeResponseDto {
+public class FundsResponseDto {
      private int fundingCode;
      private String fundDate;
      private int salesPlanCode;
@@ -20,7 +19,7 @@ public class InOutComeResponseDto {
      private int taxType;
      private double fundBalance;
      
-     public InOutComeResponseDto(FundsViewEntity fundsViewEntity){
+     public FundsResponseDto(FundsViewEntity fundsViewEntity){
           this.fundingCode = fundsViewEntity.getFundingCode();
           this.fundDate = fundsViewEntity.getFundDate();
           this.salesPlanCode = fundsViewEntity.getSalesPlanCode();
@@ -31,14 +30,14 @@ public class InOutComeResponseDto {
           this.fundBalance = fundsViewEntity.getFundBalance();
      }
      
-     public static List<InOutComeResponseDto> copyEntityList(List<FundsViewEntity> fundsViewEntities) {
-          List<InOutComeResponseDto> inOutComeList = new ArrayList<>();
+     public static List<FundsResponseDto> copyEntityList(List<FundsViewEntity> fundsViewEntities) {
+          List<FundsResponseDto> fundsList = new ArrayList<>();
 
           for (FundsViewEntity fundsViewEntity : fundsViewEntities) {
-               InOutComeResponseDto dto = new InOutComeResponseDto(fundsViewEntity);
-               inOutComeList.add(dto);
+               FundsResponseDto dto = new FundsResponseDto(fundsViewEntity);
+               fundsList.add(dto);
           }
 
-          return inOutComeList;
+          return fundsList;
      }
 }
