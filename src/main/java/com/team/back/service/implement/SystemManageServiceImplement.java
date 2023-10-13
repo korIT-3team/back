@@ -17,6 +17,7 @@ import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.PutProductInfoResponseDto;
 import com.team.back.dto.response.system.CustomerListResponseDto;
+import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
 import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.DepartmentListResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
@@ -27,9 +28,6 @@ import com.team.back.entity.CompanyEntity;
 import com.team.back.entity.CustomerEntity;
 import com.team.back.entity.DepartmentEntity;
 import com.team.back.entity.ProductEntity;
-import com.team.back.entity.CompanyEntity;
-import com.team.back.entity.CustomerEntity;
-import com.team.back.entity.DepartmentEntity;
 import com.team.back.entity.InvoiceEntity;
 import com.team.back.entity.resultSets.CustomerListResultSet;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
@@ -256,6 +254,24 @@ public class SystemManageServiceImplement implements SystemManageService{
         return PutCustomerInfoResponseDto.success();
 
      }
+
+     @Override
+     public ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(Integer employeeCode, Integer customerCode) {
+          try {
+               // description: 존재하는 유저인지 확인 //
+               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               if (!hasUser) return DeleteCustomerInfoResponseDto.noExistedUser();
+               // description: 존재하는 거래처코드인지 확인 //
+               CustomerEntity customerEntity = customerRepository.findByCustomerCode(customerCode);
+               if (customerEntity == null) return DeleteCustomerInfoResponseDto.noExistedCustomerCode();
+               // description: 거래처 삭제 //
+               customerRepository.delete(customerEntity);
+          } catch (Exception exception) {
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+          return DeleteCustomerInfoResponseDto.success();
+     } 
 
      @Override
      public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo() {

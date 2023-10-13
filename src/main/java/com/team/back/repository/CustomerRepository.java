@@ -17,6 +17,7 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
   boolean existsByCustomerBusinessNumber(String businessNumber);
   
   CustomerEntity findByCustomerCode(Integer CustomerCode);
+  CustomerEntity findByCustomerName(String CustomerName);
 
   @Query(
     value = 
