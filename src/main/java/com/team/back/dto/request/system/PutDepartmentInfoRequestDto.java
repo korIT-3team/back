@@ -2,6 +2,7 @@ package com.team.back.dto.request.system;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.UniqueElements;
 
@@ -29,10 +30,10 @@ public class PutDepartmentInfoRequestDto {
   
   private String departmentEndDate;
 
-  @NotBlank
+  @NotBlank @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$")
   private String departmentTelNumber;
 
-  @NotBlank
+  @NotBlank @Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$")
   private String departmentFax;
 
 }

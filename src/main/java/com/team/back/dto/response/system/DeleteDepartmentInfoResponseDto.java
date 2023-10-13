@@ -28,7 +28,7 @@ public class DeleteDepartmentInfoResponseDto extends ResponseDto {
   }
 
   public static ResponseEntity<ResponseDto> noExistedDept() {
-    ResponseDto result = new ResponseDto(ResponseCode.NO_EXISTED_DEPARTMENT_CODE, ResponseMessage.NO_EXISTED_DEPARTMENT_CODE);
+    ResponseDto result = new ResponseDto(ResponseCode.NO_EXISTED_DEPARTMENT_INFO, ResponseMessage.NO_EXISTED_DEPARTMENT_INFO);
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
   }
 
