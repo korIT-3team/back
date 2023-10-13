@@ -16,12 +16,12 @@ import com.team.back.dto.response.accounting.GetInvoiceDetailSalesInfoResponseDt
 import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
 import com.team.back.dto.response.accounting.InOutComeResponseDto;
 import com.team.back.dto.response.accounting.InvoiceResponseDto;
-import com.team.back.entity.InOutComeViewEntity;
+import com.team.back.entity.FundsViewEntity;
 import com.team.back.entity.IncentiveViewEntity;
 import com.team.back.entity.InvoiceEntity;
 import com.team.back.entity.OrderViewEntity;
 import com.team.back.entity.SalesViewEntity;
-import com.team.back.repository.InOutComeViewRepository;
+import com.team.back.repository.FundsViewRepository;
 import com.team.back.repository.IncentiveViewRepository;
 import com.team.back.repository.InvoiceRepository;
 import com.team.back.repository.OrderViewRepository;
@@ -39,7 +39,7 @@ public class AccountingServiceImplement implements AccountingService {
      private final OrderViewRepository orderViewRepository;
      private final SalesViewRepository salesViewRepository;
      private final IncentiveViewRepository incentiveViewRepository;
-     private final InOutComeViewRepository inOutComeViewRepository;
+     private final FundsViewRepository fundsViewRepository;
      private final UserRepository userRepository;
      
      @Override
@@ -143,8 +143,8 @@ public class AccountingServiceImplement implements AccountingService {
                String strCmCode = cmCode == null ? "" : Integer.toString(cmCode);
                String strSpCode = spCode == null ? "" : Integer.toString(spCode);
                
-               List<InOutComeViewEntity> inOutComeViewEntities = inOutComeViewRepository.getInOutComeList(strCmCode, strSpCode, start, end);
-               inOutComeList = InOutComeResponseDto.copyEntityList(inOutComeViewEntities);
+               List<FundsViewEntity> fundsViewEntities = fundsViewRepository.getInOutComeList(strCmCode, strSpCode, start, end);
+               inOutComeList = InOutComeResponseDto.copyEntityList(fundsViewEntities);
                
           } catch(Exception exception){
                exception.printStackTrace();

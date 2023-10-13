@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="inout_come_view")
-@Table(name="inout_come_view")
-public class InOutComeViewEntity {
+@Entity(name="funds_view")
+@Table(name="funds_view")
+public class FundsViewEntity {
      @Id
      private int fundingCode;
      private String fundDate;
