@@ -79,7 +79,7 @@ public class SalesServiceImplement implements SalesService {
       String strExTotalPrice = exTotalPrice == null ? "" : Double.toString(exTotalPrice);
 
       // description : db 조회
-      List<SalesPlanEntity> salesPlanEntities = salesPlanRepository.getSalesPlanList(strDeptCode, strEmpCode, pDate, strProCode, strExType, strPQuantity, strExRate, pDate, strExPrice, strExTotalPrice);
+      List<SalesPlanEntity> salesPlanEntities = salesPlanRepository.getSalesPlanList(strDeptCode, strEmpCode, pDate, strProCode, proName, strExType, strPQuantity, strExRate, strExPrice, strExTotalPrice);
 
       // description : entity 를 dto 로 변환 //
       salesPlanList = SalesPlanResponseDto.copyEntityList(salesPlanEntities);

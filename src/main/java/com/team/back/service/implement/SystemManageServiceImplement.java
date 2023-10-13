@@ -211,17 +211,9 @@ public class SystemManageServiceImplement implements SystemManageService{
      @Override
      public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(Integer employeeCode, PutCustomerInfoRequestDto dto) {
 
-          String customerName = dto.getCustomerNameInfo();
-          int customerCode = dto.getCustomerCodeInfo();
+          String customerName = dto.getCustomerName();
 
           try {
-
-               // description: 거래처 코드 중복 확인
-               CustomerEntity custEntity = customerRepository.findByCustomerCode(customerCode);
-               int getCustEntityCode = custEntity.getCustomerCode();
-               boolean sameCustInfo = (getCustEntityCode == customerCode);
-               boolean hasCustCode = customerRepository.existsByCustomerCode(customerCode);
-               if (!sameCustInfo && hasCustCode) return PutCustomerInfoResponseDto.existedCustomerCode();
 
                // description: 거래처 명 중복 확인
                boolean hasCustomerName = customerRepository.existsByCustomerName(customerName);
