@@ -13,9 +13,13 @@ import com.team.back.entity.resultSets.DepartmentListResultSet;
 public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Integer> {
   boolean existsByDepartmentCode(Integer departmentCode);
   boolean existsByDepartmentName(String departmentName);
+  boolean existsByDepartmentTelNumber(String departmentTelNumber);
+  boolean existsByDepartmentFax(String departmentFax);
 
   DepartmentEntity findByDepartmentCode(Integer DepartmentCode);
   DepartmentEntity findByDepartmentName(String DepartmentName);
+  DepartmentEntity findByDepartmentTelNumber(String DepartmentTelNumber);
+  DepartmentEntity findByDepartmentFax(String DepartmentFax);
 
   @Query(
     value=
@@ -28,7 +32,7 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, In
     "department_tel_number AS departmentTelNumber, " + 
     "department_fax AS departmentFax " + 
     "FROM department AS D " + 
-    "WHERE department_code != 9999 " + 
+    "WHERE department_code != 999 " + 
     "AND department_name LIKE %?1% " +
     "ORDER BY department_code ",
     

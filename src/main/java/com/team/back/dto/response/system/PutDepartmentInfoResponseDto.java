@@ -42,5 +42,14 @@ public class PutDepartmentInfoResponseDto extends ResponseDto {
     ResponseDto result = new ResponseDto(ResponseCode.EXISTED_DEPARTMENT_NAME, ResponseMessage.EXISTED_DEPARTMENT_NAME);
     return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
   }
+
+  public static ResponseEntity<ResponseDto> existedDeptTelNumber() {
+    ResponseDto result = new ResponseDto(ResponseCode.EXISTED_DEPARTMENT_TELNUMBER, ResponseMessage.EXISTED_DEPARTMENT_TELNUMBER);
+    return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
+  }
   
+  public static ResponseEntity<ResponseDto> existedDeptFax() {
+    ResponseDto result = new ResponseDto(ResponseCode.EXISTED_DEPARTMENT_FAX, ResponseMessage.EXISTED_DEPARTMENT_FAX);
+    return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
+  }  
 }

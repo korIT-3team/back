@@ -12,6 +12,8 @@ public interface ResponseCode {
      String NO_EXISTED_DEPARTMENT_INFO = "ND";
      String NO_EXISTED_INVOICE = "NI";
      String EXISTED_DEPARTMENT_NAME = "ED";
+     String EXISTED_DEPARTMENT_TELNUMBER = "ET";
+     String EXISTED_DEPARTMENT_FAX = "EF";
      String NO_EXISTED_DEPARTMENT_CODE = "NDC";
 
      String NO_EXISTED_CUSTOMER_INFO = "NEC";

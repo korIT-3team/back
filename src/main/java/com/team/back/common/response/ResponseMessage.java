@@ -12,6 +12,8 @@ public interface ResponseMessage {
      String NO_EXISTED_DEPARTMENT_INFO = "No Existed Department Info";
      String NO_EXISTED_INVOICE = "No Existed Invoice";
      String EXISTED_DEPARTMENT_NAME = "Existed Department Name";
+     String EXISTED_DEPARTMENT_TELNUMBER = "Existed Department TelNumber";
+     String EXISTED_DEPARTMENT_FAX = "Existed Department Fax";     
      String NO_EXISTED_DEPARTMENT_CODE = "No Existed Department Code";
 
      String NO_EXISTED_CUSTOMER_INFO = "No Existed Customer Info";
