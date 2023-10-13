@@ -16,7 +16,7 @@ public class CustomerListResponseDto {
   private int companyCode;
   private int customerCode;
   private String customerName;
-  private String businessNumber;
+  private String customerBusinessNumber;
   private String customerPostCode;
   private String customerAddress;
   private String customerAddressDetail;
@@ -27,7 +27,7 @@ public class CustomerListResponseDto {
     this.companyCode = resultSet.getCompanyCode();
     this.customerCode = resultSet.getCustomerCode();
     this.customerName = resultSet.getCustomerName();
-    this.businessNumber = resultSet.getBusinessNumber();
+    this.customerBusinessNumber = resultSet.getCustomerBusinessNumber();
     this.customerPostCode = resultSet.getCustomerPostCode();
     this.customerAddress = resultSet.getCustomerAddres();
     this.customerAddressDetail = resultSet.getCustomerAddressDetail();

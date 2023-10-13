@@ -14,7 +14,7 @@ import com.team.back.entity.resultSets.CustomerListResultSet;
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
   boolean existsByCustomerCode(Integer customerCode);
   boolean existsByCustomerName(String customerName);
-  boolean existsByCustomerBusinessNumber(String businessNumber);
+  boolean existsByCustomerBusinessNumber(String customerBusinessNumber);
   
   CustomerEntity findByCustomerCode(Integer CustomerCode);
   CustomerEntity findByCustomerName(String CustomerName);
@@ -25,7 +25,7 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
     "customer_code AS customerCode, " +
     "company_code AS companyCode, " +
     "customer_name AS customerName, " +
-    "business_Number AS customerBusinessNumber, " +
+    "customer_business_number AS customerBusinessNumber, " +
     "customer_post_code AS customerPostCode, " +
     "customer_address AS customerAddress, " +
     "customer_address_detail AS customerAddressDetail, " +

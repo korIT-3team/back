@@ -5,7 +5,7 @@ public interface CustomerListResultSet {
   int getCompanyCode();
   int getCustomerCode();
   String getCustomerName();
-  String getBusinessNumber();
+  String getCustomerBusinessNumber();
   String getCustomerPostCode();
   String getCustomerAddres();
   String getCustomerAddressDetail();
