@@ -9,12 +9,12 @@ public interface ResponseCode {
      String VALIDATE_FAIL = "VF";
      String NO_PERMISSION = "NP";
 
-     String NO_EXISTED_DEPARTMENT_INFO = "ND";
      String NO_EXISTED_INVOICE = "NI";
+
+     String NO_EXISTED_DEPARTMENT_INFO = "ND";
      String EXISTED_DEPARTMENT_NAME = "ED";
      String EXISTED_DEPARTMENT_TELNUMBER = "ET";
      String EXISTED_DEPARTMENT_FAX = "EF";
-     String NO_EXISTED_DEPARTMENT_CODE = "NDC";
 
      String NO_EXISTED_CUSTOMER_INFO = "NEC";
      String EXISTED_CUSTOMER_NAME = "ECN";
