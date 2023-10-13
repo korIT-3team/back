@@ -9,12 +9,12 @@ public interface ResponseMessage {
      String VALIDATE_FAIL = "Validation Fail";
      String NO_PERMISSION = "No Permission";
 
-     String NO_EXISTED_DEPARTMENT_INFO = "No Existed Department Info";
      String NO_EXISTED_INVOICE = "No Existed Invoice";
+
+     String NO_EXISTED_DEPARTMENT_INFO = "No Existed Department Info";
      String EXISTED_DEPARTMENT_NAME = "Existed Department Name";
      String EXISTED_DEPARTMENT_TELNUMBER = "Existed Department TelNumber";
      String EXISTED_DEPARTMENT_FAX = "Existed Department Fax";     
-     String NO_EXISTED_DEPARTMENT_CODE = "No Existed Department Code";
 
      String NO_EXISTED_CUSTOMER_INFO = "No Existed Customer Info";
      String EXISTED_CUSTOMER_NAME = "Existed Customer Name";
