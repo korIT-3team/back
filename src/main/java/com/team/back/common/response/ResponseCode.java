@@ -21,6 +21,12 @@ public interface ResponseCode {
      String EXISTED_CUSTOMER_BUSINESS_NUMBER = "ECB";
 
      String NO_EXISTED_PRODUCT_INFO = "NEP";
-     String EXISTED_PRODUCT_NAME = "EP";
+     String EXISTED_PRODUCT_NAME = "EPN";
+     String NO_EXISTED_PRODUCT_NAME = "NPN";
+     String EXISTED_PRODUCT_CODE = "EPC";
      String NO_EXISTED_PRODUCT_CODE = "NPC";
+
+     String NO_EXISTED_SALES_PLAN_CODE = "NSPC";
+     String EXISTED_SALES_PLAN_CODE = "ESPC";
+     String NO_EXISTED_SALES_PLAN = "NSP";
 }

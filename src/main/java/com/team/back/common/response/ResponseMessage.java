@@ -22,5 +22,11 @@ public interface ResponseMessage {
 
      String NO_EXISTED_PRODUCT_INFO = "No Existed Product Info";
      String EXISTED_PRODUCT_NAME = "Existed Product Name";
-     String NO_EXISTED_PRODUCT_CODE = "No Existed Product Code"; 
+     String EXISTED_PRODUCT_CODE = "Existed Product Code";
+     String NO_EXISTED_PRODUCT_NAME = "No Existed Product Name";
+     String NO_EXISTED_PRODUCT_CODE = "No Existed Product Code";
+     
+     String NO_EXISTED_SALES_PLAN_CODE = "No Existed Sales Plan Code";
+     String EXISTED_SALES_PLAN_CODE = "Existed Sales Plan Code";
+     String NO_EXISTED_SALE_PLAN = "No Existed Sales Plan";
 }

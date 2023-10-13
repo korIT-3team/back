@@ -2,8 +2,6 @@ package com.team.back.dto.request.system;
 
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +12,6 @@ import lombok.Setter;
 public class PutProductInfoRequestDto {
 
   @NotBlank
-  @UniqueElements
   private String productName;
 
   @NotBlank

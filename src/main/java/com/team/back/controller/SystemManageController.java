@@ -18,6 +18,7 @@ import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
 import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
+import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
 import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
@@ -105,6 +106,16 @@ public class SystemManageController {
      ) {
           ResponseEntity<? super GetCustomerInfoResponseDto> response = systemManageService.getCustomerInfo(employeeCode, customerCode, customerName);
           return response;
+     }
+
+     // API : 거래처 정보 삭제 메서드 //
+     @DeleteMapping("/customer-info/{customerCode}")
+     public ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @PathVariable(value="customerCode", required = false) Integer customerCode
+     ) {
+          ResponseEntity<? super DeleteCustomerInfoResponseDto> responese = systemManageService.deleteCustomerInfo(employeeCode, customerCode);
+          return responese;
      }
 
      

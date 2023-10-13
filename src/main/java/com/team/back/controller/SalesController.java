@@ -1,30 +1,48 @@
-// package com.team.back.controller;
+package com.team.back.controller;
 
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
-// import com.team.back.service.SalesService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-// import lombok.RequiredArgsConstructor;
+import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
+import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
+import com.team.back.dto.response.sales.SalesPlanResponseDto;
+import com.team.back.service.SalesService;
 
-// @RestController
-// @RequestMapping("/sales")
-// @RequiredArgsConstructor
-// public class SalesController {
+import lombok.RequiredArgsConstructor;
 
-//   private final SalesService salesService;
+@RestController
+@RequestMapping("/sales")
+@RequiredArgsConstructor
+public class SalesController {
+
+  private final SalesService salesService;
   
-//   // API: 판매계획 목록 조회 메서드 //
-//   @GetMapping("/sales-plan/{salesPlanCode}")
-//   public ResponseEntity<?> getSalesPlanList(
-//     @PathVariable(value="salesPlanCode", required=true) Integer salesPlanCode
-//   ) {
-//     ResponseEntity<?> response = salesService.getSalesPlanDetail(salesPlanCode);
-//     return response;
-//   }
+  // API: 판매계획 등록 메서드 //
+  @PutMapping("/sales-plan")
+  public ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo (
+    @AuthenticationPrincipal Integer employeeCode,
+    @RequestBody @Valid PutSalesPlanInfoRequestDto requestBody
+  ) {
+    ResponseEntity<? super PutSalesPlanInfoResponseDto> response = salesService.putSalesPlanInfo(employeeCode, requestBody);
+    return response;
+  }
+
+  // API: 판매계획 조회 메서드 //
+  @GetMapping("/sales-plan/{salesPlanCode}")
+  public ResponseEntity<? super SalesPlanResponseDto> getSalesPlanDetail (
+    @PathVariable(value="salesPlanCode", required=true) Integer salesPlanCode
+  ) {
+    ResponseEntity<? super SalesPlanResponseDto> response = salesService.getSalesPlanDetail(salesPlanCode);
+    return response;
+  }
 
 
-// }
+}
