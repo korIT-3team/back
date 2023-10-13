@@ -9,6 +9,7 @@ import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
 import com.team.back.dto.request.system.PutProductInfoRequestDto;
+import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
 import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
@@ -40,6 +41,9 @@ public interface SystemManageService {
 
      // API : 거래처 정보 등록 메서드 //
      ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(Integer employeeCode, PutCustomerInfoRequestDto dto);
+
+     // API : 거래처 정보 삭제 메서드 //
+     ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(Integer employeeCode, Integer deleteCustomerCode);
 
      // API : 품목 정보 불러오기 메서드 //
      ResponseEntity<? super GetProductInfoResponseDto> getProductInfo();
