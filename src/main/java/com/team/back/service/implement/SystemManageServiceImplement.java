@@ -18,7 +18,9 @@ import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.PutProductInfoResponseDto;
+import com.team.back.dto.response.system.Employee.GetSystemEmpUserDefineInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseDto;
+import com.team.back.dto.response.system.Employee.SystemEmpUserDefineListResponseDto;
 import com.team.back.dto.response.system.Employee.SystemEmployeeListResponseDto;
 import com.team.back.dto.response.system.CustomerListResponseDto;
 import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
@@ -35,11 +37,13 @@ import com.team.back.entity.ProductEntity;
 import com.team.back.entity.InvoiceEntity;
 import com.team.back.entity.resultSets.CustomerListResultSet;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
+import com.team.back.entity.resultSets.UserDefineListResultSet;
 import com.team.back.entity.resultSets.SystemEmployeeListResultSet;
 import com.team.back.repository.CompanyRepository;
 import com.team.back.repository.CustomerRepository;
 import com.team.back.repository.DepartmentRepository;
 import com.team.back.repository.ProductRepository;
+import com.team.back.repository.UserDefineRepository;
 import com.team.back.repository.SystemEmployeeRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.repository.UserViewRepository;
@@ -56,6 +60,7 @@ public class SystemManageServiceImplement implements SystemManageService{
      private final UserViewRepository userViewRepository;
      private final DepartmentRepository departmentRepository;
      private final SystemEmployeeRepository systemEmployeeRepository;
+     private final UserDefineRepository systemEmpUserDefineRepository;
      private final CustomerRepository customerRepository;
      private final ProductRepository productRepository;
 
@@ -219,6 +224,23 @@ public class SystemManageServiceImplement implements SystemManageService{
              }
              return GetSystemEmployeeInfoResponseDto.success(systemEmployeeList);
      }
+
+     @Override
+     public ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> getSystemEmpUserDefineInfo(Integer employeeCode, Integer userDefineCode) {
+          List<SystemEmpUserDefineListResponseDto> systemEmpUserDefineList = null;
+
+          try {
+               // description: 사용자정의코드를 가진 user_define_detail 데이터 조회
+               List<UserDefineListResultSet> userDefineEntities = systemEmpUserDefineRepository.getUserDefineList(userDefineCode);
+               // description: entity를 dto형태로 변환 //
+               systemEmpUserDefineList = SystemEmpUserDefineListResponseDto.copyList(userDefineEntities);
+               
+          } catch(Exception exception) {
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+          return GetSystemEmpUserDefineInfoResponseDto.success(systemEmpUserDefineList);
+     }     
 
      @Override
      public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, Integer customerCode, String customerName) {
