@@ -23,6 +23,7 @@ import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.Employee.GetSystemEmpUserDefineInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
@@ -93,6 +94,16 @@ public class SystemManageController {
           @PathVariable(value="systemEmployeeName", required=false) String systemEmployeeName
      ) {
           ResponseEntity<? super GetSystemEmployeeInfoResponseDto> response = systemManageService.getSystemEmployeeInfo(employeeCode, systemEmployeeName);
+          return response;
+     }
+
+     // API : 사원 - 사용자정의 정보 불러오기 메서드
+     @GetMapping(value={"/employee-info/user-define/{userDefineCode}"})
+     public ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> getSystemEmpUserDefineInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @PathVariable(value="userDefineCode", required = false) Integer userDefineCode
+     ) {
+          ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> response = systemManageService.getSystemEmpUserDefineInfo(employeeCode, userDefineCode);
           return response;
      }
      

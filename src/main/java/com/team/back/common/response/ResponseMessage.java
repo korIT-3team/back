@@ -24,6 +24,8 @@ public interface ResponseMessage {
      String EXISTED_SYSTEM_EMPLOYEE_PASSWORD = "Existed System Employee Password";
      String EXISTED_SYSTEM_EMPLOYEE_REGISTRATION_NUMBER = "System Employee Registration Number";
 
+     String NO_EXISTED_USER_DEFINE_INFO = "No Existed UserDefine Info";
+
      String NO_EXISTED_CUSTOMER_INFO = "No Existed Customer Info";
      String EXISTED_CUSTOMER_NAME = "Existed Customer Name";
      String EXISTED_CUSTOMER_CODE = "Existed Customer Code";
