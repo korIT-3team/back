@@ -3,6 +3,8 @@ package com.team.back.service.implement;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.team.back.common.constants.DepartmentCode;
@@ -16,6 +18,8 @@ import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.PutProductInfoResponseDto;
+import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseDto;
+import com.team.back.dto.response.system.Employee.SystemEmployeeListResponseDto;
 import com.team.back.dto.response.system.CustomerListResponseDto;
 import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
 import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
@@ -31,10 +35,12 @@ import com.team.back.entity.ProductEntity;
 import com.team.back.entity.InvoiceEntity;
 import com.team.back.entity.resultSets.CustomerListResultSet;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
+import com.team.back.entity.resultSets.SystemEmployeeListResultSet;
 import com.team.back.repository.CompanyRepository;
 import com.team.back.repository.CustomerRepository;
 import com.team.back.repository.DepartmentRepository;
 import com.team.back.repository.ProductRepository;
+import com.team.back.repository.SystemEmployeeRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.repository.UserViewRepository;
 import com.team.back.service.SystemManageService;
@@ -49,8 +55,11 @@ public class SystemManageServiceImplement implements SystemManageService{
      private final UserRepository userRepository;
      private final UserViewRepository userViewRepository;
      private final DepartmentRepository departmentRepository;
+     private final SystemEmployeeRepository systemEmployeeRepository;
      private final CustomerRepository customerRepository;
      private final ProductRepository productRepository;
+
+     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
      @Override
      public ResponseEntity<? super GetCompanyInfoResponseDto> getCompanyInfo() {
@@ -184,6 +193,31 @@ public class SystemManageServiceImplement implements SystemManageService{
                return ResponseDto.databaseError();
              }
              return GetDepartmentInfoResponseDto.success(departmentList);
+     }
+
+
+     @Override
+     public ResponseEntity<? super GetSystemEmployeeInfoResponseDto> getSystemEmployeeInfo(Integer employeeCode, String systemEmployeeName) {
+          List<SystemEmployeeListResponseDto> systemEmployeeList = null;
+
+          try {
+               systemEmployeeName = systemEmployeeName == null ? "": systemEmployeeName;
+               // description: 검색어가 사원명에 포함되어 있는 데이터 조회 //
+               List<SystemEmployeeListResultSet> systemEmployeeEntities = systemEmployeeRepository.getSystemEmployeeList(systemEmployeeName);
+
+               // // description: 비밀번호 암호화 //
+               // password = passwordEncoder.encode(password);
+               // // description: dto의 password 변경 //
+               // dto.setPassword(password);
+               
+               // description: entity를 dto형태로 변환 //
+               systemEmployeeList = SystemEmployeeListResponseDto.copyList(systemEmployeeEntities);
+
+             } catch(Exception exception) {
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+             }
+             return GetSystemEmployeeInfoResponseDto.success(systemEmployeeList);
      }
 
      @Override

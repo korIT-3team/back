@@ -1,6 +1,5 @@
 package com.team.back.dto.response.system;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;

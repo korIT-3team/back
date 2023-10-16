@@ -3,7 +3,6 @@ package com.team.back.dto.response.system;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.team.back.entity.DepartmentEntity;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
 
 import lombok.AllArgsConstructor;
