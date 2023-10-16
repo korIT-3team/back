@@ -16,6 +16,14 @@ public interface ResponseMessage {
      String EXISTED_DEPARTMENT_TELNUMBER = "Existed Department TelNumber";
      String EXISTED_DEPARTMENT_FAX = "Existed Department Fax";     
 
+     String NO_EXISTED_SYSTEM_EMPLOYEE_INFO = "No Existed System Employee Info";
+     String EXISTED_SYSTEM_EMPLOYEE_NAME = "Existed System Employee Name";
+     String EXISTED_SYSTEM_EMPLOYEE_GENDER = "Existed System Employee Gender";
+     String EXISTED_SYSTEM_EMPLOYEE_DEPARTMENT = "Existed System Employee Department";
+     String EXISTED_SYSTEM_EMPLOYEE_JOIN_DATE = "Existed System Employee Join Date";
+     String EXISTED_SYSTEM_EMPLOYEE_PASSWORD = "Existed System Employee Password";
+     String EXISTED_SYSTEM_EMPLOYEE_REGISTRATION_NUMBER = "System Employee Registration Number";
+
      String NO_EXISTED_CUSTOMER_INFO = "No Existed Customer Info";
      String EXISTED_CUSTOMER_NAME = "Existed Customer Name";
      String EXISTED_CUSTOMER_CODE = "Existed Customer Code";

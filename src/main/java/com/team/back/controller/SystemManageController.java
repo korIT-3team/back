@@ -23,6 +23,7 @@ import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
@@ -85,7 +86,16 @@ public class SystemManageController {
           return response;
      }
 
-
+     // API : 검색 사원 정보 불러오기 메서드 //
+     @GetMapping(value ={"/employee-info/{systemEmployeeName}", "/employee-info"} )
+     public ResponseEntity<? super GetSystemEmployeeInfoResponseDto> getSystemEmployeeInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @PathVariable(value="systemEmployeeName", required=false) String systemEmployeeName
+     ) {
+          ResponseEntity<? super GetSystemEmployeeInfoResponseDto> response = systemManageService.getSystemEmployeeInfo(employeeCode, systemEmployeeName);
+          return response;
+     }
+     
      //! API : 거래처 정보 등록 메서드 //
      @PutMapping("/customer-info")
      public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(
