@@ -97,6 +97,16 @@ public class SystemManageController {
           return response;
      }
 
+     // API : 사원 - 전체 부서정보 불러오기 메서드
+     @GetMapping(value={"/employee-info/department"})
+     public ResponseEntity<? super GetDepartmentInfoResponseDto> getSystemEmpDepartmentInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @PathVariable(value="", required=false) String departmentName
+     ) {
+          ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo(employeeCode, departmentName);
+          return response;
+     }
+
      // API : 사원 - 사용자정의 정보 불러오기 메서드
      @GetMapping(value={"/employee-info/user-define/{userDefineCode}"})
      public ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> getSystemEmpUserDefineInfo(
