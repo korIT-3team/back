@@ -41,4 +41,6 @@ public interface ResponseCode {
      String NO_EXISTED_SALES_PLAN_CODE = "NSPC";
      String EXISTED_SALES_PLAN_CODE = "ESPC";
      String NO_EXISTED_SALES_PLAN = "NSP";
+
+     String NO_REQUIRED_CONTENT = "NRC";
 }

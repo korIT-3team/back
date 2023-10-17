@@ -13,18 +13,18 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class GetInvoiceDetailIncentiveInfoResponseDto extends ResponseDto {
+public class GetInvoiceDetailIncentiveInfoResponseDto extends ResponseDto { // todo 얘 들어가는거 수정
      private Integer incentiveCode;
-     private Integer incentiveCategory;
+     private String incentiveCategoryName;
      private String paymentDate;
      private String employeeName;
-     private Integer incentivePrice;
+     private double incentivePrice;
      private String content;
 
      public GetInvoiceDetailIncentiveInfoResponseDto(String code, String message, IncentiveViewEntity incentiveViewEntity){
           super(code, message);
           this.incentiveCode = incentiveViewEntity.getIncentiveCode();
-          this.incentiveCategory = incentiveViewEntity.getIncentiveCategory();
+          this.incentiveCategoryName = incentiveViewEntity.getIncentiveCategoryName();
           this.paymentDate = incentiveViewEntity.getPaymentDate();
           this.employeeName = incentiveViewEntity.getEmployeeName();
           this.incentivePrice = incentiveViewEntity.getIncentivePrice();

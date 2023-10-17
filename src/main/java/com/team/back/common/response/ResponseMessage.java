@@ -41,4 +41,6 @@ public interface ResponseMessage {
      String NO_EXISTED_SALES_PLAN_CODE = "No Existed Sales Plan Code";
      String EXISTED_SALES_PLAN_CODE = "Existed Sales Plan Code";
      String NO_EXISTED_SALE_PLAN = "No Existed Sales Plan";
+     
+     String NO_REQUIRED_CONTENT = "No Required Content";
 }
