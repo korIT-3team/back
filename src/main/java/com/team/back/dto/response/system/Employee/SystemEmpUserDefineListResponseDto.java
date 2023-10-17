@@ -11,16 +11,18 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class SystemEmpUserDefineListResponseDto {
+  private Integer no;
   private Integer systemUserDefineCode;
   private String systemUserDefineName;
   private Integer systemUserDefineDetailCode;
   private String systemUserDefineDetailName;
 
   public SystemEmpUserDefineListResponseDto (UserDefineListResultSet resultSet) {
-      this.systemUserDefineCode = resultSet.getuserDefineCode();
-      this.systemUserDefineName = resultSet.getuserDefineName();
-      this.systemUserDefineDetailCode = resultSet.getuserDefineDetailCode();
-      this.systemUserDefineDetailName = resultSet.getuserDefineDetailName();
+    this.no = resultSet.getNo();
+      this.systemUserDefineCode = resultSet.getUserDefineCode();
+      this.systemUserDefineName = resultSet.getUserDefineName();
+      this.systemUserDefineDetailCode = resultSet.getUserDefineDetailCode();
+      this.systemUserDefineDetailName = resultSet.getUserDefineDetailName();
     }  
 
   public static List<SystemEmpUserDefineListResponseDto> copyList(List<UserDefineListResultSet> resultSets) {

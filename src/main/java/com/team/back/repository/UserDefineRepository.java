@@ -13,7 +13,8 @@ import com.team.back.entity.resultSets.UserDefineListResultSet;
 public interface UserDefineRepository  extends JpaRepository<UserDefineViewEntity, Integer>   {
   @Query(
       value=
-      "SELECT UDD.user_define_detail_code AS userDefineDetailCode, "+
+      "SELECT ROW_NUMBER() OVER(ORDER BY UDD.user_define_detail_code) AS no, " +
+      "UDD.user_define_detail_code AS userDefineDetailCode, "+
       "UDD.user_define_detail_name AS userDefineDetailName, "+
       "UD.user_define_code AS userDefineCode, "+
       "UD.user_define_name AS userDefineName "+

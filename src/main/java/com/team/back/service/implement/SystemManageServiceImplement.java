@@ -228,7 +228,6 @@ public class SystemManageServiceImplement implements SystemManageService{
      @Override
      public ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> getSystemEmpUserDefineInfo(Integer employeeCode, Integer userDefineCode) {
           List<SystemEmpUserDefineListResponseDto> systemEmpUserDefineList = null;
-
           try {
                // description: 사용자정의코드를 가진 user_define_detail 데이터 조회
                List<UserDefineListResultSet> userDefineEntities = systemEmpUserDefineRepository.getUserDefineList(userDefineCode);
