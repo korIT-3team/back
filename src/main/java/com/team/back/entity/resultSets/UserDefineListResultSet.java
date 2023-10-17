@@ -1,8 +1,9 @@
 package com.team.back.entity.resultSets;
 
 public interface UserDefineListResultSet {
-  int getuserDefineCode();
-  String getuserDefineName();
-  int getuserDefineDetailCode();
-  String getuserDefineDetailName();
+  int getNo();
+  int getUserDefineCode();
+  String getUserDefineName();
+  int getUserDefineDetailCode();
+  String getUserDefineDetailName();
 }
