@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.team.back.dto.request.searchView.GetEmployeeViewListRequestDto;
 import com.team.back.dto.request.searchView.GetFundsListRequestDto;
+import com.team.back.dto.request.searchView.GetIncentiveViewListRequestDto;
 import com.team.back.dto.response.searchView.GetFundsListResponseDto;
 import com.team.back.dto.response.searchView.GetEmployeeViewListResponseDto;
+import com.team.back.dto.response.searchView.GetIncentiveViewListResponseDto;
 import com.team.back.service.SearchViewService;
 
 import lombok.RequiredArgsConstructor;
@@ -38,6 +40,15 @@ public class SearchController {
           @RequestBody @Valid GetEmployeeViewListRequestDto requestBody
      ) {
           ResponseEntity<? super GetEmployeeViewListResponseDto> response = searchViewService.getEmployeeViewList(requestBody);
+          return response;
+     }
+
+     // API : 급여정보조회 메서드 //
+     @PostMapping("/incentive-list")
+     public ResponseEntity<? super GetIncentiveViewListResponseDto> getIncentiveViewList(
+          @RequestBody @Valid GetIncentiveViewListRequestDto requestBody
+     ) {
+          ResponseEntity<? super GetIncentiveViewListResponseDto> response = searchViewService.getIncentiveViewList(requestBody);
           return response;
      }
 }

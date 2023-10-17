@@ -16,9 +16,9 @@ import lombok.NoArgsConstructor;
 public class IncentiveViewEntity {
      @Id
      private Integer incentiveCode;
-     private Integer incentiveCategory;
-     private String paymentDate;
      private String employeeName;
-     private Integer incentivePrice;
+     private String incentiveCategoryName;
+     private String paymentDate;
+     private double incentivePrice;
      private String content;
 }
