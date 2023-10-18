@@ -63,7 +63,7 @@ public interface SystemManageService {
      ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(Integer employeeCode, Integer deleteCustomerCode);
 
      // API : 품목 정보 불러오기 메서드 //
-     ResponseEntity<? super GetProductInfoResponseDto> getProductInfo();
+     ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(Integer employeeCode, String productName, Integer procurementCategory);
 
      // API : 품목 정보 등록 메서드 //
      ResponseEntity<?> putProductInfo(Integer employeeCode, PutProductInfoRequestDto dto);

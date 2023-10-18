@@ -1,6 +1,8 @@
 package com.team.back.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,6 +20,7 @@ import lombok.NoArgsConstructor;
 public class CustomerEntity {
   
   @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int companyCode;
   private int customerCode;
   private String customerName;

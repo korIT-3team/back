@@ -33,6 +33,7 @@ import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.GetProductInfoResponseDto;
+import com.team.back.dto.response.system.ProductListResponseDto;
 import com.team.back.entity.CompanyEntity;
 import com.team.back.entity.CustomerEntity;
 import com.team.back.entity.DepartmentEntity;
@@ -41,6 +42,7 @@ import com.team.back.entity.SystemEmployeeEntity;
 import com.team.back.entity.InvoiceEntity;
 import com.team.back.entity.resultSets.CustomerListResultSet;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
+import com.team.back.entity.resultSets.ProductListResultSet;
 import com.team.back.entity.resultSets.UserDefineListResultSet;
 import com.team.back.entity.resultSets.SystemEmployeeListResultSet;
 import com.team.back.repository.CompanyRepository;
@@ -388,19 +390,23 @@ public class SystemManageServiceImplement implements SystemManageService{
      } 
 
      @Override
-     public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo() {
-
-          ProductEntity productEntity;
+     public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(Integer employeeCode, String productName, Integer procurementCategory) {
+          List<ProductListResponseDto> productList = null;
 
           try{
-               // 데이터베이스에서 품목 정보 불러오기 //
-               productEntity = productRepository.findByProductCode(2000);
+               productName = productName == null ? "" : productName;
+               procurementCategory = procurementCategory == null ? null : procurementCategory;
+               // description: 검색어가 품명 및 조달구분에 포함되어 있는 데이터 조회 //
+               List<ProductListResultSet> productEntities = productRepository.getProductList(productName, procurementCategory);
+
+               // description: entity를 dto형태로 변환 //
+               productList = ProductListResponseDto.copyList(productEntities);
           } catch(Exception exception){
                exception.printStackTrace();
                return ResponseDto.databaseError();
           }
 
-          return GetProductInfoResponseDto.success(productEntity);   
+          return GetProductInfoResponseDto.success(productList);   
 
      }
 

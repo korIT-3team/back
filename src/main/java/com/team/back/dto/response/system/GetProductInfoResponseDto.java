@@ -1,12 +1,13 @@
 package com.team.back.dto.response.system;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
 import com.team.back.dto.response.ResponseDto;
-import com.team.back.entity.ProductEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,23 +15,16 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class GetProductInfoResponseDto extends ResponseDto {
-  private int companyCode;
-  private int productCode;
-  private String productName;
-  private int procurementCategory;
-  private double productPrice;
+  
+  private List<ProductListResponseDto> productList;
 
-  private GetProductInfoResponseDto(String code, String message, ProductEntity productEntity) {
+  private GetProductInfoResponseDto(String code, String message, List<ProductListResponseDto> productList) {
     super(code, message);
-    this.companyCode = productEntity.getCompanyCode();
-    this.productCode = productEntity.getProductCode();
-    this.productName = productEntity.getProductName();
-    this.procurementCategory = productEntity.getProcurementCategory();
-    this.productPrice = productEntity.getProductPrice();
+    this.productList = productList;
   }
 
-  public static ResponseEntity<GetProductInfoResponseDto> success(ProductEntity productEntity) {
-    GetProductInfoResponseDto result = new GetProductInfoResponseDto(ResponseCode.Success, ResponseMessage.Success, productEntity);
+  public static ResponseEntity<GetProductInfoResponseDto> success(List<ProductListResponseDto> productList) {
+    GetProductInfoResponseDto result = new GetProductInfoResponseDto(ResponseCode.Success, ResponseMessage.Success, productList);
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
 

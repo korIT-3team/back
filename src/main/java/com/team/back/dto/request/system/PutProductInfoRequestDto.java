@@ -1,15 +1,19 @@
 package com.team.back.dto.request.system;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 public class PutProductInfoRequestDto {
+
+  @NotNull
+  private Integer productCodeInfo;
 
   @NotBlank
   private String productName;
