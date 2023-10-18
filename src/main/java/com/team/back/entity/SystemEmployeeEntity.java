@@ -28,24 +28,24 @@ public class SystemEmployeeEntity {
   private int employeeDepartmentCode;
   private String employeeJoinDate;
   private String employeeResignationDate;
-  private int employeePassword;
-  private String employeeRegistration;
+  private String employeePassword;
+  private String employeeRegistrationNumber;
   private String employeeEmploymentType;
   private int employeeEmploymentTypeCode;
 
   public SystemEmployeeEntity(PutSystemEmployeeInfoRequestDto dto) {
-    this.employeeCode = dto.getSystemEmployeeCode();
-    this.employeeName = dto.getSystemEmployeeName();
-    this.employeeGender = dto.getSystemEmployeeGender();
-    this.employeeGenderCode = dto.getSystemEmployeeGenderCode();
-    this.employeeDepartmentName = dto.getSystemEmployeeDepartmentName();
-    this.employeeDepartmentCode = dto.getSystemEmployeeDepartmentCode();
-    this.employeeJoinDate = dto.getSystemEmployeeJoinDate();
-    this.employeeResignationDate = dto.getSystemEmployeeResignationDate();
-    this.employeePassword = dto.getSystemEmployeePassword();
-    this.employeeRegistration = dto.getSystemEmployeeRegistration();
-    this.employeeEmploymentType = dto.getSystemEmployeeEmploymentType();
-    this.employeeEmploymentTypeCode = dto.getSystemEmployeeEmploymentTypeCode();
+    this.employeeCode = dto.getEmployeeCode();
+    this.employeeName = dto.getEmployeeName();
+    this.employeeGender = dto.getEmployeeGender();
+    this.employeeGenderCode = dto.getEmployeeGenderCode();
+    this.employeeDepartmentName = dto.getEmployeeDepartmentName();
+    this.employeeDepartmentCode = dto.getEmployeeDepartmentCode();
+    this.employeeJoinDate = dto.getEmployeeJoinDate();
+    this.employeeResignationDate = dto.getEmployeeResignationDate();
+    this.employeePassword = dto.getEmployeePassword();
+    this.employeeRegistrationNumber = dto.getEmployeeRegistrationNumber();
+    this.employeeEmploymentType = dto.getEmployeeEmploymentType();
+    this.employeeEmploymentTypeCode = dto.getEmployeeEmploymentTypeCode();
   }
 
 }

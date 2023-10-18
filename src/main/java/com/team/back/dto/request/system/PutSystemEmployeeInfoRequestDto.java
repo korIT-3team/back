@@ -13,38 +13,38 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PutSystemEmployeeInfoRequestDto {
   @NotNull
-  private Integer systemEmployeeCode;
+  private Integer employeeCode;
 
   @NotBlank
-  private String systemEmployeeName;
+  private String employeeName;
 
   @NotBlank
-  private String systemEmployeeGender;
+  private String employeeGender;
   
   @NotNull
-  private Integer systemEmployeeGenderCode;
+  private Integer employeeGenderCode;
 
   @NotBlank
-  private String systemEmployeeDepartmentName;
+  private String employeeDepartmentName;
   
   @NotNull
-  private Integer systemEmployeeDepartmentCode;
+  private Integer employeeDepartmentCode;
 
   @NotBlank
-  private String systemEmployeeJoinDate;
+  private String employeeJoinDate;
 
-  private String systemEmployeeResignationDate;
+  private String employeeResignationDate;
 
   @NotBlank
-  private Integer systemEmployeePassword;
+  private String employeePassword;
 
   @NotBlank @Pattern(regexp = "^[\\d]{6}-[1-4][\\d]{6}+$")
-  private String systemEmployeeRegistration;
+  private String employeeRegistrationNumber;
 
   @NotBlank
-  private String systemEmployeeEmploymentType;
+  private String employeeEmploymentType;
 
   @NotNull
-  private Integer systemEmployeeEmploymentTypeCode;
+  private Integer employeeEmploymentTypeCode;
 
 }
