@@ -1,6 +1,8 @@
 package com.team.back.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,6 +20,7 @@ import lombok.NoArgsConstructor;
 public class ProductEntity {
 
   @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int companyCode;
   private int productCode;
   private String productName;
@@ -26,7 +29,7 @@ public class ProductEntity {
 
   public ProductEntity(PutProductInfoRequestDto dto) {
     this.companyCode = 1;
-    this.productCode = 2000;
+    this.productCode = dto.getProductCodeInfo();
     this.productName = dto.getProductName();
     this.procurementCategory = dto.getProcurementCategory();
     this.productPrice = dto.getProductPrice();
