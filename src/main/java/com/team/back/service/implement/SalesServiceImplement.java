@@ -5,14 +5,15 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.team.back.dto.request.sales.GetSalesPlanListRequestDto;
 import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
 import com.team.back.dto.response.sales.GetSalesPlanListResponseDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
+import com.team.back.dto.response.sales.SalesPlanListResponseDto;
 import com.team.back.dto.response.sales.SalesPlanResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.entity.SalesPlanEntity;
+import com.team.back.entity.resultSets.SalesPlanListResultSet;
 import com.team.back.repository.SalesPlanRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.service.SalesService;
@@ -52,37 +53,17 @@ public class SalesServiceImplement implements SalesService {
   }
 
   @Override
-  public ResponseEntity<? super GetSalesPlanListResponseDto> getSalesPlanList(GetSalesPlanListRequestDto dto) {
-    List<SalesPlanResponseDto> salesPlanList = null;
-    
-    Integer deptCode = dto.getDepartmentCode();
-    Integer empCode = dto.getEmployeeCode();
-    String pDate = dto.getPlanDate();
-    Integer proCode = dto.getProductCode();
-    String proName = dto.getProductName();
-    Integer pQuantity = dto.getPlanQuantity();
-    Integer exType = dto.getExchangeType();
-    Double exRate = dto.getExchangeRate();
-    Double exPrice = dto.getExpectPrice();
-    Double exTotalPrice = dto.getExpectTotalPrice();
+  public ResponseEntity<? super GetSalesPlanListResponseDto> getSalesPlanList(Integer employeeCode, Integer salesPlanCode) {
+    List<SalesPlanListResponseDto> salesPlanList = null;
 
     try {
 
-      // description : string으로 변환시키지않으면, "null" 문자열이 들어가게 된다.
-      String strDeptCode = deptCode == null ? "" : Integer.toString(deptCode);
-      String strEmpCode = empCode == null ? "" : Integer.toString(empCode);
-      String strProCode = proCode == null ? "" : Integer.toString(proCode);
-      String strPQuantity = pQuantity == null ? "" : Integer.toString(pQuantity);
-      String strExType = exType == null ? "" : Integer.toString(exType);
-      String strExRate = exRate == null ? "" : Double.toString(exRate);
-      String strExPrice = exPrice == null ? "" : Double.toString(exPrice);
-      String strExTotalPrice = exTotalPrice == null ? "" : Double.toString(exTotalPrice);
+      salesPlanCode = salesPlanCode == null ? null : salesPlanCode;
+      // description: 검색어가 판매계획코드에 포함되어 있는 데이터 조회 //
+      List<SalesPlanListResultSet> salesPlanEntities = salesPlanRepository.getSalesPlanList(salesPlanCode);
 
-      // description : db 조회
-      List<SalesPlanEntity> salesPlanEntities = salesPlanRepository.getSalesPlanList(strDeptCode, strEmpCode, pDate, strProCode, proName, strExType, strPQuantity, strExRate, strExPrice, strExTotalPrice);
-
-      // description : entity 를 dto 로 변환 //
-      salesPlanList = SalesPlanResponseDto.copyEntityList(salesPlanEntities);
+      // description: entity를 dto형태로 변환 //
+      salesPlanList = SalesPlanListResponseDto.copyList(salesPlanEntities);
 
     } catch (Exception exception) {
       exception.printStackTrace();

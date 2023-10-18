@@ -10,5 +10,5 @@ import lombok.Setter;
 public class GetEmployeeViewListRequestDto {
      private Integer employeeCode;
      private Integer departmentCode;
-     private Integer employmentCode;
+     private String employmentType;
 }

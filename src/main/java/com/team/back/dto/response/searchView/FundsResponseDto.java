@@ -17,6 +17,7 @@ public class FundsResponseDto {
      private double price;
      private String priceDetail;
      private int taxType;
+     private String taxTypeName;
      private double fundBalance;
      
      public FundsResponseDto(FundsViewEntity fundsViewEntity){
@@ -27,6 +28,7 @@ public class FundsResponseDto {
           this.price = fundsViewEntity.getPrice();
           this.priceDetail = fundsViewEntity.getPriceDetail();
           this.taxType = fundsViewEntity.getTaxType();
+          this.taxTypeName = fundsViewEntity.getTaxTypeName();
           this.fundBalance = fundsViewEntity.getFundBalance();
      }
      

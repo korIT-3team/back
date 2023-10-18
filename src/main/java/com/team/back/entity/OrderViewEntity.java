@@ -20,6 +20,7 @@ public class OrderViewEntity {
      private Double orderPrice;
      private String orderDetail;
      private Integer salesPlanCode;
+     private String projectName;
      private Integer customerCode;
      private String employeeName;
      private String customerName;

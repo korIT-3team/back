@@ -17,6 +17,7 @@ public class SalesViewEntity {
      @Id
      private Integer salesCode;
      private Integer salesPlanCode;
+     private String projectName;
      private String deadlineDate;
      private String salesDetail;
      private Integer salesPrice;
