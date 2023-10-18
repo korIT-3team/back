@@ -12,12 +12,14 @@ import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
 import com.team.back.dto.request.system.PutProductInfoRequestDto;
+import com.team.back.dto.request.system.PutSystemEmployeeInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
 import com.team.back.dto.response.accounting.InvoiceResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.PutProductInfoResponseDto;
+import com.team.back.dto.response.system.PutSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmpUserDefineInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.Employee.SystemEmpUserDefineListResponseDto;
@@ -25,6 +27,7 @@ import com.team.back.dto.response.system.Employee.SystemEmployeeListResponseDto;
 import com.team.back.dto.response.system.CustomerListResponseDto;
 import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
 import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.DeleteSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.DepartmentListResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
@@ -35,6 +38,7 @@ import com.team.back.entity.CompanyEntity;
 import com.team.back.entity.CustomerEntity;
 import com.team.back.entity.DepartmentEntity;
 import com.team.back.entity.ProductEntity;
+import com.team.back.entity.SystemEmployeeEntity;
 import com.team.back.entity.InvoiceEntity;
 import com.team.back.entity.resultSets.CustomerListResultSet;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
@@ -202,6 +206,69 @@ public class SystemManageServiceImplement implements SystemManageService{
              return GetDepartmentInfoResponseDto.success(departmentList);
      }
 
+     @Override
+     public ResponseEntity<? super PutSystemEmployeeInfoResponseDto> putSystemEmployeeInfo(Integer employeeCode, PutSystemEmployeeInfoRequestDto dto) {
+          int systemEmployeeCode = dto.getEmployeeCode();
+          String systemEmployeeName = dto.getEmployeeDepartmentName();
+          String systemEmployeeRegistrationNumber = dto.getEmployeeRegistrationNumber();
+
+          try{
+               // description: 신규입력의 경우
+               if (systemEmployeeCode == 0) {
+                    // description: 사원명 중복 확인
+                    boolean hasEmployeeName = systemEmployeeRepository.existsByEmployeeName(systemEmployeeName);
+                    if (hasEmployeeName) return PutSystemEmployeeInfoResponseDto.existedSystemEmployeeName();
+                    // description: 부서전화번호 중복 확인
+                    boolean hasregistrationNumber = systemEmployeeRepository.existsByEmployeeRegistrationNumber(systemEmployeeRegistrationNumber);
+                    if (hasregistrationNumber) return PutSystemEmployeeInfoResponseDto.existedSystemEmployeeRegistrationNumber();
+               } else {
+                    // description: 부서전화번호 중복 확인
+                    SystemEmployeeEntity registrationNumberEntity = systemEmployeeRepository.findByEmployeeRegistrationNumber(systemEmployeeRegistrationNumber);
+                    if (registrationNumberEntity != null) {
+                         if (systemEmployeeCode != registrationNumberEntity.getEmployeeCode()) return PutSystemEmployeeInfoResponseDto.existedSystemEmployeeRegistrationNumber();
+                    }
+               }
+
+               // description: 존재하는 사원번호인지 확인 //
+               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               if(!hasUser) return PutDepartmentInfoResponseDto.noExistedUser();
+
+               // description:  권한 //
+               Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+               if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
+
+               // description:  Entity 생성 //
+               SystemEmployeeEntity systemEmployeeEntity = new SystemEmployeeEntity(dto);
+               
+               // description:  DB에 저장 //
+               systemEmployeeRepository.save(systemEmployeeEntity);
+
+          } catch(Exception exception){
+               // description: 데이터베이스 에러 //
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+
+        return PutSystemEmployeeInfoResponseDto.success();
+     }
+
+     @Override
+     public ResponseEntity<? super DeleteSystemEmployeeInfoResponseDto> deleteSystemEmployeeInfo(Integer employeeCode, Integer deleteSystemEmployeeCode) {
+          try {
+               // description: 존재하는 유저인지 확인 //
+               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               if (!hasUser) return DeleteSystemEmployeeInfoResponseDto.noExistedUser();
+               // description: 존재하는 사원코드인지 확인 //
+               SystemEmployeeEntity systemEmployeeEntity = systemEmployeeRepository.findByEmployeeCode(deleteSystemEmployeeCode);
+               if (systemEmployeeEntity == null) return DeleteSystemEmployeeInfoResponseDto.noExistedSystemEmployee();
+               // description: 사원 삭제 //
+               systemEmployeeRepository.delete(systemEmployeeEntity);
+          } catch (Exception exception) {
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+          return DeleteSystemEmployeeInfoResponseDto.success();
+     }     
 
      @Override
      public ResponseEntity<? super GetSystemEmployeeInfoResponseDto> getSystemEmployeeInfo(Integer employeeCode, String systemEmployeeName) {

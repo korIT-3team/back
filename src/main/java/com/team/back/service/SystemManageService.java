@@ -9,14 +9,17 @@ import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
 import com.team.back.dto.request.system.PutProductInfoRequestDto;
+import com.team.back.dto.request.system.PutSystemEmployeeInfoRequestDto;
 import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
 import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.DeleteSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
 import com.team.back.dto.response.system.GetProductInfoResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.PutSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmpUserDefineInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
@@ -37,6 +40,12 @@ public interface SystemManageService {
      
      // API : 부서 정보 불러오기 //
      ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(Integer employeeCode, String departmentName);
+
+     // API : 사원 정보 등록 메서드 //
+     ResponseEntity<? super PutSystemEmployeeInfoResponseDto> putSystemEmployeeInfo(Integer employeeCode, PutSystemEmployeeInfoRequestDto dto);
+
+     // API : 사원 정보 삭제 메서드 //
+     ResponseEntity<? super DeleteSystemEmployeeInfoResponseDto> deleteSystemEmployeeInfo(Integer employeeCode, Integer deleteSystemEmployeeCode);
   
      // API : 사원 정보 불러오기 //
      ResponseEntity<? super GetSystemEmployeeInfoResponseDto> getSystemEmployeeInfo(Integer employeeCode, String systemEmployeeName);

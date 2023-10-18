@@ -13,7 +13,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class GetInvoiceDetailIncentiveInfoResponseDto extends ResponseDto { // todo 얘 들어가는거 수정
+public class GetInvoiceDetailIncentiveInfoResponseDto extends ResponseDto {
      private Integer incentiveCode;
      private String incentiveCategoryName;
      private String paymentDate;

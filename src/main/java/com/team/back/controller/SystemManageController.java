@@ -17,9 +17,11 @@ import com.team.back.dto.request.accounting.GetInvoiceListRequestDto;
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
+import com.team.back.dto.request.system.PutSystemEmployeeInfoRequestDto;
 import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
 import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
 import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.DeleteSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
@@ -28,6 +30,7 @@ import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseD
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.PutSystemEmployeeInfoResponseDto;
 import com.team.back.service.SystemManageService;
 
 import lombok.RequiredArgsConstructor;
@@ -71,9 +74,9 @@ public class SystemManageController {
      @DeleteMapping("/dept-info/{departmentCode}")
      public ResponseEntity<? super DeleteDepartmentInfoResponseDto> deleteDepartmentInfo(
           @AuthenticationPrincipal Integer employeeCode,
-          @PathVariable(value="departmentCode", required = false) Integer departmnetCode
+          @PathVariable(value="departmentCode", required = false) Integer deleteDepartmentCode
      ) {
-          ResponseEntity<? super DeleteDepartmentInfoResponseDto> responese = systemManageService.deleteDepartmentInfo(employeeCode, departmnetCode);
+          ResponseEntity<? super DeleteDepartmentInfoResponseDto> responese = systemManageService.deleteDepartmentInfo(employeeCode, deleteDepartmentCode);
           return responese;
      }
 
@@ -86,6 +89,26 @@ public class SystemManageController {
           ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo(employeeCode, departmentName);
           return response;
      }
+
+     // API : 사원 정보 등록 메서드 //
+     @PutMapping("/employee-info")
+     public ResponseEntity<? super PutSystemEmployeeInfoResponseDto> putDepartmentInfo (
+          @AuthenticationPrincipal Integer employeeCode,
+          @RequestBody @Valid PutSystemEmployeeInfoRequestDto requestBody
+     ) {
+          ResponseEntity<? super PutSystemEmployeeInfoResponseDto> response = systemManageService.putSystemEmployeeInfo(employeeCode, requestBody);
+          return response;
+     }
+
+     // API : 사원 정보 삭제 메서드 //
+     @DeleteMapping("/employee-info/{systemEmployeeCode}")
+     public ResponseEntity<? super DeleteSystemEmployeeInfoResponseDto> deleteSystemEmployeeInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @PathVariable(value="systemEmployeeCode", required = false) Integer deleteSystemEmployeeCode
+     ) {
+          ResponseEntity<? super DeleteSystemEmployeeInfoResponseDto> responese = systemManageService.deleteSystemEmployeeInfo(employeeCode, deleteSystemEmployeeCode);
+          return responese;
+     }     
 
      // API : 검색 사원 정보 불러오기 메서드 //
      @GetMapping(value ={"/employee-info/{systemEmployeeName}", "/employee-info"} )

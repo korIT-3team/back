@@ -3,8 +3,6 @@ package com.team.back.dto.response.system.Employee;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.team.back.dto.response.system.DepartmentListResponseDto;
-import com.team.back.entity.resultSets.DepartmentListResultSet;
 import com.team.back.entity.resultSets.SystemEmployeeListResultSet;
 
 import lombok.AllArgsConstructor;
@@ -29,18 +27,18 @@ public class SystemEmployeeListResponseDto {
 
   public SystemEmployeeListResponseDto (SystemEmployeeListResultSet resultSet) {
     this.no = resultSet.getNo();
-    this.employeeCode = resultSet.getSystemEmployeeCode();    
-    this.employeeName = resultSet.getSystemEmployeeName();
-    this.gender = resultSet.getSystememployeeGender();
-    this.genderCode = resultSet.getSystemEmployeeGenderCode();
-    this.departmentName = resultSet.getSystemEmployeeDepartmentName();
-    this.departmentCode = resultSet.getSystemEmployeeDepartmentCode();
-    this.joinDate = resultSet.getSystemEmployeeJoinDate();
-    this.resignationDate = resultSet.getSystemEmployeeResignationDate();
-    this.password = resultSet.getSystemEmployeePassword();
-    this.registrationNumber = resultSet.getSystemEmployeeRegistrationNumber();
-    this.employmentType = resultSet.getSystemEmployeeEmploymentType();
-    this.employmentTypeCode = resultSet.getSystemEmployeeEmploymentTypeCode();
+    this.employeeCode = resultSet.getEmployeeCode();    
+    this.employeeName = resultSet.getEmployeeName();
+    this.gender = resultSet.getEmployeeGender();
+    this.genderCode = resultSet.getEmployeeGenderCode();
+    this.departmentName = resultSet.getEmployeeDepartmentName();
+    this.departmentCode = resultSet.getEmployeeDepartmentCode();
+    this.joinDate = resultSet.getEmployeeJoinDate();
+    this.resignationDate = resultSet.getEmployeeResignationDate();
+    this.password = resultSet.getEmployeePassword();
+    this.registrationNumber = resultSet.getEmployeeRegistrationNumber();
+    this.employmentType = resultSet.getEmployeeEmploymentType();
+    this.employmentTypeCode = resultSet.getEmployeeEmploymentTypeCode();
 
     }  
   

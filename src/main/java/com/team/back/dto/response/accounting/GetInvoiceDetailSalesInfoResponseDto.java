@@ -16,6 +16,7 @@ import lombok.Getter;
 public class GetInvoiceDetailSalesInfoResponseDto extends ResponseDto {
      private Integer salesCode;
      private Integer salesPlanCode;
+     private String projectName;
      private String deadlineDate;
      private String salesDetail;
      private Integer salesPrice;
@@ -26,6 +27,7 @@ public class GetInvoiceDetailSalesInfoResponseDto extends ResponseDto {
           super(code, message);
           this.salesCode = salesViewEntity.getSalesCode();
           this.salesPlanCode = salesViewEntity.getSalesPlanCode();
+          this.projectName = salesViewEntity.getProjectName();
           this.deadlineDate = salesViewEntity.getDeadlineDate();
           this.salesDetail = salesViewEntity.getSalesDetail();
           this.salesPrice = salesViewEntity.getSalesPrice();
