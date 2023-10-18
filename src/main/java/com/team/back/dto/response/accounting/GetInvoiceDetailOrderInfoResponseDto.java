@@ -19,6 +19,7 @@ public class GetInvoiceDetailOrderInfoResponseDto extends ResponseDto {
      private Double orderPrice;
      private String orderDetail;
      private Integer salesPlanCode;
+     private String projectName;
      private Integer customerCode;
      private String employeeName;
      private String customerName;
@@ -30,6 +31,7 @@ public class GetInvoiceDetailOrderInfoResponseDto extends ResponseDto {
           this.orderPrice = orderViewEntity.getOrderPrice();
           this.orderDetail = orderViewEntity.getOrderDetail();
           this.salesPlanCode = orderViewEntity.getSalesPlanCode();
+          this.projectName = orderViewEntity.getProjectName();
           this.customerCode = orderViewEntity.getCustomerCode();
           this.employeeName = orderViewEntity.getEmployeeName();
           this.customerName = orderViewEntity.getCustomerName();

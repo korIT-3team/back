@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,7 @@ import com.team.back.dto.response.accounting.GetInvoiceDetailSalesInfoResponseDt
 import com.team.back.dto.response.accounting.GetInvoiceDetailIncentiveInfoResponseDto;
 import com.team.back.dto.response.accounting.GetInOutComeListResponseDto;
 import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
-import com.team.back.dto.response.accounting.InvoiceResponseDto;
+import com.team.back.dto.response.accounting.GetInvoiceTypeListResponseDto;
 import com.team.back.service.AccountingService;
 
 import lombok.RequiredArgsConstructor;
@@ -38,16 +37,15 @@ public class AccountingController {
           ResponseEntity<? super GetInvoiceListResponseDto> response = accountingService.getInvoiceList(requestBody);
           return response;
      }
-     	
-     // API : 전표 상세 조회 메서드 //
-     @GetMapping("/invoice/{invoiceCode}")
-     public ResponseEntity<? super InvoiceResponseDto> getInvoiceDetail(
-          @PathVariable(value="invoiceCode", required=true) Integer invoiceCode
+
+     // API : 조회조건 : 전표유형 콤보박스 조회 메서드 //
+     @GetMapping("/invoice")
+     public ResponseEntity<? super GetInvoiceTypeListResponseDto> getInvoiceType(
      ) {
-          ResponseEntity<? super InvoiceResponseDto> response = accountingService.getInvoiceDetail(invoiceCode);
+          ResponseEntity<? super GetInvoiceTypeListResponseDto> response = accountingService.getInvoiceType();
           return response;
      }
-
+     
      // API : 수주 전표 조회 메서드 //
      @PostMapping("/invoice/{invoiceCode}/order-info")
      public ResponseEntity<? super GetInvoiceDetailOrderInfoResponseDto> getInvoiceDetailOrderInfo(

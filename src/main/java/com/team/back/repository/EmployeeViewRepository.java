@@ -16,9 +16,9 @@ public interface EmployeeViewRepository extends JpaRepository<EmployeeViewEntity
                "from employee_list_view " +
                "where employee_code LIKE %?2% " +
                "AND department_code LIKE %?1% " +
-               "AND employment_code LIKE %?3%; ",
+               "AND employment_type LIKE %?3%; ",
                nativeQuery=true 
      )
-     List<EmployeeViewEntity> getEmployeeViewList(String departmentCode, String employeeCode, String employmentCode);
+     List<EmployeeViewEntity> getEmployeeViewList(String departmentCode, String employeeCode, String employmentType);
      
 }

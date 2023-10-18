@@ -11,17 +11,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="funds_view")
-@Table(name="funds_view")
-public class FundsViewEntity {
+@Entity(name="invoice_view")
+@Table(name="invoice_view")
+public class InvoiceViewEntity {
      @Id
-     private int fundingCode;
-     private String fundDate;
-     private int salesPlanCode;
-     private String customerName;
+     private int invoiceCode;
+     private int invoiceDetailPk;
+     private String invoiceDate;
+     private String invoiceTypeName;
+     private String workerName;
      private double price;
      private String priceDetail;
-     private int taxType;
-     private String taxTypeName;
-     private double fundBalance;
 }
