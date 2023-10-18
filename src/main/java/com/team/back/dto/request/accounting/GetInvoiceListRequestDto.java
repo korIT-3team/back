@@ -16,5 +16,5 @@ public class GetInvoiceListRequestDto {
     private String invoiceDateStart;
     @NotBlank
     private String invoiceDateEnd;
-    private Integer invoiceType;
+    private String invoiceTypeName;
 }

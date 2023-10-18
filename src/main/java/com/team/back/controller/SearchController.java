@@ -3,6 +3,7 @@ package com.team.back.controller;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,9 @@ import com.team.back.dto.request.searchView.GetEmployeeViewListRequestDto;
 import com.team.back.dto.request.searchView.GetFundsListRequestDto;
 import com.team.back.dto.request.searchView.GetIncentiveViewListRequestDto;
 import com.team.back.dto.response.searchView.GetFundsListResponseDto;
+import com.team.back.dto.response.accounting.GetInvoiceTypeListResponseDto;
 import com.team.back.dto.response.searchView.GetEmployeeViewListResponseDto;
+import com.team.back.dto.response.searchView.GetEmploymentTypeListResponseDto;
 import com.team.back.dto.response.searchView.GetIncentiveViewListResponseDto;
 import com.team.back.service.SearchViewService;
 
@@ -24,6 +27,14 @@ import lombok.RequiredArgsConstructor;
 public class SearchController {
 
      private final SearchViewService searchViewService;
+
+     // API : 조회조건 : 전표유형 콤보박스 조회 메서드 //
+     @GetMapping("/employee-list")
+     public ResponseEntity<? super GetEmploymentTypeListResponseDto> getEmploymentType(
+     ) {
+          ResponseEntity<? super GetEmploymentTypeListResponseDto> response = searchViewService.getEmploymentType();
+          return response;
+     }
 
      // API : 사내자금현황 메서드 //
      @PostMapping("/check-funds")
