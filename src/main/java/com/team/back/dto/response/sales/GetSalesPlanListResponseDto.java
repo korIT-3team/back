@@ -16,15 +16,20 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetSalesPlanListResponseDto extends ResponseDto {
 
-  private List<SalesPlanResponseDto> salesPlanList;
+  private List<SalesPlanListResponseDto> salesPlanList;
 
-  private GetSalesPlanListResponseDto(String code, String message, List<SalesPlanResponseDto> salesPlanList) {
+  private GetSalesPlanListResponseDto(String code, String message, List<SalesPlanListResponseDto> salesPlanList) {
     super(code, message);
     this.salesPlanList = salesPlanList;
   }
 
-  public static ResponseEntity<GetSalesPlanListResponseDto> success(List<SalesPlanResponseDto> salesPlanList) {
+  public static ResponseEntity<GetSalesPlanListResponseDto> success(List<SalesPlanListResponseDto> salesPlanList) {
     GetSalesPlanListResponseDto result = new GetSalesPlanListResponseDto(ResponseCode.Success, ResponseMessage.Success, salesPlanList);
     return ResponseEntity.status(HttpStatus.OK).body(result);
+  }
+
+  public static ResponseEntity<ResponseDto> noExistedSalesPlan() {
+    ResponseDto result = new ResponseDto(ResponseCode.NO_EXISTED_SALES_PLAN, ResponseMessage.NO_EXISTED_SALE_PLAN);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
   }
 }
