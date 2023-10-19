@@ -8,11 +8,9 @@ import com.team.back.dto.response.ResponseDto;
 import com.team.back.dto.response.auth.SignInResponseDto;
 import com.team.back.dto.response.user.GetSignInUserResponseDto;
 import com.team.back.entity.SystemEmployeeEntity;
-import com.team.back.entity.UserEntity;
 import com.team.back.entity.UserViewEntity;
 import com.team.back.provider.JwtProvider;
 import com.team.back.repository.SystemEmployeeRepository;
-import com.team.back.repository.UserRepository;
 import com.team.back.repository.UserViewRepository;
 import com.team.back.service.UserService;
 
@@ -21,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImplement implements UserService {
-    private final UserRepository userRepository;
     private final UserViewRepository userviewRepository;
     private final JwtProvider jwtProvider;
     private final SystemEmployeeRepository systemEmployeeRepository;
@@ -33,14 +30,13 @@ public class UserServiceImplement implements UserService {
 
         try{
             // 사원번호로 entity 조회 //
-            // UserEntity userEntity = userRepository.findByEmployeeCode(dto.getEmployeeCode());
-            SystemEmployeeEntity userEntity2 = systemEmployeeRepository.findByEmployeeCode(dto.getEmployeeCode());
+            SystemEmployeeEntity userEntity = systemEmployeeRepository.findByEmployeeCode(dto.getEmployeeCode());
             
             // 존재하는 사원번호인지 확인 //
-            if(userEntity2 == null) return SignInResponseDto.signInDataMismatch();
+            if(userEntity == null) return SignInResponseDto.signInDataMismatch();
 
             // 비밀번호 일치여부 확인 // //! todo : 사원등록 시 encoding 하면 수정할 것
-            String password = userEntity2.getPassword();
+            String password = userEntity.getPassword();
             boolean equalPassword = password.equals(dto.getPassword());
             if( !equalPassword ) return SignInResponseDto.signInDataMismatch();
             
