@@ -209,8 +209,8 @@ public class SystemManageServiceImplement implements SystemManageService{
      @Override
      public ResponseEntity<? super PutSystemEmployeeInfoResponseDto> putSystemEmployeeInfo(Integer employeeCode, PutSystemEmployeeInfoRequestDto dto) {
           int systemEmployeeCode = dto.getEmployeeCode();
-          String systemEmployeeName = dto.getEmployeeDepartmentName();
-          String systemEmployeeRegistrationNumber = dto.getEmployeeRegistrationNumber();
+          String systemEmployeeName = dto.getEmployeeName();
+          String systemEmployeeRegistrationNumber = dto.getRegistrationNumber();
 
           try{
                // description: 신규입력의 경우
@@ -219,11 +219,11 @@ public class SystemManageServiceImplement implements SystemManageService{
                     boolean hasEmployeeName = systemEmployeeRepository.existsByEmployeeName(systemEmployeeName);
                     if (hasEmployeeName) return PutSystemEmployeeInfoResponseDto.existedSystemEmployeeName();
                     // description: 부서전화번호 중복 확인
-                    boolean hasregistrationNumber = systemEmployeeRepository.existsByEmployeeRegistrationNumber(systemEmployeeRegistrationNumber);
+                    boolean hasregistrationNumber = systemEmployeeRepository.existsByRegistrationNumber(systemEmployeeRegistrationNumber);
                     if (hasregistrationNumber) return PutSystemEmployeeInfoResponseDto.existedSystemEmployeeRegistrationNumber();
                } else {
                     // description: 부서전화번호 중복 확인
-                    SystemEmployeeEntity registrationNumberEntity = systemEmployeeRepository.findByEmployeeRegistrationNumber(systemEmployeeRegistrationNumber);
+                    SystemEmployeeEntity registrationNumberEntity = systemEmployeeRepository.findByRegistrationNumber(systemEmployeeRegistrationNumber);
                     if (registrationNumberEntity != null) {
                          if (systemEmployeeCode != registrationNumberEntity.getEmployeeCode()) return PutSystemEmployeeInfoResponseDto.existedSystemEmployeeRegistrationNumber();
                     }

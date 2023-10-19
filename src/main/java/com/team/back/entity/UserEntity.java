@@ -1,8 +1,6 @@
 package com.team.back.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "employee")
-@Table(name = "employee")
+@Entity(name = "day_off")
+@Table(name = "day_off")
 public class UserEntity {
      @Id
      //! todo : 사원등록을 코드상에서 할땐 auto increment 컬럼이므로 주석풀고

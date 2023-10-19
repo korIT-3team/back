@@ -15,37 +15,40 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="system_employee")
+@Entity(name="employee")
 @Table(name="employee")
 public class SystemEmployeeEntity {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int employeeCode;
   private String employeeName;
-  private String employeeGender;
-  private int employeeGenderCode;
-  private String employeeDepartmentName;
-  private int employeeDepartmentCode;
-  private String employeeJoinDate;
-  private String employeeResignationDate;
-  private String employeePassword;
-  private String employeeRegistrationNumber;
-  private String employeeEmploymentType;
-  private int employeeEmploymentTypeCode;
+  private int genderCode;
+  private int departmentCode;
+  private String joinDate;
+  private String resignationDate;
+  private String password;
+  private String registrationNumber;
+  private int employmentType;
+  private String employeeImage;
+  private String email;
+  private String nationality;
+  private String address;
+  private String addressDetail;
+  private String telNumber;
+  private int education;
+  private int militaryService;
+  private int position;
 
   public SystemEmployeeEntity(PutSystemEmployeeInfoRequestDto dto) {
     this.employeeCode = dto.getEmployeeCode();
     this.employeeName = dto.getEmployeeName();
-    this.employeeGender = dto.getEmployeeGender();
-    this.employeeGenderCode = dto.getEmployeeGenderCode();
-    this.employeeDepartmentName = dto.getEmployeeDepartmentName();
-    this.employeeDepartmentCode = dto.getEmployeeDepartmentCode();
-    this.employeeJoinDate = dto.getEmployeeJoinDate();
-    this.employeeResignationDate = dto.getEmployeeResignationDate();
-    this.employeePassword = dto.getEmployeePassword();
-    this.employeeRegistrationNumber = dto.getEmployeeRegistrationNumber();
-    this.employeeEmploymentType = dto.getEmployeeEmploymentType();
-    this.employeeEmploymentTypeCode = dto.getEmployeeEmploymentTypeCode();
+    this.genderCode = dto.getGenderCode();
+    this.departmentCode = dto.getDepartmentCode();
+    this.joinDate = dto.getJoinDate();
+    this.resignationDate = dto.getResignationDate();
+    this.password = dto.getPassword();
+    this.registrationNumber = dto.getRegistrationNumber();
+    this.employmentType = dto.getEmploymentType();
   }
 
 }

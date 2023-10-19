@@ -17,7 +17,9 @@ import com.team.back.dto.response.searchView.FundsResponseDto;
 import com.team.back.dto.response.searchView.GetEmployeeViewListResponseDto;
 import com.team.back.dto.response.searchView.GetEmploymentTypeListResponseDto;
 import com.team.back.dto.response.searchView.GetFundsListResponseDto;
+import com.team.back.dto.response.searchView.GetIncentiveTypeListResponseDto;
 import com.team.back.dto.response.searchView.GetIncentiveViewListResponseDto;
+import com.team.back.dto.response.searchView.IncentiveTypeResponseDto;
 import com.team.back.dto.response.searchView.IncentiveViewResponseDto;
 import com.team.back.entity.EmployeeViewEntity;
 import com.team.back.entity.FundsViewEntity;
@@ -54,6 +56,22 @@ public class SearchViewServiceImplement implements SearchViewService {
           }
 
           return GetEmploymentTypeListResponseDto.success(employmentTypeList);
+     }
+
+     @Override
+     public ResponseEntity<? super GetIncentiveTypeListResponseDto> getIncentiveType() {
+          List<IncentiveTypeResponseDto> incentiveTypeList = null;
+          try{
+               List<UserDefineDetailEntity> employmentTypeEntities = userDefineDetailRepository.getIncentiveType();
+               
+               incentiveTypeList = IncentiveTypeResponseDto.copyEntityList(employmentTypeEntities);
+
+          } catch(Exception exception){
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+
+          return GetIncentiveTypeListResponseDto.success(incentiveTypeList);
      }
 
      @Override
@@ -98,15 +116,14 @@ public class SearchViewServiceImplement implements SearchViewService {
      @Override
      public ResponseEntity<? super GetIncentiveViewListResponseDto> getIncentiveViewList(GetIncentiveViewListRequestDto requestBody) {
           List<IncentiveViewResponseDto> incentiveViewList = null;
-          Integer category = requestBody.getIncentiveCategory();
+          String category = requestBody.getIncentiveCategoryName() == null ? "" : requestBody.getIncentiveCategoryName();
           String start = requestBody.getPaymentDateStart();
           String end = requestBody.getPaymentDateEnd();
           Integer emCode = requestBody.getEmployeeCode();
 
           try{ 
-               String strCategory = category == null ? "" : Integer.toString(category);
                String strEmCode = emCode == null ? "" : Integer.toString(emCode);
-               List<IncentiveViewEntity> incentiveViewEntities = incentiveViewRepository.getIncentiveViewList(strEmCode,strCategory,start,end);
+               List<IncentiveViewEntity> incentiveViewEntities = incentiveViewRepository.getIncentiveViewList(strEmCode, category, start, end);
                incentiveViewList = IncentiveViewResponseDto.copyEntityList(incentiveViewEntities);
                
           } catch(Exception exception){

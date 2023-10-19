@@ -13,10 +13,10 @@ import com.team.back.entity.resultSets.SystemEmployeeListResultSet;
 public interface SystemEmployeeRepository  extends JpaRepository<SystemEmployeeEntity, Integer>  {
 
     boolean existsByEmployeeName(String employeeName);
-    boolean existsByEmployeeRegistrationNumber(String employeeRegistrationNumber);
+    boolean existsByRegistrationNumber(String registrationNumber);
 
     SystemEmployeeEntity findByEmployeeCode(Integer employeeCode);
-    SystemEmployeeEntity findByEmployeeRegistrationNumber(String employeeRegistrationNumber);
+    SystemEmployeeEntity findByRegistrationNumber(String registrationNumber);
 
 
   @Query(
