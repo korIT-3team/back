@@ -17,7 +17,7 @@ public interface IncentiveViewRepository extends JpaRepository<IncentiveViewEnti
                "SELECT * " +
                "from incentive_view " +
                "where payment_date BETWEEN ?3 AND ?4 " +
-               "AND incentive_category LIKE %?2% " +
+               "AND incentive_category_name LIKE %?2% " +
                "AND employee_code LIKE %?1%; ",
                nativeQuery=true 
      )

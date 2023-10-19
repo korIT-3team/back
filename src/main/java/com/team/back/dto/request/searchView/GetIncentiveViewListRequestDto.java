@@ -13,7 +13,7 @@ import lombok.Setter;
 public class GetIncentiveViewListRequestDto {
      @NotNull
      private Integer employeeCode;
-     private Integer incentiveCategory;
+     private String incentiveCategoryName;
      @NotBlank
      private String paymentDateStart;
      @NotBlank
