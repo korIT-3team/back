@@ -208,9 +208,10 @@ public class SystemManageServiceImplement implements SystemManageService{
 
      @Override
      public ResponseEntity<? super PutSystemEmployeeInfoResponseDto> putSystemEmployeeInfo(Integer employeeCode, PutSystemEmployeeInfoRequestDto dto) {
-          int systemEmployeeCode = dto.getEmployeeCode();
+          int systemEmployeeCode = dto.getSysEmployeeCode();
           String systemEmployeeName = dto.getEmployeeName();
           String systemEmployeeRegistrationNumber = dto.getRegistrationNumber();
+          String password = dto.getPassword();
 
           try{
                // description: 신규입력의 경우
@@ -236,6 +237,12 @@ public class SystemManageServiceImplement implements SystemManageService{
                // description:  권한 //
                Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
+
+               // description: 비밀번호 암호화 //
+               password = passwordEncoder.encode(password);
+
+               // description: dto의 password 변경 //
+               dto.setPassword(password);
 
                // description:  Entity 생성 //
                SystemEmployeeEntity systemEmployeeEntity = new SystemEmployeeEntity(dto);
