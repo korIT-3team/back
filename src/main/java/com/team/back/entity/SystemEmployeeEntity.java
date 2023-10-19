@@ -40,15 +40,15 @@ public class SystemEmployeeEntity {
   private int position;
 
   public SystemEmployeeEntity(PutSystemEmployeeInfoRequestDto dto) {
-    this.employeeCode = dto.getEmployeeCode();
+    this.employeeCode = dto.getSysEmployeeCode();
     this.employeeName = dto.getEmployeeName();
     this.genderCode = dto.getGenderCode();
-    this.departmentCode = dto.getDepartmentCode();
+    this.departmentCode = dto.getEmpDepartmentCode();
     this.joinDate = dto.getJoinDate();
     this.resignationDate = dto.getResignationDate();
     this.password = dto.getPassword();
     this.registrationNumber = dto.getRegistrationNumber();
-    this.employmentType = dto.getEmploymentType();
+    this.employmentType = dto.getEmploymentTypeCode();
   }
 
 }

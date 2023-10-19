@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PutSystemEmployeeInfoRequestDto {
   @NotNull
-  private Integer employeeCode;
+  private Integer sysEmployeeCode;
 
   @NotBlank
   private String employeeName;
@@ -22,7 +22,7 @@ public class PutSystemEmployeeInfoRequestDto {
   private Integer genderCode;
 
   @NotNull
-  private Integer departmentCode;
+  private Integer empDepartmentCode;
 
   @NotBlank
   private String joinDate;
@@ -36,6 +36,6 @@ public class PutSystemEmployeeInfoRequestDto {
   private String registrationNumber;
 
   @NotNull
-  private Integer employmentType;
+  private Integer employmentTypeCode;
 
 }
