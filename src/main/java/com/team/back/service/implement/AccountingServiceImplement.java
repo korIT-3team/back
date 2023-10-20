@@ -65,8 +65,8 @@ public class AccountingServiceImplement implements AccountingService {
      @Override
      public ResponseEntity<? super GetInvoiceListResponseDto> getInvoiceList(GetInvoiceListRequestDto dto) {
           List<InvoiceResponseDto> invoiceList = null;
-          Integer emCode = dto.getEmployeeCode();
-          Integer deCode = dto.getDepartmentCode();
+          Integer emCode = dto.getWorkerCode();
+          Integer deCode = dto.getWorkerDepartmentCode();
           String start = dto.getInvoiceDateStart();
           String end = dto.getInvoiceDateEnd();
           String type = dto.getInvoiceTypeName() == null ? "" : dto.getInvoiceTypeName();
@@ -77,7 +77,7 @@ public class AccountingServiceImplement implements AccountingService {
                String strDeCode = deCode == null ? "" : Integer.toString(deCode);
                
                // description : db 조회
-               List<InvoiceViewEntity> invoiceViewEntities = invoiceViewRepository.getInvoiceList(strEmCode, strDeCode, start, end, type);
+               List<InvoiceViewEntity> invoiceViewEntities = invoiceViewRepository.getInvoiceList(strDeCode, strEmCode, start, end, type);
 
                // description : entity 를 dto 로 변환 //
                invoiceList = InvoiceResponseDto.copyEntityList(invoiceViewEntities);
