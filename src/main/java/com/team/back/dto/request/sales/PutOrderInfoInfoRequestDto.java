@@ -20,13 +20,9 @@ public class PutOrderInfoInfoRequestDto {
   
   private Integer orderInfoCustomerCode;
   
-  private String orderInfoCustomerName;
-  
   private String orderDate;
   
   private Integer orderInfoManagerCode;
-  
-  private String orderInfoManagerName;
   
   private String orderDetail;
   
