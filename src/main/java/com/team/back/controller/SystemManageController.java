@@ -17,19 +17,23 @@ import com.team.back.dto.request.accounting.GetInvoiceListRequestDto;
 import com.team.back.dto.request.system.PutCompanyInfoRequestDto;
 import com.team.back.dto.request.system.PutCustomerInfoRequestDto;
 import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
+import com.team.back.dto.request.system.PutProductInfoRequestDto;
 import com.team.back.dto.request.system.PutSystemEmployeeInfoRequestDto;
 import com.team.back.dto.response.accounting.GetInvoiceListResponseDto;
 import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
 import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.DeleteProductInfoResponseDto;
 import com.team.back.dto.response.system.DeleteSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetCustomerInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.GetProductInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmpUserDefineInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.PutProductInfoResponseDto;
 import com.team.back.dto.response.system.PutSystemEmployeeInfoResponseDto;
 import com.team.back.service.SystemManageService;
 
@@ -172,6 +176,35 @@ public class SystemManageController {
           return responese;
      }
 
+     // API : product 정보 불러오기 메서드 //
+     @GetMapping(value={"/product-info/{productName}/{procurementCategory}", "/product-info"})
+     public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @PathVariable(value="productName", required=false) String productName,
+          @PathVariable(value="procurementCategory", required=false) Integer procurementCategory
+     ) {
+          ResponseEntity<? super GetProductInfoResponseDto> response = systemManageService.getProductInfo(employeeCode, productName, procurementCategory);
+          return response;
+     }
      
+     // API : product 정보 등록 메서드 //
+     @PutMapping("/product-info")
+     public ResponseEntity<? super PutProductInfoResponseDto> putProductInfo (
+           @AuthenticationPrincipal Integer employeeCode,
+           @RequestBody @Valid PutProductInfoRequestDto requestBody
+     ) {
+          ResponseEntity<? super PutProductInfoResponseDto> response = systemManageService.putProductInfo(employeeCode, requestBody);
+          return response;
+     }
+
+     // API : product 정보 삭제 메서드 //
+     @DeleteMapping("/product-info/{productCode}")
+     public ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo (
+          @AuthenticationPrincipal Integer employeeCode,
+          @PathVariable(value="productCode", required = false) Integer deleteProductCode
+     ) {
+          ResponseEntity<? super DeleteProductInfoResponseDto> response = systemManageService.deleteProductInfo(employeeCode, deleteProductCode);
+          return response;
+     }
      
 }

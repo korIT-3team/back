@@ -11,6 +11,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PutProductInfoRequestDto {
+  
+  @NotNull
+  private Integer companyCode = 1;
 
   @NotNull
   private Integer productCodeInfo;

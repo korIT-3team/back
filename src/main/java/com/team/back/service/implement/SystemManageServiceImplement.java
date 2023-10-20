@@ -27,6 +27,7 @@ import com.team.back.dto.response.system.Employee.SystemEmployeeListResponseDto;
 import com.team.back.dto.response.system.CustomerListResponseDto;
 import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
 import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.DeleteProductInfoResponseDto;
 import com.team.back.dto.response.system.DeleteSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.DepartmentListResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
@@ -435,6 +436,25 @@ public class SystemManageServiceImplement implements SystemManageService{
         return PutProductInfoResponseDto.success();
 
 
+     }
+
+     @Override
+     public ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo(Integer employeeCode, Integer deleteProductCode) {
+          try {
+               // description: 존재하는 유저인지 확인 //
+               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               if (!hasUser) return DeleteProductInfoResponseDto.noExistedUser();
+               // description: 존재하는 품목코드인지 확인 //
+               ProductEntity productEntity = productRepository.findByProductCode(deleteProductCode);
+               if (productEntity == null) return DeleteProductInfoResponseDto.noExistedProduct();
+               // description: 품목 삭제 //
+               productRepository.delete(productEntity);
+
+          } catch (Exception exception) {
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+          return DeleteProductInfoResponseDto.success();
      }
      
 }

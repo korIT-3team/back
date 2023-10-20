@@ -12,9 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PutCustomerInfoRequestDto {
 
-  @NotNull
-  private Integer companyCode = 1;
-
   private String customerName;
 
   @NotBlank
