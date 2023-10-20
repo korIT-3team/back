@@ -19,5 +19,33 @@ public interface SearchCodeRepository extends JpaRepository<EmptyEntity, Integer
                "AND employee_name != 'system'; ",
                nativeQuery=true 
      )
-     List<SearchCodeResultSet> getEmployeeList(String employeeCode);
+     List<SearchCodeResultSet> getEmployeeList(String code);
+
+     @Query(
+          value=
+               "SELECT ROW_NUMBER() OVER(ORDER BY department_code) AS no, department_code as detailCode, department_name as name " +
+               "FROM department " +
+               "WHERE department_code LIKE %?1% " +
+               "AND department_name != 'SYSTEM'; ",
+               nativeQuery=true 
+     )
+     List<SearchCodeResultSet> getDepartmentList(String code);
+
+     @Query(
+          value=
+               "SELECT ROW_NUMBER() OVER(ORDER BY customer_code) AS no, customer_code as detailCode, customer_name as name " +
+               "FROM customer " +
+               "WHERE customer_code LIKE %?1% ",
+               nativeQuery=true 
+     )
+     List<SearchCodeResultSet> getCustomerList(String code);
+
+     @Query(
+          value=
+               "SELECT ROW_NUMBER() OVER(ORDER BY sales_plan_code) AS no, sales_plan_code as detailCode, project_name as name " +
+               "FROM sales_plan " +
+               "WHERE sales_plan_code LIKE %?1% ",
+               nativeQuery=true 
+     )
+     List<SearchCodeResultSet> getProjecttList(String code);
 }

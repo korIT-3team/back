@@ -10,8 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class GetInvoiceListRequestDto {
-    private Integer departmentCode;
-    private Integer employeeCode;
+    private Integer workerDepartmentCode;
+    private Integer workerCode;
     @NotBlank
     private String invoiceDateStart;
     @NotBlank
