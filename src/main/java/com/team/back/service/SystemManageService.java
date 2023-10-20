@@ -12,6 +12,7 @@ import com.team.back.dto.request.system.PutProductInfoRequestDto;
 import com.team.back.dto.request.system.PutSystemEmployeeInfoRequestDto;
 import com.team.back.dto.response.system.DeleteCustomerInfoResponseDto;
 import com.team.back.dto.response.system.DeleteDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.DeleteProductInfoResponseDto;
 import com.team.back.dto.response.system.DeleteSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.GetCompanyInfoResponseDto;
 import com.team.back.dto.response.system.GetDepartmentInfoResponseDto;
@@ -19,6 +20,7 @@ import com.team.back.dto.response.system.GetProductInfoResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
+import com.team.back.dto.response.system.PutProductInfoResponseDto;
 import com.team.back.dto.response.system.PutSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmpUserDefineInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseDto;
@@ -66,6 +68,9 @@ public interface SystemManageService {
      ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(Integer employeeCode, String productName, Integer procurementCategory);
 
      // API : 품목 정보 등록 메서드 //
-     ResponseEntity<?> putProductInfo(Integer employeeCode, PutProductInfoRequestDto dto);
+     ResponseEntity<? super PutProductInfoResponseDto> putProductInfo(Integer employeeCode, PutProductInfoRequestDto dto);
+
+     // API : 품목 정보 삭제 메서드 //
+     ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo(Integer employeeCode, Integer deleteProductCode);
 
 }

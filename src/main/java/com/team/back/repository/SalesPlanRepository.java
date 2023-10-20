@@ -29,7 +29,7 @@ public interface SalesPlanRepository extends JpaRepository<SalesPlanEntity, Inte
       "exchange_rate AS exchangeRate, " +
       "expect_price AS expectPrice, " +
       "expect_total_price AS expectTotalPrice, " +
-      "expect_korean_price AS expectKoreanPrice, " +
+      "expect_korean_price AS expectKoreanPrice " +
       "FROM sales_plan " +
       "ORDER BY sales_plan_code ",
       nativeQuery=true

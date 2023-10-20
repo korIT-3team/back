@@ -10,9 +10,15 @@ import com.team.back.entity.resultSets.ProductListResultSet;
 
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
   
+  boolean existsByProductCode(Integer productCode);
+  boolean existsByProductName(String productName);
+
+  ProductEntity findByProductCode(Integer productCode);
+  ProductEntity findByProductName(String productName);
+
 @Query(
   value = 
-    "SELECT ROW_NUMBER() OVER(ORDER BY customer_code) AS no, " +
+    "SELECT ROW_NUMBER() OVER(ORDER BY product_code) AS no, " +
     "product_code AS productCode, " +
     "procurement_category AS procurementCategory, " +
     "product_name AS productName, " +
@@ -24,5 +30,5 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
     nativeQuery=true
 )
 
-  List<ProductListResultSet> getProductList(String productName, int procurementCategory);
+  List<ProductListResultSet> getProductList(String productName, Integer procurementCategory);
 }
