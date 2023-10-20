@@ -13,6 +13,7 @@ import com.team.back.dto.request.searchView.GetEmployeeViewListRequestDto;
 import com.team.back.dto.request.searchView.GetFundsListRequestDto;
 import com.team.back.dto.request.searchView.GetIncentiveViewListRequestDto;
 import com.team.back.dto.response.searchView.GetFundsListResponseDto;
+import com.team.back.dto.response.searchView.GetIncentiveTypeListResponseDto;
 import com.team.back.dto.response.accounting.GetInvoiceTypeListResponseDto;
 import com.team.back.dto.response.searchView.GetEmployeeViewListResponseDto;
 import com.team.back.dto.response.searchView.GetEmploymentTypeListResponseDto;
@@ -28,11 +29,19 @@ public class SearchController {
 
      private final SearchViewService searchViewService;
 
-     // API : 조회조건 : 전표유형 콤보박스 조회 메서드 //
+     // API : 조회조건 : 재직구분 콤보박스 조회 메서드 //
      @GetMapping("/employee-list")
      public ResponseEntity<? super GetEmploymentTypeListResponseDto> getEmploymentType(
      ) {
           ResponseEntity<? super GetEmploymentTypeListResponseDto> response = searchViewService.getEmploymentType();
+          return response;
+     }
+
+     // API : 조회조건 : 급상여구분 콤보박스 조회 메서드 //
+     @GetMapping("/incentive-list")
+     public ResponseEntity<? super GetIncentiveTypeListResponseDto> getIncentiveType(
+     ) {
+          ResponseEntity<? super GetIncentiveTypeListResponseDto> response = searchViewService.getIncentiveType();
           return response;
      }
 

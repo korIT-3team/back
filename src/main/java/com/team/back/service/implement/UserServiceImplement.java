@@ -7,10 +7,10 @@ import com.team.back.dto.request.auth.SignInRequestDto;
 import com.team.back.dto.response.ResponseDto;
 import com.team.back.dto.response.auth.SignInResponseDto;
 import com.team.back.dto.response.user.GetSignInUserResponseDto;
-import com.team.back.entity.UserEntity;
+import com.team.back.entity.SystemEmployeeEntity;
 import com.team.back.entity.UserViewEntity;
 import com.team.back.provider.JwtProvider;
-import com.team.back.repository.UserRepository;
+import com.team.back.repository.SystemEmployeeRepository;
 import com.team.back.repository.UserViewRepository;
 import com.team.back.service.UserService;
 
@@ -19,9 +19,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImplement implements UserService {
-    private final UserRepository userRepository;
     private final UserViewRepository userviewRepository;
     private final JwtProvider jwtProvider;
+    private final SystemEmployeeRepository systemEmployeeRepository;
 
     @Override
     //!       로그인 메서드            //
@@ -30,7 +30,7 @@ public class UserServiceImplement implements UserService {
 
         try{
             // 사원번호로 entity 조회 //
-            UserEntity userEntity = userRepository.findByEmployeeCode(dto.getEmployeeCode());
+            SystemEmployeeEntity userEntity = systemEmployeeRepository.findByEmployeeCode(dto.getEmployeeCode());
             
             // 존재하는 사원번호인지 확인 //
             if(userEntity == null) return SignInResponseDto.signInDataMismatch();

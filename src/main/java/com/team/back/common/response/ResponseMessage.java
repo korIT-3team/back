@@ -21,7 +21,6 @@ public interface ResponseMessage {
      String EXISTED_SYSTEM_EMPLOYEE_GENDER = "Existed System Employee Gender";
      String EXISTED_SYSTEM_EMPLOYEE_DEPARTMENT = "Existed System Employee Department";
      String EXISTED_SYSTEM_EMPLOYEE_JOIN_DATE = "Existed System Employee Join Date";
-     String EXISTED_SYSTEM_EMPLOYEE_PASSWORD = "Existed System Employee Password";
      String EXISTED_SYSTEM_EMPLOYEE_REGISTRATION_NUMBER = "System Employee Registration Number";
 
      String NO_EXISTED_USER_DEFINE_INFO = "No Existed UserDefine Info";

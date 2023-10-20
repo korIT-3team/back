@@ -27,4 +27,13 @@ public interface UserDefineDetailRepository extends JpaRepository<UserDefineDeta
                nativeQuery=true 
      )
      List<UserDefineDetailEntity> getEmploymentType();
+
+     @Query(
+          value=
+               "SELECT * " +
+               "FROM user_define_detail " +
+               "WHERE user_define_code = 9008; ",
+               nativeQuery=true 
+     )
+     List<UserDefineDetailEntity> getIncentiveType();
 }
