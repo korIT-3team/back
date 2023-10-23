@@ -1,4 +1,4 @@
-package com.team.back.dto.response.Human;
+package com.team.back.dto.response.human;
 
 import java.util.ArrayList;
 import java.util.List;

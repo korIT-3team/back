@@ -1,4 +1,4 @@
-package com.team.back.dto.response.Human;
+package com.team.back.dto.response.human;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
