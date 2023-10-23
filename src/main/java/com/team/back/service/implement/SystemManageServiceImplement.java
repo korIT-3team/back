@@ -14,7 +14,6 @@ import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
 import com.team.back.dto.request.system.PutProductInfoRequestDto;
 import com.team.back.dto.request.system.PutSystemEmployeeInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
-import com.team.back.dto.response.accounting.InvoiceResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
@@ -40,7 +39,6 @@ import com.team.back.entity.CustomerEntity;
 import com.team.back.entity.DepartmentEntity;
 import com.team.back.entity.ProductEntity;
 import com.team.back.entity.SystemEmployeeEntity;
-import com.team.back.entity.InvoiceEntity;
 import com.team.back.entity.resultSets.CustomerListResultSet;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
 import com.team.back.entity.resultSets.ProductListResultSet;
@@ -212,7 +210,7 @@ public class SystemManageServiceImplement implements SystemManageService{
           int systemEmployeeCode = dto.getSysEmployeeCode();
           String systemEmployeeName = dto.getEmployeeName();
           String systemEmployeeRegistrationNumber = dto.getRegistrationNumber();
-          String password = dto.getPassword();
+          String password;
 
           try{
                // description: 신규입력의 경우
@@ -223,12 +221,18 @@ public class SystemManageServiceImplement implements SystemManageService{
                     // description: 부서전화번호 중복 확인
                     boolean hasregistrationNumber = systemEmployeeRepository.existsByRegistrationNumber(systemEmployeeRegistrationNumber);
                     if (hasregistrationNumber) return PutSystemEmployeeInfoResponseDto.existedSystemEmployeeRegistrationNumber();
+                    // description: 비밀번호 암호화  ( 초기화 : "0000" //
+                    password = passwordEncoder.encode("0000");
+
                } else {
                     // description: 부서전화번호 중복 확인
                     SystemEmployeeEntity registrationNumberEntity = systemEmployeeRepository.findByRegistrationNumber(systemEmployeeRegistrationNumber);
                     if (registrationNumberEntity != null) {
                          if (systemEmployeeCode != registrationNumberEntity.getEmployeeCode()) return PutSystemEmployeeInfoResponseDto.existedSystemEmployeeRegistrationNumber();
                     }
+                    // description: 기존 저장된 암호 불러오기
+                    SystemEmployeeEntity employeeEntity = systemEmployeeRepository.findByEmployeeCode(systemEmployeeCode);
+                    password = employeeEntity.getPassword();
                }
 
                // description: 존재하는 사원번호인지 확인 //
@@ -239,17 +243,14 @@ public class SystemManageServiceImplement implements SystemManageService{
                Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
 
-               // description: 비밀번호 암호화 //
-               password = passwordEncoder.encode(password);
-
                // description: dto의 password 변경 //
                dto.setPassword(password);
 
                // description:  Entity 생성 //
-               SystemEmployeeEntity systemEmployeeEntity = new SystemEmployeeEntity(dto);
+               // SystemEmployeeEntity systemEmployeeEntity = new SystemEmployeeEntity(dto);
                
                // description:  DB에 저장 //
-               systemEmployeeRepository.save(systemEmployeeEntity);
+               // systemEmployeeRepository.save(systemEmployeeEntity);
 
           } catch(Exception exception){
                // description: 데이터베이스 에러 //
