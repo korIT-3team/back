@@ -3,6 +3,7 @@ package com.team.back.service;
 import org.springframework.http.ResponseEntity;
 
 import com.team.back.dto.request.sales.PutOrderInfoInfoRequestDto;
+import com.team.back.dto.request.sales.PutReleaseInfoRequestDto;
 import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
 
@@ -29,10 +30,13 @@ public interface SalesService {
 //------------------------------------------------------------
 
   // API: 출고 정보 등록 메서드 //
+  ResponseEntity<?> putReleaseInfoInfo(Integer employeeCode, PutReleaseInfoRequestDto dto);
 
   // API: 출고 정보 삭제 메서드 //
+  ResponseEntity<?> deleteReleaseInfoInfo(Integer employeeCode, Integer deleteReleaseCode);
 
   // API: 출고 정보 불러오기 메서드 //
+  ResponseEntity<?> getReleaseInfoInfo(Integer employeeCode, Integer releaseCode, String releaseDate);
 
 //------------------------------------------------------------
 

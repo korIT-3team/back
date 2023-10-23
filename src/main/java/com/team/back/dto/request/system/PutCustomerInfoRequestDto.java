@@ -2,6 +2,7 @@ package com.team.back.dto.request.system;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PutCustomerInfoRequestDto {
 
-  private String customerName;
+  @NotNull
+  private Integer customerCodeInfo;
+
+  @NotNull
+  private Integer customerCompanyCode = 1;
+
+  @NotNull
+  private String customerNameInfo;
 
   @NotBlank
   private String customerBusinessNumber;
@@ -26,7 +34,7 @@ public class PutCustomerInfoRequestDto {
   @NotBlank
   private String customerAddressDetail;
 
-  @NotBlank
+  @NotBlank @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$")
   private String customerTelNumber;
   
 }

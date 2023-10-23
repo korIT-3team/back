@@ -31,7 +31,9 @@ public class CustomerEntity {
   private String customerTelNumber;
 
   public CustomerEntity(PutCustomerInfoRequestDto dto) {
-    this.customerName = dto.getCustomerName();
+    this.companyCode = dto.getCustomerCompanyCode();
+    this.customerCode = dto.getCustomerCodeInfo();
+    this.customerName = dto.getCustomerNameInfo();
     this.customerBusinessNumber = dto.getCustomerBusinessNumber();
     this.customerPostCode = dto.getCustomerPostCode();
     this.customerAddress = dto.getCustomerAddress();
