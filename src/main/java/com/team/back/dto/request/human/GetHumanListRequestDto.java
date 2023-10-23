@@ -10,5 +10,5 @@ import lombok.Setter;
 public class GetHumanListRequestDto {
   private Integer humanDepartmentCode;
   private Integer humanEmployeeCode;
-  private Integer employmentType;
+  private Integer humanEmploymentType;
 }

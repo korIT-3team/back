@@ -21,6 +21,7 @@ import com.team.back.entity.SystemEmployeeEntity;
 import com.team.back.entity.UserDefineDetailEntity;
 import com.team.back.repository.EmployeeViewRepository;
 import com.team.back.repository.HumanDetailRepository;
+import com.team.back.repository.HumanViewReposiroty;
 import com.team.back.repository.UserDefineDetailRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.repository.UserViewRepository;
@@ -37,6 +38,7 @@ public class HumanServiceImplement implements HumanService {
      private final UserDefineDetailRepository employmentTypeReposiroty;
      private final HumanDetailRepository humanDetailRepository;
      private final EmployeeViewRepository employeeViewRepository;
+     private final HumanViewReposiroty humanViewReposiroty;
 
 
      @Override
@@ -67,24 +69,19 @@ public class HumanServiceImplement implements HumanService {
     @Override
     public ResponseEntity<? super GetHumanListResponseDto> getHumanList(GetHumanListRequestDto dto) {
       List<HumanListResponseDto> humanList = null;
-      Integer humanEmploymentType = dto.getEmploymentType();
+      Integer humanEmploymentType = dto.getHumanEmploymentType();
       Integer humanDepartmentCode = dto.getHumanDepartmentCode();
       Integer humanEmployeeCode = dto.getHumanEmployeeCode();
 
       // int -> string
-      String employmentType = (humanEmploymentType == null) ? "" : Integer.toString(humanEmploymentType);
-      String departmentCode = (humanDepartmentCode == null) ? "" : Integer.toString(humanDepartmentCode);
-      String employeeCode = (humanEmployeeCode == null) ? "" : Integer.toString(humanEmployeeCode);
-
-      System.out.println("employemetType : " + employmentType);
-      System.out.println("departmentCode : " + departmentCode);
-      System.out.println("employeeCode : " + employeeCode);
-
+      String employmentType = (humanEmploymentType == null) ? "0" : Integer.toString(humanEmploymentType);
+      String departmentCode = (humanDepartmentCode == null) ? "0" : Integer.toString(humanDepartmentCode);
+      String employeeCode = (humanEmployeeCode == null) ? "0" : Integer.toString(humanEmployeeCode);
 
       try {
 
         // description: 조회조건에 맞는 데이터 조회 //
-        List<EmployeeViewEntity> humanEntities = employeeViewRepository.getEmployeeViewList(departmentCode, employeeCode, employmentType);
+        List<EmployeeViewEntity> humanEntities = humanViewReposiroty.getHumanViewList(departmentCode, employeeCode, employmentType);
 
         // description: entity를 dto형채로 변환 //
         humanList = HumanListResponseDto.copyList(humanEntities);
