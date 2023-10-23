@@ -26,6 +26,8 @@ public interface ResponseCode {
 
      String NO_EXISTED_USER_DEFINE_INFO = "NUD";
 
+     String NO_EXISTED_HUMAN_INFO = "NH";
+
      String NO_EXISTED_CUSTOMER_INFO = "NEC";
      String EXISTED_CUSTOMER_NAME = "ECN";
      String EXISTED_CUSTOMER_CODE = "ECC";

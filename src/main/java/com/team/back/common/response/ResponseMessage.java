@@ -25,6 +25,8 @@ public interface ResponseMessage {
 
      String NO_EXISTED_USER_DEFINE_INFO = "No Existed UserDefine Info";
 
+     String NO_EXISTED_HUMAN_INFO = "No Existed Human Info";
+
      String NO_EXISTED_CUSTOMER_INFO = "No Existed Customer Info";
      String EXISTED_CUSTOMER_NAME = "Existed Customer Name";
      String EXISTED_CUSTOMER_CODE = "Existed Customer Code";
