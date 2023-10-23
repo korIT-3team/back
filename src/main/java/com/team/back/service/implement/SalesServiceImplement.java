@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.team.back.dto.request.sales.PutOrderInfoInfoRequestDto;
+import com.team.back.dto.request.sales.PutReleaseInfoRequestDto;
 import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
@@ -67,6 +68,24 @@ public class SalesServiceImplement implements SalesService {
   public ResponseEntity<?> putOrderInfoInfo(Integer employeeCode, PutOrderInfoInfoRequestDto dto) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'putOrderInfoInfo'");
+  }
+
+  @Override
+  public ResponseEntity<?> putReleaseInfoInfo(Integer employeeCode, PutReleaseInfoRequestDto dto) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'putReleaseInfoInfo'");
+  }
+
+  @Override
+  public ResponseEntity<?> deleteReleaseInfoInfo(Integer employeeCode, Integer deleteReleaseCode) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'deleteReleaseInfoInfo'");
+  }
+
+  @Override
+  public ResponseEntity<?> getReleaseInfoInfo(Integer employeeCode, Integer releaseCode, String releaseDate) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getReleaseInfoInfo'");
   }
 
   

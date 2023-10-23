@@ -18,6 +18,7 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
   
   CustomerEntity findByCustomerCode(Integer CustomerCode);
   CustomerEntity findByCustomerName(String CustomerName);
+  CustomerEntity findByCustomerBusinessNumber(String CustomerBusinessNumber);
 
   @Query(
     value = 
@@ -30,7 +31,7 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
     "customer_address AS customerAddress, " +
     "customer_address_detail AS customerAddressDetail, " +
     "customer_tel_number AS customerTelNumber " +
-    "FROM customer " +
+    "FROM customer AS C " +
     "ORDER BY customer_code ",
 
     nativeQuery=true
