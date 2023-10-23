@@ -29,7 +29,6 @@ public class PutSystemEmployeeInfoRequestDto {
 
   private String resignationDate;
 
-  @NotBlank
   private String password;
 
   @NotBlank @Pattern(regexp = "^[\\d]{6}-[1-4][\\d]{6}+$")
