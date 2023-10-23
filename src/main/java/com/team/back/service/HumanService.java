@@ -5,10 +5,10 @@ import org.springframework.http.ResponseEntity;
 import com.team.back.dto.request.human.GetHumanDetailRequestDto;
 import com.team.back.dto.request.human.GetHumanListRequestDto;
 import com.team.back.dto.request.human.PutHumanDetailInfoRequestDto;
-import com.team.back.dto.response.Human.GetEmploymentTypeListResponseDto;
-import com.team.back.dto.response.Human.GetHumanDetailInfoResponseDto;
-import com.team.back.dto.response.Human.GetHumanListResponseDto;
-import com.team.back.dto.response.Human.PutHumanDetailInfoResponseDto;
+import com.team.back.dto.response.human.GetEmploymentTypeListResponseDto;
+import com.team.back.dto.response.human.GetHumanDetailInfoResponseDto;
+import com.team.back.dto.response.human.GetHumanListResponseDto;
+import com.team.back.dto.response.human.PutHumanDetailInfoResponseDto;
 
 public interface HumanService {
      // API : 사원 리스트 불러오기 메서드 //
