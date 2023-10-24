@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.team.back.common.constants.DepartmentCode;
 import com.team.back.dto.request.human.GetHumanDetailRequestDto;
-import com.team.back.dto.request.human.GetHumanListRequestDto;
 import com.team.back.dto.request.human.PutHumanDetailInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
 import com.team.back.dto.response.human.EmploymentTypeResponseDto;
@@ -67,21 +66,18 @@ public class HumanServiceImplement implements HumanService {
 
 
     @Override
-    public ResponseEntity<? super GetHumanListResponseDto> getHumanList(GetHumanListRequestDto dto) {
+    public ResponseEntity<? super GetHumanListResponseDto> getHumanList(Integer employeeCode, Integer departmentCode, Integer humanEmployeeCode, Integer employmentType) {
       List<HumanListResponseDto> humanList = null;
-      Integer humanEmploymentType = dto.getHumanEmploymentType();
-      Integer humanDepartmentCode = dto.getHumanDepartmentCode();
-      Integer humanEmployeeCode = dto.getHumanEmployeeCode();
 
       // int -> string
-      String employmentType = (humanEmploymentType == null) ? "0" : Integer.toString(humanEmploymentType);
-      String departmentCode = (humanDepartmentCode == null) ? "0" : Integer.toString(humanDepartmentCode);
-      String employeeCode = (humanEmployeeCode == null) ? "0" : Integer.toString(humanEmployeeCode);
-
+      String humanEmploymentType = (employmentType == null) ? "0" : Integer.toString(employmentType);
+      String humanDepartmentCode = (departmentCode == null) ? "0" : Integer.toString(departmentCode);
+      String humanEmpCode = (humanEmployeeCode == null) ? "0" : Integer.toString(humanEmployeeCode);
+      
       try {
 
         // description: 조회조건에 맞는 데이터 조회 //
-        List<EmployeeViewEntity> humanEntities = humanViewReposiroty.getHumanViewList(departmentCode, employeeCode, employmentType);
+        List<EmployeeViewEntity> humanEntities = humanViewReposiroty.getHumanViewList(humanDepartmentCode, humanEmpCode, humanEmploymentType);
 
         // description: entity를 dto형채로 변환 //
         humanList = HumanListResponseDto.copyList(humanEntities);
