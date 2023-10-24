@@ -3,7 +3,6 @@ package com.team.back.service;
 import org.springframework.http.ResponseEntity;
 
 import com.team.back.dto.request.human.GetHumanDetailRequestDto;
-import com.team.back.dto.request.human.GetHumanListRequestDto;
 import com.team.back.dto.request.human.PutHumanDetailInfoRequestDto;
 import com.team.back.dto.response.human.GetEmploymentTypeListResponseDto;
 import com.team.back.dto.response.human.GetHumanDetailInfoResponseDto;
@@ -12,7 +11,7 @@ import com.team.back.dto.response.human.PutHumanDetailInfoResponseDto;
 
 public interface HumanService {
      // API : 사원 리스트 불러오기 메서드 //
-     ResponseEntity<? super GetHumanListResponseDto> getHumanList(GetHumanListRequestDto dto);
+     ResponseEntity<? super GetHumanListResponseDto> getHumanList(Integer employeeCode, Integer departmentCode, Integer humanEmployeeCode, Integer employmentType);
 
      // API : 사원 - 재직구분 콤보박스 불러오기 메서드 //
      ResponseEntity<? super GetEmploymentTypeListResponseDto> getEmploymentType();

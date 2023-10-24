@@ -34,7 +34,7 @@ public class WebSecurityConfig {
             .csrf().disable()
             .httpBasic().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeRequests().antMatchers("/", "/auth/**", "/system/**", "/accounting/**", "/sales/**", "/file/**", "/searchView/**", "/detail-code/**").permitAll()
+            .authorizeRequests().antMatchers("/", "/auth/**", "/system/**", "/accounting/**", "/sales/**", "/file/**", "/searchView/**", "/detail-code/**", "/human/employee-info-detail/**").permitAll()
             .anyRequest().authenticated().and()
             .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
 		

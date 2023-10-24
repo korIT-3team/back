@@ -247,10 +247,10 @@ public class SystemManageServiceImplement implements SystemManageService{
                dto.setPassword(password);
 
                // description:  Entity 생성 //
-               // SystemEmployeeEntity systemEmployeeEntity = new SystemEmployeeEntity(dto);
+               SystemEmployeeEntity systemEmployeeEntity = new SystemEmployeeEntity(dto);
                
                // description:  DB에 저장 //
-               // systemEmployeeRepository.save(systemEmployeeEntity);
+               systemEmployeeRepository.save(systemEmployeeEntity);
 
           } catch(Exception exception){
                // description: 데이터베이스 에러 //
