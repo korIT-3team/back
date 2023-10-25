@@ -16,7 +16,7 @@ public class JwtProvider {
     @Value("${secret-key}") //? todo : 이거 현직에선 어떤 방법을 쓰는지.
     private String secretKey;
 
-    public String create(Integer employeeCode){
+    public String create(String employeeCode){
 
         
         // 토큰 만료 기간 : 8시간 //
@@ -24,12 +24,12 @@ public class JwtProvider {
 
         // JWT 생성 //
         String jwt = Jwts.builder().signWith(SignatureAlgorithm.HS256, secretKey)
-                            .setSubject(employeeCode.toString()).setIssuedAt(new Date()).setExpiration(expiredDate).compact();
+                            .setSubject(employeeCode).setIssuedAt(new Date()).setExpiration(expiredDate).compact();
 
         return jwt;
     }
 
-    public Integer validate(String jwt){
+    public String validate(String jwt){
         Claims payload= null;
         try{
             // JWT 검증 //
@@ -41,6 +41,6 @@ public class JwtProvider {
         }
 
         String subject = payload.getSubject();
-        return Integer.parseInt(subject);
+        return subject;
     }
 }

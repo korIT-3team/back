@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
                 return;
             }
 
-            Integer employeeCode = jwtProvider.validate(token);
+            String employeeCode = jwtProvider.validate(token);
             if(employeeCode == null){
                 filterChain.doFilter(request, response);
                 return;

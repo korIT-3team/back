@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.team.back.dto.request.auth.KakaoSignInRequestDto;
 import com.team.back.dto.request.auth.SignInRequestDto;
+import com.team.back.dto.response.auth.KakaoSignInResponseDto;
 import com.team.back.dto.response.auth.SignInResponseDto;
 import com.team.back.dto.response.user.GetSignInUserResponseDto;
 import com.team.back.service.UserService;
@@ -27,18 +29,28 @@ public class UserController {
      // API : 로그인 메서드 //
      @PostMapping("/sign-in")
      public ResponseEntity<? super SignInResponseDto> signIn(
-     @RequestBody @Valid SignInRequestDto requestBody
+          @RequestBody @Valid SignInRequestDto requestBody
      ) {
-     ResponseEntity<? super SignInResponseDto> response = userService.signIn(requestBody);
-     return response;
+          ResponseEntity<? super SignInResponseDto> response = userService.signIn(requestBody);
+          return response;
      }
 
      // API : 로그인 유저 정보 불러오기 메서드 //
      @GetMapping("/user")
      public ResponseEntity<? super GetSignInUserResponseDto> getSignInUser(
-          @AuthenticationPrincipal Integer employeeCode
+          @AuthenticationPrincipal String employeeCode
      ) {
           ResponseEntity<? super GetSignInUserResponseDto> response = userService.getSignInUser(employeeCode);
+          return response;
+     }
+
+     // API : 카카오 로그인 메서드 //
+     @PostMapping("/sign-in/kakao")
+     public ResponseEntity<? super KakaoSignInResponseDto> KakaoSignIn(
+          @AuthenticationPrincipal String id,
+          @RequestBody @Valid KakaoSignInRequestDto requestBody
+     ) {
+          ResponseEntity<? super KakaoSignInResponseDto> response = userService.KakaoSignIn(id, requestBody);
           return response;
      }
 

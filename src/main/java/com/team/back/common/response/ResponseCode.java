@@ -47,4 +47,5 @@ public interface ResponseCode {
      String EXISTED_ORDER_CODE = "EOC";
 
      String NO_REQUIRED_CONTENT = "NRC";
+     String NOT_MATCHED_ID = "NMI";
 }

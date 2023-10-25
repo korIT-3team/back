@@ -5,17 +5,18 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.team.back.common.constants.DepartmentCode;
 import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
 import com.team.back.dto.response.sales.GetSalesPlanListResponseDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.SalesPlanListResponseDto;
 import com.team.back.dto.response.sales.SalesPlanResponseDto;
-import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.entity.SalesPlanEntity;
 import com.team.back.entity.resultSets.SalesPlanListResultSet;
 import com.team.back.repository.SalesPlanRepository;
 import com.team.back.repository.UserRepository;
+import com.team.back.repository.UserViewRepository;
 import com.team.back.service.SalesService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,17 +27,21 @@ public class SalesServiceImplement implements SalesService {
 
   private final SalesPlanRepository salesPlanRepository;
   private final UserRepository userRepository;
+  private final UserViewRepository userViewRepository;
   
   @Override
-  public ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo(Integer employeeCode, PutSalesPlanInfoRequestDto dto) {
+  public ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo(String employeeCode, PutSalesPlanInfoRequestDto dto) {
+    
+    Integer emCode = Integer.parseInt(employeeCode);
 
     try {
       // description: 존재하는 사원번호인지 확인 //
-      boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+      boolean hasUser = userRepository.existsByEmployeeCode(emCode);
       if(!hasUser) return PutSalesPlanInfoResponseDto.noExistedUser();
 
       // description: 권한 //
-      if(employeeCode != 9999) return PutSalesPlanInfoResponseDto.noPermission();
+      Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+      if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutSalesPlanInfoResponseDto.noPermission();
 
       // description: entity 생성 //
       SalesPlanEntity salesPlanEntity = new SalesPlanEntity(dto);
@@ -53,7 +58,7 @@ public class SalesServiceImplement implements SalesService {
   }
 
   @Override
-  public ResponseEntity<? super GetSalesPlanListResponseDto> getSalesPlanList(Integer employeeCode, Integer salesPlanCode) {
+  public ResponseEntity<? super GetSalesPlanListResponseDto> getSalesPlanList(String employeeCode, Integer salesPlanCode) {
     List<SalesPlanListResponseDto> salesPlanList = null;
 
     try {

@@ -29,7 +29,7 @@ public class SalesController {
   // API: 판매계획 등록 메서드 //
   @PutMapping("/sales-plan")
   public ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo (
-    @AuthenticationPrincipal Integer employeeCode,
+    @AuthenticationPrincipal String employeeCode,
     @RequestBody @Valid PutSalesPlanInfoRequestDto requestBody
   ) {
     ResponseEntity<? super PutSalesPlanInfoResponseDto> response = salesService.putSalesPlanInfo(employeeCode, requestBody);
@@ -48,7 +48,7 @@ public class SalesController {
   // API: 판매계획 조회 메서드 //
   @GetMapping(value={"/sales-plan/{salesPlanCode}", "/sales-plan"})
   public ResponseEntity<? super GetSalesPlanListResponseDto> getSalesPlanList (
-    @AuthenticationPrincipal Integer employeeCode,
+    @AuthenticationPrincipal String employeeCode,
     @PathVariable(value="salesPlanCode", required=false) Integer salesPlanCode
   ) {
     ResponseEntity<? super GetSalesPlanListResponseDto> response = salesService.getSalesPlanList(employeeCode, salesPlanCode);
