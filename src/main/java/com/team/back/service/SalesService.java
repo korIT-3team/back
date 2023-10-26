@@ -10,7 +10,7 @@ import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
 public interface SalesService {
 
   // API: 판매계획 정보 등록 메서드 //
-  ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo(Integer employeeCode, PutSalesPlanInfoRequestDto dto);
+  ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo(String employeeCode, PutSalesPlanInfoRequestDto dto);
   
   // API: 판매계획 정보 삭제 메서드 //
   ResponseEntity<?> deleteSalesPlanInfo(Integer employeeCode, Integer deleteSalesPlanCode);

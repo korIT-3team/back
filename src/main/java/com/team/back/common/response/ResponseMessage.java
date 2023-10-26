@@ -48,4 +48,5 @@ public interface ResponseMessage {
      String EXISTED_ORDER_CODE = "Existed Order Code";
 
      String NO_REQUIRED_CONTENT = "No Required Content";
+     String NOT_MATCHED_ID = "No Matched Id";
 }

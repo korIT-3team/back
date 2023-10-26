@@ -4,8 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +25,12 @@ public class SalesController {
   // API: 판매계획 등록 메서드 //
   @PutMapping("/sales-plan")
   public ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo (
-    @AuthenticationPrincipal Integer employeeCode,
+    @AuthenticationPrincipal String employeeCode,
     @RequestBody @Valid PutSalesPlanInfoRequestDto requestBody
   ) {
     ResponseEntity<? super PutSalesPlanInfoResponseDto> response = salesService.putSalesPlanInfo(employeeCode, requestBody);
     return response;
   }
-
 
 
 }
