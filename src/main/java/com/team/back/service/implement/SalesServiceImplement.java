@@ -1,19 +1,16 @@
 package com.team.back.service.implement;
 
-import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.team.back.common.constants.DepartmentCode;
+import com.team.back.dto.request.sales.PutOrderInfoInfoRequestDto;
+import com.team.back.dto.request.sales.PutReleaseInfoRequestDto;
 import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
-import com.team.back.dto.response.sales.GetSalesPlanListResponseDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
-import com.team.back.dto.response.sales.SalesPlanListResponseDto;
-import com.team.back.dto.response.sales.SalesPlanResponseDto;
 import com.team.back.entity.SalesPlanEntity;
-import com.team.back.entity.resultSets.SalesPlanListResultSet;
 import com.team.back.repository.SalesPlanRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.repository.UserViewRepository;
@@ -56,43 +53,41 @@ public class SalesServiceImplement implements SalesService {
     return PutSalesPlanInfoResponseDto.success();
     
   }
-
-  @Override
-  public ResponseEntity<? super GetSalesPlanListResponseDto> getSalesPlanList(String employeeCode, Integer salesPlanCode) {
-    List<SalesPlanListResponseDto> salesPlanList = null;
-
-    try {
-
-      salesPlanCode = salesPlanCode == null ? null : salesPlanCode;
-      // description: 검색어가 판매계획코드에 포함되어 있는 데이터 조회 //
-      List<SalesPlanListResultSet> salesPlanEntities = salesPlanRepository.getSalesPlanList(salesPlanCode);
-
-      // description: entity를 dto형태로 변환 //
-      salesPlanList = SalesPlanListResponseDto.copyList(salesPlanEntities);
-
-    } catch (Exception exception) {
-      exception.printStackTrace();
-      return ResponseDto.databaseError();
-    }
-
-    return GetSalesPlanListResponseDto.success(salesPlanList);
-
-  }
-
-  @Override
-  public ResponseEntity<? super SalesPlanResponseDto> getSalesPlanDetail(Integer SalesPlanCode) {
-
-    SalesPlanEntity salesPlanEntity;
-    try {
-      // description : 선택된 해당 판매계획코드의 데이터를 가져옴 //
-      salesPlanEntity = salesPlanRepository.findBySalesPlanCode(SalesPlanCode);
-      if (salesPlanEntity == null) return SalesPlanResponseDto.noExistedSalesPlan();
-    } catch (Exception exception) {
-      exception.printStackTrace();
-      return ResponseDto.databaseError();
-    }
-    return SalesPlanResponseDto.success(salesPlanEntity);
-  }
   
+  public ResponseEntity<?> deleteSalesPlanInfo(Integer employeeCode, Integer deleteSalesPlanCode) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'deleteSalesPlanInfo'");
+  }
+
+  @Override
+  public ResponseEntity<?> getSalesPlanInfo(Integer employeeCode, Integer salesPlanCode, String projectName) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getSalesPlanInfo'");
+  }
+
+  @Override
+  public ResponseEntity<?> putOrderInfoInfo(Integer employeeCode, PutOrderInfoInfoRequestDto dto) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'putOrderInfoInfo'");
+  }
+
+  @Override
+  public ResponseEntity<?> putReleaseInfoInfo(Integer employeeCode, PutReleaseInfoRequestDto dto) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'putReleaseInfoInfo'");
+  }
+
+  @Override
+  public ResponseEntity<?> deleteReleaseInfoInfo(Integer employeeCode, Integer deleteReleaseCode) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'deleteReleaseInfoInfo'");
+  }
+
+  @Override
+  public ResponseEntity<?> getReleaseInfoInfo(Integer employeeCode, Integer releaseCode, String releaseDate) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getReleaseInfoInfo'");
+  }
+
   
 }

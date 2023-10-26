@@ -42,10 +42,8 @@ public class OrderInfoEntity {
   this.salesPlanCode = dto.getOrderInfoSalesPlanCode();
   this.companyCode = dto.getOrderInfoCompanyCode();
   this.customerCode = dto.getOrderInfoCustomerCode();
-  this.customerName = dto.getOrderInfoCustomerName();
   this.orderDate = dto.getOrderDate();
   this.managerCode = dto.getOrderInfoManagerCode();
-  this.managerName = dto.getOrderInfoManagerName();
   this.orderDetail = dto.getOrderDetail();
   this.productCode = dto.getOrderInfoproductCode();
   this.productName = dto.getOrderInfoProductName();

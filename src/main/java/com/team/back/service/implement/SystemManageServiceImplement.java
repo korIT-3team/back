@@ -14,7 +14,6 @@ import com.team.back.dto.request.system.PutDepartmentInfoRequestDto;
 import com.team.back.dto.request.system.PutProductInfoRequestDto;
 import com.team.back.dto.request.system.PutSystemEmployeeInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
-import com.team.back.dto.response.accounting.InvoiceResponseDto;
 import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.dto.response.system.PutCustomerInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
@@ -40,7 +39,6 @@ import com.team.back.entity.CustomerEntity;
 import com.team.back.entity.DepartmentEntity;
 import com.team.back.entity.ProductEntity;
 import com.team.back.entity.SystemEmployeeEntity;
-import com.team.back.entity.InvoiceEntity;
 import com.team.back.entity.resultSets.CustomerListResultSet;
 import com.team.back.entity.resultSets.DepartmentListResultSet;
 import com.team.back.entity.resultSets.ProductListResultSet;
@@ -226,12 +224,18 @@ public class SystemManageServiceImplement implements SystemManageService{
                     // description: 부서전화번호 중복 확인
                     boolean hasregistrationNumber = systemEmployeeRepository.existsByRegistrationNumber(systemEmployeeRegistrationNumber);
                     if (hasregistrationNumber) return PutSystemEmployeeInfoResponseDto.existedSystemEmployeeRegistrationNumber();
+                    // description: 비밀번호 암호화  ( 초기화 : "0000" //
+                    password = passwordEncoder.encode("0000");
+
                } else {
                     // description: 부서전화번호 중복 확인
                     SystemEmployeeEntity registrationNumberEntity = systemEmployeeRepository.findByRegistrationNumber(systemEmployeeRegistrationNumber);
                     if (registrationNumberEntity != null) {
                          if (systemEmployeeCode != registrationNumberEntity.getEmployeeCode()) return PutSystemEmployeeInfoResponseDto.existedSystemEmployeeRegistrationNumber();
                     }
+                    // description: 기존 저장된 암호 불러오기
+                    SystemEmployeeEntity employeeEntity = systemEmployeeRepository.findByEmployeeCode(systemEmployeeCode);
+                    password = employeeEntity.getPassword();
                }
 
                // description: 존재하는 사원번호인지 확인 //
@@ -241,9 +245,6 @@ public class SystemManageServiceImplement implements SystemManageService{
                // description:  권한 //
                Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
-
-               // description: 비밀번호 암호화 //
-               password = passwordEncoder.encode(password);
 
                // description: dto의 password 변경 //
                dto.setPassword(password);
@@ -346,18 +347,30 @@ public class SystemManageServiceImplement implements SystemManageService{
 
      @Override
      public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(String employeeCode, PutCustomerInfoRequestDto dto) {
-
-          String customerName = dto.getCustomerName();
           Integer emCode = Integer.parseInt(employeeCode);
+          int customerCode = dto.getCustomerCodeInfo();
+          String customerName = dto.getCustomerNameInfo();
+          String customerBusinessNumber = dto.getCustomerBusinessNumber();
+
           try {
+               // description: 신규입력의 경우 //
+               if (customerCode == 0) {
 
-               // description: 거래처 명 중복 확인
-               boolean hasCustomerName = customerRepository.existsByCustomerName(customerName);
-               if (hasCustomerName) return PutCustomerInfoResponseDto.existedCustomerName();
+                    // description: 거래처 명 중복 확인 //
+                    boolean hasCustomerName = customerRepository.existsByCustomerName(customerName);
+                    if (hasCustomerName) return PutCustomerInfoResponseDto.existedCustomerName();
 
-               // description: 사업자 등록번호 중복 확인
-               boolean hasCustomerBusinessNumber = customerRepository.existsByCustomerName(customerName);
-               if (hasCustomerBusinessNumber) return PutCustomerInfoResponseDto.existedCustomerName();
+                    // description: 사업자 등록번호 중복 확인 //
+                    boolean hasCustomerBusinessNumber = customerRepository.existsByCustomerBusinessNumber(customerBusinessNumber);
+                    if (hasCustomerBusinessNumber) return PutCustomerInfoResponseDto.existedCustomerBusinessNumber();
+               
+               } else {
+                    // description: 사업자 등록번호 중복 확인 //
+                    CustomerEntity custBusinessNumberEntity = customerRepository.findByCustomerBusinessNumber(customerBusinessNumber);
+                    if (custBusinessNumberEntity != null) {
+                         if (customerCode != custBusinessNumberEntity.getCustomerCode()) return PutCustomerInfoResponseDto.existedCustomerBusinessNumber();
+                    }
+               }
             
                // description: 존재하는 사원번호인지 확인 //
                boolean hasUser = userRepository.existsByEmployeeCode(emCode);

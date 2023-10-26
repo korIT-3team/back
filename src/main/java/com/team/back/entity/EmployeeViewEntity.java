@@ -19,6 +19,7 @@ public class EmployeeViewEntity {
      private int employeeCode;
      private String employeeName;
      private String genderName;
+     private int departmentCode;
      private String departmentName;
      private String position;
      private String email;

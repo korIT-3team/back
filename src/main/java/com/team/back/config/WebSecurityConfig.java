@@ -40,7 +40,7 @@ public class WebSecurityConfig {
             .httpBasic().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
-            .antMatchers("/", "/auth/**", "/system/**", "/accounting/**", "/sales/**", "/file/**", "/searchView/**", "/detail-code/**").permitAll()
+            .antMatchers("/", "/auth/**", "/system/**", "/accounting/**", "/sales/**", "/file/**", "/searchView/**", "/detail-code/**", "/human/employee-info-detail/**").permitAll()
             .anyRequest().authenticated().and()
             .oauth2Login()
             .redirectionEndpoint().baseUri("/auth/callback/kakao").and()
