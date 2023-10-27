@@ -154,7 +154,7 @@ public class SystemManageController {
       // API : 거래처 정보 삭제 메서드 //
      @DeleteMapping("/customer-info/{customerCode}")
      public ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @PathVariable(value="customerCode", required = false) Integer deleteCustomerCode
      ) {
           ResponseEntity<? super DeleteCustomerInfoResponseDto> responese = systemManageService.deleteCustomerInfo(employeeCode, deleteCustomerCode);
@@ -165,7 +165,7 @@ public class SystemManageController {
      // API: 검색 거래처 정보 불러오기 //
      @GetMapping(value={"/customer-info/{customerName}", "/customer-info"})
      public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @PathVariable(value="customerName", required=false) String customerName
      ) {
           ResponseEntity<? super GetCustomerInfoResponseDto> response = systemManageService.getCustomerInfo(employeeCode, customerName);
@@ -197,7 +197,7 @@ public class SystemManageController {
      // API : 검색 product 정보 불러오기 메서드 //
      @GetMapping(value={"/product-info/{productName}", "/product-info"})
      public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @PathVariable(value="productName", required=false) String productName
      ) {
           ResponseEntity<? super GetProductInfoResponseDto> response = systemManageService.getProductInfo(employeeCode, productName);
