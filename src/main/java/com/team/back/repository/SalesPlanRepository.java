@@ -12,6 +12,8 @@ import com.team.back.entity.resultSets.SalesPlanListResultSet;
 @Repository
 public interface SalesPlanRepository extends JpaRepository<SalesPlanEntity, Integer> {
   
+  boolean existsByProjectName(String projectName);
+
   SalesPlanEntity findBySalesPlanCode(Integer salesPlanCode);
 
   @Query(
@@ -30,7 +32,7 @@ public interface SalesPlanRepository extends JpaRepository<SalesPlanEntity, Inte
       "expect_price AS expectPrice, " +
       "expect_total_price AS expectTotalPrice, " +
       "expect_korean_price AS expectKoreanPrice " +
-      "FROM sales_plan " +
+      "FROM sales_plan as SP" +
       "ORDER BY sales_plan_code ",
       nativeQuery=true
   )
