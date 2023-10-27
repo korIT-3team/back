@@ -96,7 +96,7 @@ public class SystemManageServiceImplement implements SystemManageService{
                boolean hasUser = userRepository.existsByEmployeeCode(emCode);
                if(!hasUser) return PutCompanyInfoResponseDto.noExistedUser();
                // description: 권한 //
-               Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+               Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutCompanyInfoResponseDto.noPermission();
 
                // description: entity 생성 //
@@ -150,7 +150,7 @@ public class SystemManageServiceImplement implements SystemManageService{
                if(!hasUser) return PutDepartmentInfoResponseDto.noExistedUser();
 
                // description:  권한 //
-               Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+               Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
 
                // description:  Entity 생성 //
@@ -243,7 +243,7 @@ public class SystemManageServiceImplement implements SystemManageService{
                if(!hasUser) return PutDepartmentInfoResponseDto.noExistedUser();
 
                // description:  권한 //
-               Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+               Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
 
                // description: dto의 password 변경 //
@@ -355,7 +355,7 @@ public class SystemManageServiceImplement implements SystemManageService{
                if(!hasUser) return PutCustomerInfoResponseDto.noExistedUser();
 
                // description:  권한 //
-               Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+               Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutCustomerInfoResponseDto.noPermission();
 
                // description:  Entity 생성 //
@@ -433,7 +433,7 @@ public class SystemManageServiceImplement implements SystemManageService{
                if(!hasUser) return PutProductInfoResponseDto.noExistedUser();
 
                // description:  권한 //
-               Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+               Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutProductInfoResponseDto.noPermission();;
 
                // description:  Entity 생성 //
@@ -495,5 +495,4 @@ public class SystemManageServiceImplement implements SystemManageService{
           return GetProductInfoResponseDto.success(productList);   
 
      }
-     
 }

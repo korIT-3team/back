@@ -18,5 +18,5 @@ public interface UserViewRepository extends JpaRepository<UserViewEntity, Intege
                "and e.employee_code = ?1 ; ",
                nativeQuery=true 
      )
-     Integer getUserDepartMentCode(Integer employeeCode);
+     Integer getUserDepartmentCode(Integer employeeCode);
 }
