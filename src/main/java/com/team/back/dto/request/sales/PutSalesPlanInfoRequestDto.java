@@ -1,5 +1,6 @@
 package com.team.back.dto.request.sales;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -11,45 +12,44 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PutSalesPlanInfoRequestDto {
   
-  @NotNull
-  private Integer salesPlanCodeInfo;
+    @NotNull
+    private Integer salesPlanCodeInfo;
 
-  @NotNull
-  private String projectNameInfo;
+    @NotBlank
+    private String salesPlanProjectName;
 
-  @NotNull
-  private Integer employeeCodeInfo;
+    @NotNull
+    private Integer salesPlanDepartmentCodeInfo;
+    
+    @NotNull
+    private Integer salesPlanEmployeeCodeInfo;
+    
+    @NotNull
+    private Integer salesPlanCompanyCodeInfo;
+    
+    @NotBlank
+    private String salesPlanDate;
 
-  @NotNull
-  private Integer departmentCodeInfo = 1;
+    @NotNull
+    private Integer salesPlanProductCodeInfo;
 
-  @NotNull
-  private Integer salesPlanCompanyCode = 1;
+    @NotNull
+    private String salesPlanProductNameInfo;
 
-  @NotNull
-  private String planDate;
+    @NotBlank
+    private Integer salesPlanQuantity;
 
-  @NotNull
-  private Integer productCode;
+    @NotNull
+    private Integer salesPlanExchangeRateCode;
 
-  @NotNull
-  private String productName;
+    private Double salesPlanExchangeRate;
 
-  @NotNull
-  private Integer planQuantity;
+    @NotBlank
+    private Double salesPlanExpectPrice;
 
-  private Integer exchangeRateCode;
-
-  private Double exchangeRate;
-
-  @NotNull
-  private Double expectPrice;
-
-  @NotNull
-  private Double expectTotalPrice;
-
-  @NotNull
-  private Double expectKoreanPrice;
+    private Double salesPlanExpectTotalPrice;
+    
+    private Double salesPlanExpectKoreanPrice;
 
 
 }

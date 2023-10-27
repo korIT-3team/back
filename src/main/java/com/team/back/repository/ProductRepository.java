@@ -24,11 +24,12 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
     "product_name AS productName, " +
     "company_code AS companyCode, " +
     "product_price AS productPrice " +
-    "FROM product " +
+    "FROM product AS P " +
+    "WHERE product_name LIKE %?1% " +
     "ORDER BY product_code ",
 
     nativeQuery=true
 )
 
-  List<ProductListResultSet> getProductList(String productName, Integer procurementCategory);
+  List<ProductListResultSet> getProductList(String productName);
 }

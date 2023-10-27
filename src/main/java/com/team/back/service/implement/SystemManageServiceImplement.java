@@ -317,30 +317,8 @@ public class SystemManageServiceImplement implements SystemManageService{
                return ResponseDto.databaseError();
           }
           return GetSystemEmpUserDefineInfoResponseDto.success(systemEmpUserDefineList);
-     }     
-
-     @Override
-     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, Integer customerCode, String customerName) {
-          List<CustomerListResponseDto> customerList = null;
-
-          try{
-               
-               customerCode = customerCode == null ? null : customerCode;
-               customerName = customerName == null ? "" : customerName;
-               // description: 검색어가 거레처 코드 및 거래처명에 포함되어 있는 데이터 조회 //
-               List<CustomerListResultSet> customerEntities = customerRepository.getCustomerList(customerCode, customerName);
-
-               // description: entity를 dto형태로 변환 //
-               customerList = CustomerListResponseDto.copyList(customerEntities);
-
-          } catch(Exception exception){
-               exception.printStackTrace();
-               return ResponseDto.databaseError();
-          }
-
-          return GetCustomerInfoResponseDto.success(customerList);
      }
-
+     
      @Override
      public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(Integer employeeCode, PutCustomerInfoRequestDto dto) {
 
@@ -411,14 +389,95 @@ public class SystemManageServiceImplement implements SystemManageService{
      } 
 
      @Override
-     public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(Integer employeeCode, String productName, Integer procurementCategory) {
+     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, String customerName) {
+          List<CustomerListResponseDto> customerList = null;
+
+          try{
+               customerName = customerName == null ? "" : customerName;
+               // description: 검색어가 거래처명에 포함되어 있는 데이터 조회 //
+               List<CustomerListResultSet> customerEntities = customerRepository.getCustomerList(customerName);
+
+               // description: entity를 dto형태로 변환 //
+               customerList = CustomerListResponseDto.copyList(customerEntities);
+
+          } catch(Exception exception){
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+
+          return GetCustomerInfoResponseDto.success(customerList);
+     }
+
+     @Override
+     public ResponseEntity<? super PutProductInfoResponseDto> putProductInfo(Integer employeeCode, PutProductInfoRequestDto dto) {
+
+          int productCode = dto.getProductCodeInfo();
+          String productName = dto.getProductName();
+
+          try {
+               // description: 신규입력의 경우 //
+               if (productCode == 0) {
+                    // description: 품명 중복 확인 //
+                    boolean hasProductName = productRepository.existsByProductName(productName);
+                    if (hasProductName) return PutProductInfoResponseDto.existedProductName();
+               }
+
+               // description: 존재하는 사원번호인지 확인 //
+               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               if(!hasUser) return PutProductInfoResponseDto.noExistedUser();
+
+               // description:  권한 //
+               Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+               if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutProductInfoResponseDto.noPermission();;
+
+               // description:  Entity 생성 //
+               ProductEntity productEntity = new ProductEntity(dto);
+
+               // description:  DB에 저장 //
+               productRepository.save(productEntity);
+
+          } catch(Exception exception){
+               // description: 데이터베이스 에러 //
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+
+          return PutProductInfoResponseDto.success();
+
+     }
+
+     @Override
+     public ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo(Integer employeeCode, Integer productCode) {
+          
+          try {
+               // description: 존재하는 유저인지 확인 //
+               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               if (!hasUser) return DeleteProductInfoResponseDto.noExistedUser();
+               
+               // description: 존재하는 품목코드인지 확인 //
+               ProductEntity productEntity = productRepository.findByProductCode(productCode);
+               if (productEntity == null) return DeleteProductInfoResponseDto.noExistedProduct();
+               
+               // description: 품목 삭제 //
+               productRepository.delete(productEntity);
+
+          } catch (Exception exception) {
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
+          return DeleteProductInfoResponseDto.success();
+     }
+
+
+     @Override
+     public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(Integer employeeCode, String productName) {
+          
           List<ProductListResponseDto> productList = null;
 
           try{
                productName = productName == null ? "" : productName;
-               procurementCategory = procurementCategory == null ? null : procurementCategory;
-               // description: 검색어가 품명 및 조달구분에 포함되어 있는 데이터 조회 //
-               List<ProductListResultSet> productEntities = productRepository.getProductList(productName, procurementCategory);
+               // description: 검색어가 품명에 포함되어 있는 데이터 조회 //
+               List<ProductListResultSet> productEntities = productRepository.getProductList(productName);
 
                // description: entity를 dto형태로 변환 //
                productList = ProductListResponseDto.copyList(productEntities);
@@ -431,50 +490,6 @@ public class SystemManageServiceImplement implements SystemManageService{
 
      }
 
-     @Override
-     public ResponseEntity<? super PutProductInfoResponseDto> putProductInfo(Integer employeeCode, PutProductInfoRequestDto dto) {
-
-          try{
-            // 존재하는 사원번호인지 확인 //
-            boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
-            if(!hasUser) return PutProductInfoResponseDto.noExistedUser();
-
-            // 권한 //
-            Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
-            if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutProductInfoResponseDto.noPermission();;
-
-            // entity 생성 //
-            ProductEntity productEntity = new ProductEntity(dto);
-            
-            // 데이터베이스에 저장 //
-            productRepository.save(productEntity);
-        } catch(Exception exception){
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
-
-        return PutProductInfoResponseDto.success();
-
-
-     }
-
-     @Override
-     public ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo(Integer employeeCode, Integer deleteProductCode) {
-          try {
-               // description: 존재하는 유저인지 확인 //
-               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
-               if (!hasUser) return DeleteProductInfoResponseDto.noExistedUser();
-               // description: 존재하는 품목코드인지 확인 //
-               ProductEntity productEntity = productRepository.findByProductCode(deleteProductCode);
-               if (productEntity == null) return DeleteProductInfoResponseDto.noExistedProduct();
-               // description: 품목 삭제 //
-               productRepository.delete(productEntity);
-
-          } catch (Exception exception) {
-               exception.printStackTrace();
-               return ResponseDto.databaseError();
-          }
-          return DeleteProductInfoResponseDto.success();
-     }
+     
      
 }

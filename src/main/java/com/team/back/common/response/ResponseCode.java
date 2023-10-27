@@ -43,6 +43,8 @@ public interface ResponseCode {
      String NO_EXISTED_SALES_PLAN_CODE = "NSPC";
      String EXISTED_SALES_PLAN_CODE = "ESPC";
      String NO_EXISTED_SALES_PLAN = "NSP";
+     String EXISTED_PROJECT_NAME = "ESPN";
+     
 
      String NO_EXISTED_ORDER_INFO = "NEOI";
      String NO_EXISTED_ORDER_CODE = "NEOC";

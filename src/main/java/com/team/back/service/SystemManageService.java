@@ -54,7 +54,7 @@ public interface SystemManageService {
      ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> getSystemEmpUserDefineInfo(Integer employeeCode, Integer userDefineCode);
 
      // API : 거래처 정보 불러오기 메서드 //
-     ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, Integer customerCode, String customerName);
+     ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, String customerName);
 
      // API : 거래처 정보 등록 메서드 //
      ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(Integer employeeCode, PutCustomerInfoRequestDto dto);
@@ -63,7 +63,7 @@ public interface SystemManageService {
      ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(Integer employeeCode, Integer deleteCustomerCode);
 
      // API : 품목 정보 불러오기 메서드 //
-     ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(Integer employeeCode, String productName, Integer procurementCategory);
+     ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(Integer employeeCode, String productName);
 
      // API : 품목 정보 등록 메서드 //
      ResponseEntity<? super PutProductInfoResponseDto> putProductInfo(Integer employeeCode, PutProductInfoRequestDto dto);

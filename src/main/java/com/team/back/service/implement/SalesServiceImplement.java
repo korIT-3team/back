@@ -1,21 +1,20 @@
 package com.team.back.service.implement;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.team.back.common.constants.DepartmentCode;
 import com.team.back.dto.request.sales.PutOrderInfoInfoRequestDto;
 import com.team.back.dto.request.sales.PutReleaseInfoRequestDto;
 import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
+import com.team.back.dto.response.sales.DeleteSalesPlanInfoResponseDto;
+import com.team.back.dto.response.sales.GetSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
-import com.team.back.dto.response.sales.SalesPlanListResponseDto;
-import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
 import com.team.back.entity.SalesPlanEntity;
-import com.team.back.entity.resultSets.SalesPlanListResultSet;
 import com.team.back.repository.SalesPlanRepository;
 import com.team.back.repository.UserRepository;
+import com.team.back.repository.UserViewRepository;
 import com.team.back.service.SalesService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,17 +25,30 @@ public class SalesServiceImplement implements SalesService {
 
   private final SalesPlanRepository salesPlanRepository;
   private final UserRepository userRepository;
+  private final UserViewRepository userViewRepository;
   
   @Override
   public ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo(Integer employeeCode, PutSalesPlanInfoRequestDto dto) {
 
+    int salesPlanCode = dto.getSalesPlanCodeInfo();
+    String projectName = dto.getSalesPlanProjectName();
+    
     try {
+
+      // description: 신규입력의 경우
+      if (salesPlanCode == 0) {
+        // description: projectName 중복 확인
+        boolean hasProjectName = salesPlanRepository.existsByProjectName(projectName);
+        if (hasProjectName) return PutSalesPlanInfoResponseDto.existedProjectName();
+      }
+
       // description: 존재하는 사원번호인지 확인 //
       boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
       if(!hasUser) return PutSalesPlanInfoResponseDto.noExistedUser();
 
       // description: 권한 //
-      if(employeeCode != 9999) return PutSalesPlanInfoResponseDto.noPermission();
+      Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+      if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutSalesPlanInfoResponseDto.noPermission();
 
       // description: entity 생성 //
       SalesPlanEntity salesPlanEntity = new SalesPlanEntity(dto);
@@ -53,13 +65,27 @@ public class SalesServiceImplement implements SalesService {
   }
 
   @Override
-  public ResponseEntity<?> deleteSalesPlanInfo(Integer employeeCode, Integer deleteSalesPlanCode) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'deleteSalesPlanInfo'");
+  public ResponseEntity<? super DeleteSalesPlanInfoResponseDto> deleteSalesPlanInfo(Integer employeeCode, Integer deleteSalesPlanCode) {
+    
+    try {
+      // description: 존재하는 유저인지 확인 //
+      boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+      if (!hasUser) return DeleteSalesPlanInfoResponseDto.noExistedUser();
+      // description: 존재하는 salesPlanCode인지 확인 //
+      
+
+    } catch (Exception exception) {
+      exception.printStackTrace();
+      return ResponseDto.databaseError();
+    }
+
+    return DeleteSalesPlanInfoResponseDto.success();
+
   }
 
   @Override
-  public ResponseEntity<?> getSalesPlanInfo(Integer employeeCode, Integer salesPlanCode, String projectName) {
+  public ResponseEntity<? super GetSalesPlanInfoResponseDto> getSalesPlanInfo(Integer employeeCode,
+      Integer salesPlanCode, String projectName, String planDate) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'getSalesPlanInfo'");
   }

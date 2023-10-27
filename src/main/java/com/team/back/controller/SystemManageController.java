@@ -151,39 +151,29 @@ public class SystemManageController {
           return response;
      }
 
-
-     // API: 거래처 정보 불러오기 //
-     @GetMapping(value={"/customer-info/{customerCode}/{customerName}", "/customer-info"})
-     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(
-          @AuthenticationPrincipal Integer employeeCode,
-          @PathVariable(value="customerCode", required=false) Integer customerCode,
-          @PathVariable(value="customerName", required=false) String customerName
-     ) {
-          ResponseEntity<? super GetCustomerInfoResponseDto> response = systemManageService.getCustomerInfo(employeeCode, customerCode, customerName);
-          return response;
-     }
-
-     // API : 거래처 정보 삭제 메서드 //
+      // API : 거래처 정보 삭제 메서드 //
      @DeleteMapping("/customer-info/{customerCode}")
      public ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(
           @AuthenticationPrincipal Integer employeeCode,
-          @PathVariable(value="customerCode", required = false) Integer customerCode
+          @PathVariable(value="customerCode", required = false) Integer deleteCustomerCode
      ) {
-          ResponseEntity<? super DeleteCustomerInfoResponseDto> responese = systemManageService.deleteCustomerInfo(employeeCode, customerCode);
+          ResponseEntity<? super DeleteCustomerInfoResponseDto> responese = systemManageService.deleteCustomerInfo(employeeCode, deleteCustomerCode);
           return responese;
      }
 
-     // API : product 정보 불러오기 메서드 //
-     @GetMapping(value={"/product-info/{productName}/{procurementCategory}", "/product-info"})
-     public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(
+
+     // API: 검색 거래처 정보 불러오기 //
+     @GetMapping(value={"/customer-info/{customerName}", "/customer-info"})
+     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(
           @AuthenticationPrincipal Integer employeeCode,
-          @PathVariable(value="productName", required=false) String productName,
-          @PathVariable(value="procurementCategory", required=false) Integer procurementCategory
+          @PathVariable(value="customerName", required=false) String customerName
      ) {
-          ResponseEntity<? super GetProductInfoResponseDto> response = systemManageService.getProductInfo(employeeCode, productName, procurementCategory);
+          ResponseEntity<? super GetCustomerInfoResponseDto> response = systemManageService.getCustomerInfo(employeeCode, customerName);
           return response;
      }
-     
+
+    
+
      // API : product 정보 등록 메서드 //
      @PutMapping("/product-info")
      public ResponseEntity<? super PutProductInfoResponseDto> putProductInfo (
@@ -193,7 +183,7 @@ public class SystemManageController {
           ResponseEntity<? super PutProductInfoResponseDto> response = systemManageService.putProductInfo(employeeCode, requestBody);
           return response;
      }
-
+     
      // API : product 정보 삭제 메서드 //
      @DeleteMapping("/product-info/{productCode}")
      public ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo (
@@ -203,5 +193,17 @@ public class SystemManageController {
           ResponseEntity<? super DeleteProductInfoResponseDto> response = systemManageService.deleteProductInfo(employeeCode, deleteProductCode);
           return response;
      }
+
+     // API : 검색 product 정보 불러오기 메서드 //
+     @GetMapping(value={"/product-info/{productName}", "/product-info"})
+     public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(
+          @AuthenticationPrincipal Integer employeeCode,
+          @PathVariable(value="productName", required=false) String productName
+     ) {
+          ResponseEntity<? super GetProductInfoResponseDto> response = systemManageService.getProductInfo(employeeCode, productName);
+          return response;
+     }
+     
+
      
 }
