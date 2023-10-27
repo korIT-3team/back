@@ -30,45 +30,45 @@ public interface SystemManageService {
      ResponseEntity<? super GetCompanyInfoResponseDto> getCompanyInfo();
 
      // API : 회사 정보 등록 메서드 //
-     ResponseEntity<? super PutCompanyInfoResponseDto> putCompanyInfo(Integer employeeCode, PutCompanyInfoRequestDto dto);
+     ResponseEntity<? super PutCompanyInfoResponseDto> putCompanyInfo(String employeeCode, PutCompanyInfoRequestDto dto);
 
      // API : 부서 정보 등록 메서드 //
-     ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(Integer employeeCode, PutDepartmentInfoRequestDto dto);
+     ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(String employeeCode, PutDepartmentInfoRequestDto dto);
 
      // API : 부서 정보 삭제 메서드 //
-     ResponseEntity<? super DeleteDepartmentInfoResponseDto> deleteDepartmentInfo(Integer employeeCode, Integer deleteDepartmentCode);
+     ResponseEntity<? super DeleteDepartmentInfoResponseDto> deleteDepartmentInfo(String employeeCode, Integer deleteDepartmentCode);
      
      // API : 부서 정보 불러오기 //
-     ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(Integer employeeCode, String departmentName);
+     ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(String employeeCode, String departmentName);
 
      // API : 사원 정보 등록 메서드 //
-     ResponseEntity<? super PutSystemEmployeeInfoResponseDto> putSystemEmployeeInfo(Integer employeeCode, PutSystemEmployeeInfoRequestDto dto);
+     ResponseEntity<? super PutSystemEmployeeInfoResponseDto> putSystemEmployeeInfo(String employeeCode, PutSystemEmployeeInfoRequestDto dto);
 
      // API : 사원 정보 삭제 메서드 //
-     ResponseEntity<? super DeleteSystemEmployeeInfoResponseDto> deleteSystemEmployeeInfo(Integer employeeCode, Integer deleteSystemEmployeeCode);
+     ResponseEntity<? super DeleteSystemEmployeeInfoResponseDto> deleteSystemEmployeeInfo(String employeeCode, Integer deleteSystemEmployeeCode);
   
      // API : 사원 정보 불러오기 //
-     ResponseEntity<? super GetSystemEmployeeInfoResponseDto> getSystemEmployeeInfo(Integer employeeCode, String systemEmployeeName);
+     ResponseEntity<? super GetSystemEmployeeInfoResponseDto> getSystemEmployeeInfo(String employeeCode, String systemEmployeeName);
 
      // API : 사원 - 코드도움 불러오기 //
-     ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> getSystemEmpUserDefineInfo(Integer employeeCode, Integer userDefineCode);
+     ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> getSystemEmpUserDefineInfo(String employeeCode, Integer userDefineCode);
 
      // API : 거래처 정보 불러오기 메서드 //
-     ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, String customerName);
+     ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(String employeeCode, String customerName);
 
      // API : 거래처 정보 등록 메서드 //
-     ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(Integer employeeCode, PutCustomerInfoRequestDto dto);
+     ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(String employeeCode, PutCustomerInfoRequestDto dto);
 
      // API : 거래처 정보 삭제 메서드 //
-     ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(Integer employeeCode, Integer deleteCustomerCode);
+     ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(String employeeCode, Integer deleteCustomerCode);
 
      // API : 품목 정보 불러오기 메서드 //
-     ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(Integer employeeCode, String productName);
+     ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(String employeeCode, String productName);
 
      // API : 품목 정보 등록 메서드 //
-     ResponseEntity<? super PutProductInfoResponseDto> putProductInfo(Integer employeeCode, PutProductInfoRequestDto dto);
+     ResponseEntity<? super PutProductInfoResponseDto> putProductInfo(String employeeCode, PutProductInfoRequestDto dto);
 
      // API : 품목 정보 삭제 메서드 //
-     ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo(Integer employeeCode, Integer deleteProductCode);
+     ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo(String employeeCode, Integer deleteProductCode);
 
 }

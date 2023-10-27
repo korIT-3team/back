@@ -28,7 +28,9 @@ public class SalesServiceImplement implements SalesService {
   private final UserViewRepository userViewRepository;
   
   @Override
-  public ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo(Integer employeeCode, PutSalesPlanInfoRequestDto dto) {
+  public ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo(String employeeCode, PutSalesPlanInfoRequestDto dto) {
+    
+    Integer emCode = Integer.parseInt(employeeCode);
 
     int salesPlanCode = dto.getSalesPlanCodeInfo();
     String projectName = dto.getSalesPlanProjectName();
@@ -43,11 +45,11 @@ public class SalesServiceImplement implements SalesService {
       }
 
       // description: 존재하는 사원번호인지 확인 //
-      boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+      boolean hasUser = userRepository.existsByEmployeeCode(emCode);
       if(!hasUser) return PutSalesPlanInfoResponseDto.noExistedUser();
 
       // description: 권한 //
-      Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+      Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
       if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutSalesPlanInfoResponseDto.noPermission();
 
       // description: entity 생성 //

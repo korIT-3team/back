@@ -88,36 +88,37 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super PutCompanyInfoResponseDto> putCompanyInfo(Integer employeeCode, PutCompanyInfoRequestDto dto) {
+     public ResponseEntity<? super PutCompanyInfoResponseDto> putCompanyInfo(String employeeCode, PutCompanyInfoRequestDto dto) {
+          
+          Integer emCode = Integer.parseInt(employeeCode);
+          try{
+               // description: 존재하는 사원번호인지 확인 //
+               boolean hasUser = userRepository.existsByEmployeeCode(emCode);
+               if(!hasUser) return PutCompanyInfoResponseDto.noExistedUser();
+               // description: 권한 //
+               Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+               if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutCompanyInfoResponseDto.noPermission();
 
-        try{
-            // description: 존재하는 사원번호인지 확인 //
-            boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
-            if(!hasUser) return PutCompanyInfoResponseDto.noExistedUser();
-            // description: 권한 //
-            Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
-            if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutCompanyInfoResponseDto.noPermission();
+               // description: entity 생성 //
+               CompanyEntity companyEntity = new CompanyEntity(dto);
+               
+               // description: 데이터베이스에 저장 //
+               companyRepository.save(companyEntity);
+          } catch(Exception exception){
+               exception.printStackTrace();
+               return ResponseDto.databaseError();
+          }
 
-            // description: entity 생성 //
-            CompanyEntity companyEntity = new CompanyEntity(dto);
-            
-            // description: 데이터베이스에 저장 //
-            companyRepository.save(companyEntity);
-        } catch(Exception exception){
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
-
-        return PutCompanyInfoResponseDto.success();
+          return PutCompanyInfoResponseDto.success();
      }
 
      @Override
-     public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(Integer employeeCode, PutDepartmentInfoRequestDto dto) {
+     public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo(String employeeCode, PutDepartmentInfoRequestDto dto) {
           int departmentCode = dto.getDepartmentCodeInfo();
           String departmentName = dto.getDepartmentNameInfo();
           String departmentTelNumber = dto.getDepartmentTelNumber();
           String departmentFax = dto.getDepartmentFax();
-
+          Integer emCode = Integer.parseInt(employeeCode);
           try{
                // description: 신규입력의 경우
                if (departmentCode == 0) {
@@ -145,11 +146,11 @@ public class SystemManageServiceImplement implements SystemManageService{
                }
 
                // description: 존재하는 사원번호인지 확인 //
-               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               boolean hasUser = userRepository.existsByEmployeeCode(emCode);
                if(!hasUser) return PutDepartmentInfoResponseDto.noExistedUser();
 
                // description:  권한 //
-               Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+               Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
 
                // description:  Entity 생성 //
@@ -168,10 +169,11 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super DeleteDepartmentInfoResponseDto> deleteDepartmentInfo(Integer employeeCode, Integer departmentCode) {
+     public ResponseEntity<? super DeleteDepartmentInfoResponseDto> deleteDepartmentInfo(String employeeCode, Integer departmentCode) {
+          Integer emCode = Integer.parseInt(employeeCode);
           try {
                // description: 존재하는 유저인지 확인 //
-               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               boolean hasUser = userRepository.existsByEmployeeCode(emCode);
                if (!hasUser) return DeleteDepartmentInfoResponseDto.noExistedUser();
                // description: 존재하는 부서코드인지 확인 //
                DepartmentEntity departmentEntity = departmentRepository.findByDepartmentCode(departmentCode);
@@ -187,7 +189,7 @@ public class SystemManageServiceImplement implements SystemManageService{
 
 
      @Override
-     public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(Integer employeeCode, String departmentName) {
+     public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(String employeeCode, String departmentName) {
           List<DepartmentListResponseDto> departmentList = null;
           try{
 
@@ -206,11 +208,12 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super PutSystemEmployeeInfoResponseDto> putSystemEmployeeInfo(Integer employeeCode, PutSystemEmployeeInfoRequestDto dto) {
+     public ResponseEntity<? super PutSystemEmployeeInfoResponseDto> putSystemEmployeeInfo(String employeeCode, PutSystemEmployeeInfoRequestDto dto) {
           int systemEmployeeCode = dto.getSysEmployeeCode();
           String systemEmployeeName = dto.getEmployeeName();
           String systemEmployeeRegistrationNumber = dto.getRegistrationNumber();
-          String password;
+          String password = dto.getPassword();
+          Integer emCode = Integer.parseInt(employeeCode);
 
           try{
                // description: 신규입력의 경우
@@ -236,21 +239,21 @@ public class SystemManageServiceImplement implements SystemManageService{
                }
 
                // description: 존재하는 사원번호인지 확인 //
-               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               boolean hasUser = userRepository.existsByEmployeeCode(emCode);
                if(!hasUser) return PutDepartmentInfoResponseDto.noExistedUser();
 
                // description:  권한 //
-               Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+               Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
 
                // description: dto의 password 변경 //
                dto.setPassword(password);
 
                // description:  Entity 생성 //
-               // SystemEmployeeEntity systemEmployeeEntity = new SystemEmployeeEntity(dto);
+               SystemEmployeeEntity systemEmployeeEntity = new SystemEmployeeEntity(dto);
                
                // description:  DB에 저장 //
-               // systemEmployeeRepository.save(systemEmployeeEntity);
+               systemEmployeeRepository.save(systemEmployeeEntity);
 
           } catch(Exception exception){
                // description: 데이터베이스 에러 //
@@ -262,10 +265,11 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super DeleteSystemEmployeeInfoResponseDto> deleteSystemEmployeeInfo(Integer employeeCode, Integer deleteSystemEmployeeCode) {
+     public ResponseEntity<? super DeleteSystemEmployeeInfoResponseDto> deleteSystemEmployeeInfo(String employeeCode, Integer deleteSystemEmployeeCode) {
+          Integer emCode = Integer.parseInt(employeeCode);
           try {
                // description: 존재하는 유저인지 확인 //
-               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               boolean hasUser = userRepository.existsByEmployeeCode(emCode);
                if (!hasUser) return DeleteSystemEmployeeInfoResponseDto.noExistedUser();
                // description: 존재하는 사원코드인지 확인 //
                SystemEmployeeEntity systemEmployeeEntity = systemEmployeeRepository.findByEmployeeCode(deleteSystemEmployeeCode);
@@ -280,7 +284,7 @@ public class SystemManageServiceImplement implements SystemManageService{
      }     
 
      @Override
-     public ResponseEntity<? super GetSystemEmployeeInfoResponseDto> getSystemEmployeeInfo(Integer employeeCode, String systemEmployeeName) {
+     public ResponseEntity<? super GetSystemEmployeeInfoResponseDto> getSystemEmployeeInfo(String employeeCode, String systemEmployeeName) {
           List<SystemEmployeeListResponseDto> systemEmployeeList = null;
 
           try {
@@ -304,7 +308,7 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> getSystemEmpUserDefineInfo(Integer employeeCode, Integer userDefineCode) {
+     public ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> getSystemEmpUserDefineInfo(String employeeCode, Integer userDefineCode) {
           List<SystemEmpUserDefineListResponseDto> systemEmpUserDefineList = null;
           try {
                // description: 사용자정의코드를 가진 user_define_detail 데이터 조회
@@ -320,8 +324,8 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
      
      @Override
-     public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(Integer employeeCode, PutCustomerInfoRequestDto dto) {
-
+     public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(String employeeCode, PutCustomerInfoRequestDto dto) {
+          Integer emCode = Integer.parseInt(employeeCode);
           int customerCode = dto.getCustomerCodeInfo();
           String customerName = dto.getCustomerNameInfo();
           String customerBusinessNumber = dto.getCustomerBusinessNumber();
@@ -347,12 +351,12 @@ public class SystemManageServiceImplement implements SystemManageService{
                }
             
                // description: 존재하는 사원번호인지 확인 //
-               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               boolean hasUser = userRepository.existsByEmployeeCode(emCode);
                if(!hasUser) return PutCustomerInfoResponseDto.noExistedUser();
 
                // description:  권한 //
-               Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
-               if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
+               Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+               if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutCustomerInfoResponseDto.noPermission();
 
                // description:  Entity 생성 //
                CustomerEntity customerEntity = new CustomerEntity(dto);
@@ -371,10 +375,11 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(Integer employeeCode, Integer customerCode) {
+     public ResponseEntity<? super DeleteCustomerInfoResponseDto> deleteCustomerInfo(String employeeCode, Integer customerCode) {
+          Integer emCode = Integer.parseInt(employeeCode);
           try {
                // description: 존재하는 유저인지 확인 //
-               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               boolean hasUser = userRepository.existsByEmployeeCode(emCode);
                if (!hasUser) return DeleteCustomerInfoResponseDto.noExistedUser();
                // description: 존재하는 거래처코드인지 확인 //
                CustomerEntity customerEntity = customerRepository.findByCustomerCode(customerCode);
@@ -389,7 +394,7 @@ public class SystemManageServiceImplement implements SystemManageService{
      } 
 
      @Override
-     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(Integer employeeCode, String customerName) {
+     public ResponseEntity<? super GetCustomerInfoResponseDto> getCustomerInfo(String employeeCode, String customerName) {
           List<CustomerListResponseDto> customerList = null;
 
           try{
@@ -409,10 +414,11 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super PutProductInfoResponseDto> putProductInfo(Integer employeeCode, PutProductInfoRequestDto dto) {
+     public ResponseEntity<? super PutProductInfoResponseDto> putProductInfo(String employeeCode, PutProductInfoRequestDto dto) {
 
           int productCode = dto.getProductCodeInfo();
           String productName = dto.getProductName();
+          Integer emCode = Integer.parseInt(employeeCode);
 
           try {
                // description: 신규입력의 경우 //
@@ -423,11 +429,11 @@ public class SystemManageServiceImplement implements SystemManageService{
                }
 
                // description: 존재하는 사원번호인지 확인 //
-               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               boolean hasUser = userRepository.existsByEmployeeCode(emCode);
                if(!hasUser) return PutProductInfoResponseDto.noExistedUser();
 
                // description:  권한 //
-               Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+               Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
                if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutProductInfoResponseDto.noPermission();;
 
                // description:  Entity 생성 //
@@ -447,11 +453,11 @@ public class SystemManageServiceImplement implements SystemManageService{
      }
 
      @Override
-     public ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo(Integer employeeCode, Integer productCode) {
-          
+     public ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo(String employeeCode, Integer productCode) {
+          Integer emCode = Integer.parseInt(employeeCode);
           try {
                // description: 존재하는 유저인지 확인 //
-               boolean hasUser = userRepository.existsByEmployeeCode(employeeCode);
+               boolean hasUser = userRepository.existsByEmployeeCode(emCode);
                if (!hasUser) return DeleteProductInfoResponseDto.noExistedUser();
                
                // description: 존재하는 품목코드인지 확인 //
@@ -470,7 +476,7 @@ public class SystemManageServiceImplement implements SystemManageService{
 
 
      @Override
-     public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(Integer employeeCode, String productName) {
+     public ResponseEntity<? super GetProductInfoResponseDto> getProductInfo(String employeeCode, String productName) {
           
           List<ProductListResponseDto> productList = null;
 
@@ -489,7 +495,5 @@ public class SystemManageServiceImplement implements SystemManageService{
           return GetProductInfoResponseDto.success(productList);   
 
      }
-
-     
      
 }

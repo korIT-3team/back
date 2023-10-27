@@ -30,7 +30,7 @@ public class SalesController {
   // API: salesPlan 정보 등록 메서드 //
   @PutMapping("/sales-plan")
   public ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo (
-    @AuthenticationPrincipal Integer employeeCode,
+    @AuthenticationPrincipal String employeeCode,
     @RequestBody @Valid PutSalesPlanInfoRequestDto requestBody
   ) {
     ResponseEntity<? super PutSalesPlanInfoResponseDto> response = salesService.putSalesPlanInfo(employeeCode, requestBody);
@@ -58,6 +58,5 @@ public class SalesController {
     ResponseEntity<? super GetSalesPlanInfoResponseDto> response = salesService.getSalesPlanInfo(employeeCode, salesPlanCode, projectName, planDate);
     return response;
   }
-
 
 }

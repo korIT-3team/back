@@ -54,7 +54,7 @@ public class SystemManageController {
      // API : 회사 정보 등록 메서드 //
      @PutMapping("/company-info")
      public ResponseEntity<? super PutCompanyInfoResponseDto> putCompanyInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @RequestBody @Valid PutCompanyInfoRequestDto requestBody
      ) {
           ResponseEntity<? super PutCompanyInfoResponseDto> response = systemManageService.putCompanyInfo(employeeCode, requestBody);
@@ -64,7 +64,7 @@ public class SystemManageController {
      // API : 부서 정보 등록 메서드 //
      @PutMapping("/dept-info")
      public ResponseEntity<? super PutDepartmentInfoResponseDto> putDepartmentInfo (
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @RequestBody @Valid PutDepartmentInfoRequestDto requestBody
      ) {
           ResponseEntity<? super PutDepartmentInfoResponseDto> response = systemManageService.putDepartmentInfo(employeeCode, requestBody);
@@ -74,7 +74,7 @@ public class SystemManageController {
      // API : 부서 정보 삭제 메서드 //
      @DeleteMapping("/dept-info/{departmentCode}")
      public ResponseEntity<? super DeleteDepartmentInfoResponseDto> deleteDepartmentInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @PathVariable(value="departmentCode", required = false) Integer deleteDepartmentCode
      ) {
           ResponseEntity<? super DeleteDepartmentInfoResponseDto> responese = systemManageService.deleteDepartmentInfo(employeeCode, deleteDepartmentCode);
@@ -84,7 +84,7 @@ public class SystemManageController {
      // API : 검색 부서 정보 불러오기 메서드 //
      @GetMapping(value={"/dept-info/{departmentName}", "/dept-info"})
      public ResponseEntity<? super GetDepartmentInfoResponseDto> getDepartmentInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @PathVariable(value="departmentName", required=false) String departmentName
      ) {
           ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo(employeeCode, departmentName);
@@ -94,7 +94,7 @@ public class SystemManageController {
      // API : 사원 정보 등록 메서드 //
      @PutMapping("/employee-info")
      public ResponseEntity<? super PutSystemEmployeeInfoResponseDto> putDepartmentInfo (
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @RequestBody @Valid PutSystemEmployeeInfoRequestDto requestBody
      ) {
           ResponseEntity<? super PutSystemEmployeeInfoResponseDto> response = systemManageService.putSystemEmployeeInfo(employeeCode, requestBody);
@@ -104,7 +104,7 @@ public class SystemManageController {
      // API : 사원 정보 삭제 메서드 //
      @DeleteMapping("/employee-info/{systemEmployeeCode}")
      public ResponseEntity<? super DeleteSystemEmployeeInfoResponseDto> deleteSystemEmployeeInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @PathVariable(value="systemEmployeeCode", required = false) Integer deleteSystemEmployeeCode
      ) {
           ResponseEntity<? super DeleteSystemEmployeeInfoResponseDto> responese = systemManageService.deleteSystemEmployeeInfo(employeeCode, deleteSystemEmployeeCode);
@@ -114,7 +114,7 @@ public class SystemManageController {
      // API : 검색 사원 정보 불러오기 메서드 //
      @GetMapping(value ={"/employee-info/{systemEmployeeName}", "/employee-info"} )
      public ResponseEntity<? super GetSystemEmployeeInfoResponseDto> getSystemEmployeeInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @PathVariable(value="systemEmployeeName", required=false) String systemEmployeeName
      ) {
           ResponseEntity<? super GetSystemEmployeeInfoResponseDto> response = systemManageService.getSystemEmployeeInfo(employeeCode, systemEmployeeName);
@@ -124,7 +124,7 @@ public class SystemManageController {
      // API : 사원 - 전체 부서정보 불러오기 메서드
      @GetMapping(value={"/employee-info/department"})
      public ResponseEntity<? super GetDepartmentInfoResponseDto> getSystemEmpDepartmentInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @PathVariable(value="", required=false) String departmentName
      ) {
           ResponseEntity<? super GetDepartmentInfoResponseDto> response = systemManageService.getDepartmentInfo(employeeCode, departmentName);
@@ -134,7 +134,7 @@ public class SystemManageController {
      // API : 사원 - 사용자정의 정보 불러오기 메서드
      @GetMapping(value={"/employee-info/user-define/{userDefineCode}"})
      public ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> getSystemEmpUserDefineInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @PathVariable(value="userDefineCode", required = false) Integer userDefineCode
      ) {
           ResponseEntity<? super GetSystemEmpUserDefineInfoResponseDto> response = systemManageService.getSystemEmpUserDefineInfo(employeeCode, userDefineCode);
@@ -144,7 +144,7 @@ public class SystemManageController {
      // API : 거래처 정보 등록 메서드 //
      @PutMapping("/customer-info")
      public ResponseEntity<? super PutCustomerInfoResponseDto> putCustomerInfo(
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @RequestBody @Valid PutCustomerInfoRequestDto requestBody
      ) {
           ResponseEntity<? super PutCustomerInfoResponseDto> response = systemManageService.putCustomerInfo(employeeCode, requestBody);
@@ -177,7 +177,7 @@ public class SystemManageController {
      // API : product 정보 등록 메서드 //
      @PutMapping("/product-info")
      public ResponseEntity<? super PutProductInfoResponseDto> putProductInfo (
-           @AuthenticationPrincipal Integer employeeCode,
+           @AuthenticationPrincipal String employeeCode,
            @RequestBody @Valid PutProductInfoRequestDto requestBody
      ) {
           ResponseEntity<? super PutProductInfoResponseDto> response = systemManageService.putProductInfo(employeeCode, requestBody);
@@ -187,7 +187,7 @@ public class SystemManageController {
      // API : product 정보 삭제 메서드 //
      @DeleteMapping("/product-info/{productCode}")
      public ResponseEntity<? super DeleteProductInfoResponseDto> deleteProductInfo (
-          @AuthenticationPrincipal Integer employeeCode,
+          @AuthenticationPrincipal String employeeCode,
           @PathVariable(value="productCode", required = false) Integer deleteProductCode
      ) {
           ResponseEntity<? super DeleteProductInfoResponseDto> response = systemManageService.deleteProductInfo(employeeCode, deleteProductCode);
