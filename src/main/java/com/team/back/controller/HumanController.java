@@ -16,6 +16,7 @@ import com.team.back.dto.request.human.PutHumanDetailInfoRequestDto;
 import com.team.back.dto.response.human.GetEmploymentTypeListResponseDto;
 import com.team.back.dto.response.human.GetHumanDetailInfoResponseDto;
 import com.team.back.dto.response.human.GetHumanListResponseDto;
+import com.team.back.dto.response.human.GetIncentiveListResponseDto;
 import com.team.back.dto.response.human.PutHumanDetailInfoResponseDto;
 import com.team.back.service.HumanService;
 
@@ -66,6 +67,24 @@ public class HumanController {
   ) {
        ResponseEntity<? super PutHumanDetailInfoResponseDto> response = humanService.putHumanDetailInfo(employeeCode, requestBody);
        return response;
+  }
+
+  //! 급/상여정보등록
+  @GetMapping("/incentive/{incentiveEmployeeCode}/{incentiveCategory}")
+  public ResponseEntity<? super GetIncentiveListResponseDto> getIncentiveList (
+    @AuthenticationPrincipal String employeeCode,
+    @PathVariable(value="incentiveEmployeeCode", required = false) String incentiveEmployeeCode,
+    @PathVariable(value="incentiveCategory", required = false) String incentiveCategory
+  ) {
+    ResponseEntity<? super GetIncentiveListResponseDto> response = humanService.getIncentiveList(employeeCode, incentiveEmployeeCode, incentiveCategory);
+    return response;
+  }
+
+  @GetMapping("/incentive/employee")
+  public ResponseEntity<? super GetHumanListResponseDto> getIncentiveEmployeeList (
+  ) {
+    ResponseEntity<? super GetHumanListResponseDto> response = humanService.getIncentiveEmployeeList();
+    return response;
   }
   
 }
