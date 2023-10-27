@@ -41,16 +41,17 @@ public class HumanServiceImplement implements HumanService {
 
 
      @Override
-     public ResponseEntity<? super PutHumanDetailInfoResponseDto> putHumanDetailInfo(Integer employeeCode, PutHumanDetailInfoRequestDto dto) {
+     public ResponseEntity<? super PutHumanDetailInfoResponseDto> putHumanDetailInfo(String employeeCode, PutHumanDetailInfoRequestDto dto) {
         
       Integer humanEmployeeCode = dto.getHumanEmployeeCode();
+      Integer emCode = Integer.parseInt(employeeCode);
 
       try{
           // description: 존재하는 사원번호인지 확인 //
           SystemEmployeeEntity humanEntity = userRepository.findByEmployeeCode(humanEmployeeCode);
           if (humanEntity == null) return PutHumanDetailInfoResponseDto.noExistedUser();
           // description: 권한 //
-          Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+          Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
           if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutHumanDetailInfoResponseDto.noPermission();
           // description: 수정 //
           humanEntity.patch(dto);
@@ -66,7 +67,7 @@ public class HumanServiceImplement implements HumanService {
 
 
     @Override
-    public ResponseEntity<? super GetHumanListResponseDto> getHumanList(Integer employeeCode, Integer departmentCode, Integer humanEmployeeCode, Integer employmentType) {
+    public ResponseEntity<? super GetHumanListResponseDto> getHumanList(String employeeCode, Integer departmentCode, Integer humanEmployeeCode, Integer employmentType) {
       List<HumanListResponseDto> humanList = null;
 
       // int -> string

@@ -37,7 +37,7 @@ public class SalesServiceImplement implements SalesService {
       if(!hasUser) return PutSalesPlanInfoResponseDto.noExistedUser();
 
       // description: 권한 //
-      Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+      Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
       if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutSalesPlanInfoResponseDto.noPermission();
 
       // description: entity 생성 //
