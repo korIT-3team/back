@@ -15,11 +15,15 @@ public class SalesPlanListResponseDto {
   private int no;
   private int salesPlanCode;
   private String projectName;
-  private int employeeCode;
   private int departmentCode;
+  private String departmentName;
+  private int employeeCode;
+  private String employeeName;
   private int companyCode;
   private String planDate;
   private int productCode;
+  private String productName;
+  private String unit;
   private int planQuantity;
   private int exchangeRateCode;
   private double exchangeRate;

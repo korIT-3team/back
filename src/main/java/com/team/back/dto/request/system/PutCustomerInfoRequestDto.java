@@ -19,7 +19,7 @@ public class PutCustomerInfoRequestDto {
   @NotNull
   private Integer customerCompanyCode = 1;
 
-  @NotNull
+  @NotBlank
   private String customerNameInfo;
 
   @NotBlank

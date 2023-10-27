@@ -49,16 +49,17 @@ public class HumanServiceImplement implements HumanService {
 
 
      @Override
-     public ResponseEntity<? super PutHumanDetailInfoResponseDto> putHumanDetailInfo(Integer employeeCode, PutHumanDetailInfoRequestDto dto) {
+     public ResponseEntity<? super PutHumanDetailInfoResponseDto> putHumanDetailInfo(String employeeCode, PutHumanDetailInfoRequestDto dto) {
         
       Integer humanEmployeeCode = dto.getHumanEmployeeCode();
+      Integer emCode = Integer.parseInt(employeeCode);
 
       try{
           // description: 존재하는 사원번호인지 확인 //
           SystemEmployeeEntity humanEntity = userRepository.findByEmployeeCode(humanEmployeeCode);
           if (humanEntity == null) return PutHumanDetailInfoResponseDto.noExistedUser();
           // description: 권한 //
-          Integer dpCode = userViewRepository.getUserDepartMentCode(employeeCode);
+          Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
           if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutHumanDetailInfoResponseDto.noPermission();
           // description: 수정 //
           humanEntity.patch(dto);
@@ -74,7 +75,7 @@ public class HumanServiceImplement implements HumanService {
 
 
     @Override
-    public ResponseEntity<? super GetHumanListResponseDto> getHumanList(Integer employeeCode, Integer departmentCode, Integer humanEmployeeCode, Integer employmentType) {
+    public ResponseEntity<? super GetHumanListResponseDto> getHumanList(String employeeCode, Integer departmentCode, Integer humanEmployeeCode, Integer employmentType) {
       List<HumanListResponseDto> humanList = null;
 
       // int -> string
@@ -135,7 +136,7 @@ public class HumanServiceImplement implements HumanService {
 
 
     @Override
-    public ResponseEntity<? super GetIncentiveListResponseDto> getIncentiveList(String employeeCode ,String incentiveEmployeeCode, String incentiveCategory) {
+    public ResponseEntity<? super GetIncentiveListResponseDto> getIncentiveList(String employeeCode ,Integer incentiveEmployeeCode, Integer incentiveCategory) {
 
       Integer emCode = Integer.parseInt(employeeCode);
       List<IncentiveListResponseDto> incentiveList = null;
@@ -146,11 +147,11 @@ public class HumanServiceImplement implements HumanService {
         if(!hasUser) return PutDepartmentInfoResponseDto.noExistedUser();
 
         // description:  권한 //
-        Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+        Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
         if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
 
         // description: 조회조건에 맞는 데이터 조회 //
-        List<IncentiveListResultSet> incentiveEntities = incentiveRepository.getIncentiveList(incentiveEmployeeCode, incentiveCategory);
+        List<IncentiveListResultSet> incentiveEntities = incentiveRepository.getIncentiveList(Integer.toString(incentiveEmployeeCode), Integer.toString(incentiveCategory));
 
         incentiveList = IncentiveListResponseDto.copyList(incentiveEntities);
 

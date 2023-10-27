@@ -33,7 +33,7 @@ public class HumanController {
   // API : 사원 리스트 불러오기 메서드 //
   @GetMapping(value={"/employee-info-detail/{departmentCode}/{employeeCode}/{employmentType}", "employee-info-detail"})
   public ResponseEntity<? super GetHumanListResponseDto> getHumanList(
-    @AuthenticationPrincipal Integer employeeCode,
+    @AuthenticationPrincipal String employeeCode,
     @PathVariable(value="departmentCode", required = false) Integer departmentCode,
     @PathVariable(value="employeeCode", required = false) Integer humanEmployeeCode,
     @PathVariable(value="employmentType", required = false)  Integer employmentType
@@ -62,7 +62,7 @@ public class HumanController {
   // API : 사원Detail정보 등록 메서드 //
   @PutMapping("/employee-info-detail")
   public ResponseEntity<? super PutHumanDetailInfoResponseDto> putHumanDetailInfo (
-       @AuthenticationPrincipal Integer employeeCode,
+       @AuthenticationPrincipal String employeeCode,
        @RequestBody @Valid PutHumanDetailInfoRequestDto requestBody
   ) {
        ResponseEntity<? super PutHumanDetailInfoResponseDto> response = humanService.putHumanDetailInfo(employeeCode, requestBody);
@@ -73,8 +73,8 @@ public class HumanController {
   @GetMapping("/incentive/{incentiveEmployeeCode}/{incentiveCategory}")
   public ResponseEntity<? super GetIncentiveListResponseDto> getIncentiveList (
     @AuthenticationPrincipal String employeeCode,
-    @PathVariable(value="incentiveEmployeeCode", required = false) String incentiveEmployeeCode,
-    @PathVariable(value="incentiveCategory", required = false) String incentiveCategory
+    @PathVariable(value="incentiveEmployeeCode", required = false) Integer incentiveEmployeeCode,
+    @PathVariable(value="incentiveCategory", required = false) Integer incentiveCategory
   ) {
     ResponseEntity<? super GetIncentiveListResponseDto> response = humanService.getIncentiveList(employeeCode, incentiveEmployeeCode, incentiveCategory);
     return response;

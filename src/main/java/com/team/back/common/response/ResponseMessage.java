@@ -42,7 +42,8 @@ public interface ResponseMessage {
      String NO_EXISTED_SALES_PLAN_CODE = "No Existed Sales Plan Code";
      String EXISTED_SALES_PLAN_CODE = "Existed Sales Plan Code";
      String NO_EXISTED_SALE_PLAN = "No Existed Sales Plan";
-     
+     String EXISTED_PROJECT_NAME = "Existed Project Name";
+
      String NO_EXISTED_ORDER_INFO = "No Existed Order Info";
      String NO_EXISTED_ORDER_CODE = "No Existed Order Code";
      String EXISTED_ORDER_CODE = "Existed Order Code";

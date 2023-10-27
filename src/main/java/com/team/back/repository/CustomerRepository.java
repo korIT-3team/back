@@ -32,9 +32,10 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
     "customer_address_detail AS customerAddressDetail, " +
     "customer_tel_number AS customerTelNumber " +
     "FROM customer AS C " +
+    "WHERE customer_name LIKE %?1% " +
     "ORDER BY customer_code ",
 
     nativeQuery=true
   )
-  List<CustomerListResultSet> getCustomerList(Integer customerCode, String customerName);
+  List<CustomerListResultSet> getCustomerList(String customerName);
 }

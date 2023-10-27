@@ -37,19 +37,19 @@ public class SalesPlanEntity {
 
   public SalesPlanEntity(PutSalesPlanInfoRequestDto dto) {
     this.salesPlanCode = dto.getSalesPlanCodeInfo();
-    this.projectName = dto.getProjectNameInfo();
-    this.employeeCode = dto.getEmployeeCodeInfo();
-    this.departmentCode = dto.getDepartmentCodeInfo();
-    this.companyCode = dto.getSalesPlanCompanyCode();
-    this.planDate = dto.getPlanDate();
-    this.productCode = dto.getProductCode();
-    this.productName = dto.getProductName();
-    this.planQuantity = dto.getPlanQuantity();
-    this.exchangeRateCode = dto.getExchangeRateCode();
-    this.exchangeRate = dto.getExchangeRate();
-    this.expectPrice = dto.getExpectPrice();
-    this.expectTotalPrice = dto.getExpectTotalPrice();
-    this.expectKoreanPrice = dto.getExpectKoreanPrice();
+    this.projectName = dto.getSalesPlanProjectName();
+    this.employeeCode = dto.getSalesPlanEmployeeCodeInfo();
+    this.departmentCode = dto.getSalesPlanDepartmentCodeInfo();
+    this.companyCode = dto.getSalesPlanCompanyCodeInfo();
+    this.planDate = dto.getSalesPlanDate();
+    this.productCode = dto.getSalesPlanProductCodeInfo();
+    this.productName = dto.getSalesPlanProductNameInfo();
+    this.planQuantity = dto.getSalesPlanQuantity();
+    this.exchangeRateCode = dto.getSalesPlanExchangeRateCode();
+    this.exchangeRate = dto.getSalesPlanExchangeRate();
+    this.expectPrice = dto.getSalesPlanExpectPrice();
+    this.expectTotalPrice = dto.getSalesPlanExpectTotalPrice();
+    this.expectKoreanPrice = dto.getSalesPlanExpectKoreanPrice();
   }
 
   

@@ -33,6 +33,12 @@ public class PutSalesPlanInfoResponseDto extends ResponseDto {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
   }
 
+  public static ResponseEntity<ResponseDto> existedProjectName() {
+    ResponseDto result = new ResponseDto(ResponseCode.EXISTED_PROJECT_NAME, ResponseMessage.EXISTED_PROJECT_NAME);
+    return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
+  }
+
+
   public static ResponseEntity<ResponseDto> existedSalesPlanCode() {
     ResponseDto result = new ResponseDto(ResponseCode.EXISTED_SALES_PLAN_CODE, ResponseMessage.EXISTED_SALES_PLAN_CODE);
     return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(result);
