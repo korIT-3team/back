@@ -25,8 +25,8 @@ public interface ResponseCode {
      String EXISTED_SYSTEM_EMPLOYEE_REGISTRATION_NUMBER = "ESER";
 
      String NO_EXISTED_USER_DEFINE_INFO = "NUD";
-
      String NO_EXISTED_HUMAN_INFO = "NH";
+     String NO_EXISTED_INCENTIVE_INFO = "NII";
 
      String NO_EXISTED_CUSTOMER_INFO = "NEC";
      String EXISTED_CUSTOMER_NAME = "ECN";
