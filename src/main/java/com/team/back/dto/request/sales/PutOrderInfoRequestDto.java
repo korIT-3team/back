@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PutOrderInfoInfoRequestDto {
+public class PutOrderInfoRequestDto {
 
   @NotNull
   private Integer orderCodeInfo;

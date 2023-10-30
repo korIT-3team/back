@@ -2,11 +2,12 @@ package com.team.back.service;
 
 import org.springframework.http.ResponseEntity;
 
-import com.team.back.dto.request.sales.PutOrderInfoInfoRequestDto;
+import com.team.back.dto.request.sales.PutOrderInfoRequestDto;
 import com.team.back.dto.request.sales.PutReleaseInfoRequestDto;
 import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
 import com.team.back.dto.response.sales.DeleteSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.GetSalesPlanInfoResponseDto;
+import com.team.back.dto.response.sales.PutOrderInfoResponseDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
 
 public interface SalesService {
@@ -23,7 +24,7 @@ public interface SalesService {
 //------------------------------------------------------------
 
   // API: 수주 정보 등록 메서드 //
-  ResponseEntity<?> putOrderInfoInfo(Integer employeeCode, PutOrderInfoInfoRequestDto dto);
+  ResponseEntity<? super PutOrderInfoResponseDto> putOrderInfo(String employeeCode, PutOrderInfoRequestDto requestBody);
 
   // API: 수주 정보 삭제 메서드 //
 

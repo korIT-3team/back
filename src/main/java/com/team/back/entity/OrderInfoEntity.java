@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.team.back.dto.request.sales.PutOrderInfoInfoRequestDto;
+import com.team.back.dto.request.sales.PutOrderInfoRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,7 +37,7 @@ public class OrderInfoEntity {
   private double orderPrice;
   private double orderTotalPrice;
 
-  public OrderInfoEntity(PutOrderInfoInfoRequestDto dto) {
+  public OrderInfoEntity(PutOrderInfoRequestDto dto) {
   this.orderCode = dto.getOrderCodeInfo();
   this.salesPlanCode = dto.getOrderInfoSalesPlanCode();
   this.companyCode = dto.getOrderInfoCompanyCode();
