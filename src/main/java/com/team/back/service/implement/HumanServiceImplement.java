@@ -17,14 +17,11 @@ import com.team.back.dto.response.human.GetIncentiveListResponseDto;
 import com.team.back.dto.response.human.HumanListResponseDto;
 import com.team.back.dto.response.human.IncentiveListResponseDto;
 import com.team.back.dto.response.human.PutHumanDetailInfoResponseDto;
-import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
 import com.team.back.entity.EmployeeViewEntity;
-import com.team.back.entity.IncentiveEntity;
 import com.team.back.entity.SystemEmployeeEntity;
 import com.team.back.entity.UserDefineDetailEntity;
 import com.team.back.entity.resultSets.IncentiveListResultSet;
-import com.team.back.repository.EmployeeViewRepository;
 import com.team.back.repository.HumanDetailRepository;
 import com.team.back.repository.HumanViewReposiroty;
 import com.team.back.repository.IncentiveRepository;
@@ -43,7 +40,6 @@ public class HumanServiceImplement implements HumanService {
      private final UserViewRepository userViewRepository;
      private final UserDefineDetailRepository employmentTypeReposiroty;
      private final HumanDetailRepository humanDetailRepository;
-     private final EmployeeViewRepository employeeViewRepository;
      private final HumanViewReposiroty humanViewReposiroty;
      private final IncentiveRepository incentiveRepository;
 
@@ -136,7 +132,7 @@ public class HumanServiceImplement implements HumanService {
 
 
     @Override
-    public ResponseEntity<? super GetIncentiveListResponseDto> getIncentiveList(String employeeCode ,Integer incentiveEmployeeCode, Integer incentiveCategory) {
+    public ResponseEntity<? super GetIncentiveListResponseDto> getIncentiveList(String employeeCode ,String incentiveEmployeeCode, String incentiveCategory) {
 
       Integer emCode = Integer.parseInt(employeeCode);
       List<IncentiveListResponseDto> incentiveList = null;
@@ -151,7 +147,7 @@ public class HumanServiceImplement implements HumanService {
         if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutDepartmentInfoResponseDto.noPermission();
 
         // description: 조회조건에 맞는 데이터 조회 //
-        List<IncentiveListResultSet> incentiveEntities = incentiveRepository.getIncentiveList(Integer.toString(incentiveEmployeeCode), Integer.toString(incentiveCategory));
+        List<IncentiveListResultSet> incentiveEntities = incentiveRepository.getIncentiveList(incentiveEmployeeCode, incentiveCategory);
 
         incentiveList = IncentiveListResponseDto.copyList(incentiveEntities);
 
