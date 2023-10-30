@@ -23,7 +23,7 @@ public interface HumanService {
      // API : 인사정보등록 - (사원)인적정보 저장 메서드 //
      ResponseEntity<? super PutHumanDetailInfoResponseDto> putHumanDetailInfo(String employeeCode, PutHumanDetailInfoRequestDto requestBody);
      // API : 급/상여정보등록 - 급/상여 리스트 불러오기 메서드 //
-     ResponseEntity<? super GetIncentiveListResponseDto> getIncentiveList(String employeeCode, Integer incentiveEmployeeCode, Integer incentiveCategory);
+     ResponseEntity<? super GetIncentiveListResponseDto> getIncentiveList(String employeeCode, String incentiveEmployeeCode, String incentiveCategory);
      // API : 급/상여정보등록 - 사원 코드도움 불러오기 메서드 //
      ResponseEntity<? super GetHumanListResponseDto> getIncentiveEmployeeList();
 }

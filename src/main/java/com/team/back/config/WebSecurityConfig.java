@@ -40,11 +40,11 @@ public class WebSecurityConfig {
             .httpBasic().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
-            .antMatchers("/", "/auth/**", "/system/**", "/accounting/**", "/sales/**", "/file/**", "/searchView/**", "/detail-code/**", "/human/**").permitAll()
+            .antMatchers("/", "/auth/**", "/system/**", "/accounting/**", "/sales/**", "/file/**", "/searchView/**", "/detail-code/**").permitAll()
             .anyRequest().authenticated().and()
             .oauth2Login()
             .redirectionEndpoint().baseUri("/auth/callback/kakao").and()
-            .authorizationEndpoint().baseUri("/auth/social").and()
+            .authorizationEndpoint().baseUri("/auth/social").and()  
             .userInfoEndpoint().userService(oAuth2UserService).and()
             .successHandler(oAuth2SuccessHandler);
 		

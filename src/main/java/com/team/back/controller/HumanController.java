@@ -70,11 +70,11 @@ public class HumanController {
   }
 
   //! 급/상여정보등록
-  @GetMapping("/incentive/{incentiveEmployeeCode}/{incentiveCategory}")
+  @GetMapping(value= {"/incentive/{humanEmployeeCode}/{humanIncentiveCategory}",  "/incentive"})
   public ResponseEntity<? super GetIncentiveListResponseDto> getIncentiveList (
     @AuthenticationPrincipal String employeeCode,
-    @PathVariable(value="incentiveEmployeeCode", required = false) Integer incentiveEmployeeCode,
-    @PathVariable(value="incentiveCategory", required = false) Integer incentiveCategory
+    @PathVariable(value="humanEmployeeCode", required = false) String incentiveEmployeeCode,
+    @PathVariable(value="humanIncentiveCategory", required = false) String incentiveCategory
   ) {
     ResponseEntity<? super GetIncentiveListResponseDto> response = humanService.getIncentiveList(employeeCode, incentiveEmployeeCode, incentiveCategory);
     return response;
