@@ -21,20 +21,22 @@ public interface SalesPlanRepository extends JpaRepository<SalesPlanEntity, Inte
       "SELECT ROW_NUMBER() OVER(ORDER BY sales_plan_code) AS no, " +
       "sales_plan_code AS salesPlanCode, " +
       "project_name AS projectName, " +
-      "department_code AS departmentCode, " +
-      "employee_code AS employeeCode, " +
-      "company_code AS companyCode, " +
-      "plan_date AS plan_date, " +
+      "plan_date AS planDate, " +
       "product_code AS productCode, " +
+      "product_name AS productName, " +
       "plan_quantity AS planQuantity, " +
-      "exchange_rate_code AS exchangeRateCode, " +
-      "exchange_rate AS exchangeRate, " +
       "expect_price AS expectPrice, " +
       "expect_total_price AS expectTotalPrice, " +
-      "expect_korean_price AS expectKoreanPrice " +
+      "employee_code AS employeeCode, " +
+      "E.employee_name AS employeeName " +
       "FROM sales_plan as SP" +
+      "LEFT OUTER JOIN product AS P ON P.product_code = SP.product_code " +
+      "LEFT OUTER JOIN product AS P ON P.product_name = SP.product_name " +
+      "LEFT OUTER JOIN employee AS E ON E.employee_code = SP.employee_code " +
+      "WHERE E.employee_code != 0 " +
+      "AND project_name LIKE %?1% " +
       "ORDER BY sales_plan_code ",
       nativeQuery=true
   )
-  List<SalesPlanListResultSet> getSalesPlanList(Integer salesPlanCode);
+  List<SalesPlanListResultSet> getSalesPlanList(String projectName);
 }
