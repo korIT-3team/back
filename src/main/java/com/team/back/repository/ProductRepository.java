@@ -22,7 +22,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
     "product_code AS productCode, " +
     "procurement_category AS procurementCategory, " +
     "product_name AS productName, " +
-    "company_code AS companyCode, " +
     "product_price AS productPrice " +
     "FROM product AS P " +
     "WHERE product_name LIKE %?1% " +

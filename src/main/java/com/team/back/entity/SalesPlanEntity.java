@@ -22,35 +22,21 @@ public class SalesPlanEntity {
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int salesPlanCode;
   private String projectName;
-  private int employeeCode;
-  private int departmentCode;
-  private int companyCode;
-  private String planDate;
   private int productCode;
-  private String productName;
+  private String planDate;
   private int planQuantity;
-  private int exchangeRateCode;
-  private double exchangeRate;
   private double expectPrice;
   private double expectTotalPrice;
-  private double expectKoreanPrice;
+  private int employeeCode;
 
   public SalesPlanEntity(PutSalesPlanInfoRequestDto dto) {
     this.salesPlanCode = dto.getSalesPlanCodeInfo();
     this.projectName = dto.getSalesPlanProjectName();
-    this.employeeCode = dto.getSalesPlanEmployeeCodeInfo();
-    this.departmentCode = dto.getSalesPlanDepartmentCodeInfo();
-    this.companyCode = dto.getSalesPlanCompanyCodeInfo();
     this.planDate = dto.getSalesPlanDate();
     this.productCode = dto.getSalesPlanProductCodeInfo();
-    this.productName = dto.getSalesPlanProductNameInfo();
     this.planQuantity = dto.getSalesPlanQuantity();
-    this.exchangeRateCode = dto.getSalesPlanExchangeRateCode();
-    this.exchangeRate = dto.getSalesPlanExchangeRate();
     this.expectPrice = dto.getSalesPlanExpectPrice();
     this.expectTotalPrice = dto.getSalesPlanExpectTotalPrice();
-    this.expectKoreanPrice = dto.getSalesPlanExpectKoreanPrice();
+    this.employeeCode = dto.getSalesPlanEmployeeCodeInfo();
   }
-
-  
 }
