@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,11 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.team.back.dto.request.human.GetHumanDetailRequestDto;
 import com.team.back.dto.request.human.PutHumanDetailInfoRequestDto;
+import com.team.back.dto.request.human.PutIncentiveInfoRequestDto;
+import com.team.back.dto.response.human.DeleteIncentiveInfoResponseDto;
 import com.team.back.dto.response.human.GetEmploymentTypeListResponseDto;
 import com.team.back.dto.response.human.GetHumanDetailInfoResponseDto;
 import com.team.back.dto.response.human.GetHumanListResponseDto;
 import com.team.back.dto.response.human.GetIncentiveListResponseDto;
 import com.team.back.dto.response.human.PutHumanDetailInfoResponseDto;
+import com.team.back.dto.response.human.PutIncentiveInfoResponseDto;
 import com.team.back.service.HumanService;
 
 import lombok.RequiredArgsConstructor;
@@ -86,5 +90,25 @@ public class HumanController {
     ResponseEntity<? super GetHumanListResponseDto> response = humanService.getIncentiveEmployeeList();
     return response;
   }
+
+  // API : 급/상여 정보 등록 메서드 //
+  @PutMapping("/incentive")
+  public ResponseEntity<? super PutIncentiveInfoResponseDto> putDepartmentInfo (
+       @AuthenticationPrincipal String employeeCode,
+       @RequestBody @Valid PutIncentiveInfoRequestDto requestBody
+  ) {
+       ResponseEntity<? super PutIncentiveInfoResponseDto> response = humanService.putIncentiveInfo(employeeCode, requestBody);
+       return response;
+  }
+  
+  // API : 급/상여 정보 삭제 메서드 //
+  @DeleteMapping("/incentive/{incentiveCode}")
+  public ResponseEntity<? super DeleteIncentiveInfoResponseDto> deleteSystemEmployeeInfo(
+       @AuthenticationPrincipal String employeeCode,
+       @PathVariable(value="incentiveCode", required = false) Integer deleteIncentiveCode
+  ) {
+       ResponseEntity<? super DeleteIncentiveInfoResponseDto> responese = humanService.deleteIncentiveInfo(employeeCode, deleteIncentiveCode);
+       return responese;
+  }   
   
 }

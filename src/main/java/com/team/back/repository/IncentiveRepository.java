@@ -11,6 +11,8 @@ import com.team.back.entity.resultSets.IncentiveListResultSet;
 
 @Repository
 public interface IncentiveRepository extends JpaRepository<IncentiveEntity, Integer> {
+
+      IncentiveEntity findByIncentiveCode(Integer incentiveCode);
        @Query(
           value=
           "SELECT ROW_NUMBER() OVER(ORDER BY I.incentive_code) AS no, " +

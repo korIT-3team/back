@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.team.back.common.constants.DepartmentCode;
 import com.team.back.dto.request.human.GetHumanDetailRequestDto;
 import com.team.back.dto.request.human.PutHumanDetailInfoRequestDto;
+import com.team.back.dto.request.human.PutIncentiveInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
+import com.team.back.dto.response.human.DeleteIncentiveInfoResponseDto;
 import com.team.back.dto.response.human.EmploymentTypeResponseDto;
 import com.team.back.dto.response.human.GetEmploymentTypeListResponseDto;
 import com.team.back.dto.response.human.GetHumanDetailInfoResponseDto;
@@ -17,8 +19,12 @@ import com.team.back.dto.response.human.GetIncentiveListResponseDto;
 import com.team.back.dto.response.human.HumanListResponseDto;
 import com.team.back.dto.response.human.IncentiveListResponseDto;
 import com.team.back.dto.response.human.PutHumanDetailInfoResponseDto;
+import com.team.back.dto.response.human.PutIncentiveInfoResponseDto;
+import com.team.back.dto.response.system.DeleteSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.system.PutDepartmentInfoResponseDto;
+import com.team.back.entity.DepartmentEntity;
 import com.team.back.entity.EmployeeViewEntity;
+import com.team.back.entity.IncentiveEntity;
 import com.team.back.entity.SystemEmployeeEntity;
 import com.team.back.entity.UserDefineDetailEntity;
 import com.team.back.entity.resultSets.IncentiveListResultSet;
@@ -158,6 +164,51 @@ public class HumanServiceImplement implements HumanService {
       return GetIncentiveListResponseDto.success(incentiveList);
     }  
 
+    @Override
+    public ResponseEntity<? super PutIncentiveInfoResponseDto> putIncentiveInfo(String employeeCode, PutIncentiveInfoRequestDto dto) {
+      Integer emCode = Integer.parseInt(employeeCode);
+
+      try {
+
+        // description: 존재하는 사원번호인지 확인 //
+        boolean hasUser = userRepository.existsByEmployeeCode(emCode);
+        if(!hasUser) return PutIncentiveInfoResponseDto.noExistedUser();
+        // description:  권한 //
+        Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
+        if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutIncentiveInfoResponseDto.noPermission();
+        // description:  Entity 생성 //
+        IncentiveEntity incentiveEntity = new IncentiveEntity(dto);
+        
+        // description:  DB에 저장 //
+        incentiveRepository.save(incentiveEntity);   
+
+      } catch (Exception exception) {
+        exception.printStackTrace();
+        return ResponseDto.databaseError();
+      }
+      return PutIncentiveInfoResponseDto.success();
+
+    }
+
+
+    @Override
+    public ResponseEntity<? super DeleteIncentiveInfoResponseDto> deleteIncentiveInfo(String employeeCode, Integer deleteIncentiveCode) {
+      Integer emCode = Integer.parseInt(employeeCode);
+      try {
+            // description: 존재하는 유저인지 확인 //
+            boolean hasUser = userRepository.existsByEmployeeCode(emCode);
+            if (!hasUser) return DeleteSystemEmployeeInfoResponseDto.noExistedUser();
+            // description: 존재하는 급/상여코드인지 확인 //
+            IncentiveEntity incentiveEntity = incentiveRepository.findByIncentiveCode(deleteIncentiveCode);
+            if (incentiveEntity == null) return DeleteIncentiveInfoResponseDto.noExistedIncentiveInfo();
+            // description: 급/상여 정보 삭제 //
+            incentiveRepository.delete(incentiveEntity);
+      } catch (Exception exception) {
+           exception.printStackTrace();
+           return ResponseDto.databaseError();
+      }
+      return DeleteIncentiveInfoResponseDto.success();
+    }
 
     @Override
     public ResponseEntity<? super GetHumanListResponseDto> getIncentiveEmployeeList() {
