@@ -87,7 +87,8 @@ public class UserServiceImplement implements UserService {
             
             // description : id가 존재하지않는다면 save
             if(!existsById) oAuth2Repository.save(oAuth2UserEntity);
-            // todo 존재하는 계정이면 사원번호랑 매칭이 되는지 확인을 해봐야지. 만약 다른 사원번호로 로그인이 된거면 연동된 카카오-ERP 계정이 아닙니다.(front) 알람이 뜨게
+            //! 존재하는 계정 : 사원번호와 매칭 확인
+            //! 다른 사원번호 로그인 시 연동된 카카오-ERP 계정이 아닙니다. 알람
             else if(existsById){
                 // description : 존재하는 id라면 매칭되는 사원번호를 가져와서 로그인하는 사람의 employeeCode와 매칭되는지 확인
                 OAuth2UserEntity oAuth2UserEntity2 = oAuth2Repository.findById(id);
