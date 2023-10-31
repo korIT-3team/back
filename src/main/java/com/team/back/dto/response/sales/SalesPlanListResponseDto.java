@@ -15,37 +15,27 @@ public class SalesPlanListResponseDto {
   private int no;
   private int salesPlanCode;
   private String projectName;
-  private int departmentCode;
-  private String departmentName;
-  private int employeeCode;
-  private String employeeName;
-  private int companyCode;
   private String planDate;
   private int productCode;
   private String productName;
-  private String unit;
   private int planQuantity;
-  private int exchangeRateCode;
-  private double exchangeRate;
   private double expectPrice;
   private double expectTotalPrice;
-  private double expectKoreanPrice;
+  private int employeeCode;
+  private String employeeName;
 
   public SalesPlanListResponseDto (SalesPlanListResultSet resultSet) {
     this.no = resultSet.getNo();
     this.salesPlanCode = resultSet.getSalesPlanCode();
     this.projectName = resultSet.getProjectName();
-    this.employeeCode = resultSet.getEmployeeCode();
-    this.departmentCode = resultSet.getDepartmentCode();
-    this.companyCode = resultSet.getCompanyCode();
     this.planDate = resultSet.getPlanDate();
     this.productCode = resultSet.getProductCode();
+    this.productName = resultSet.getProductName();
     this.planQuantity = resultSet.getPlanQuantity();
-    this.exchangeRateCode = resultSet.getExchangeRateCode();
-    this.exchangeRate = resultSet.getExchangeRate();
     this.expectPrice = resultSet.getExpectPrice();
     this.expectTotalPrice = resultSet.getExpectTotalPrice();
-    this.expectKoreanPrice = resultSet.getExpectKoreanPrice();
+    this.employeeCode = resultSet.getEmployeeCode();
+    this.employeeName = resultSet.getEmployeeName();
   }
 
   public static List<SalesPlanListResponseDto> copyList(List<SalesPlanListResultSet> resultSets) {
