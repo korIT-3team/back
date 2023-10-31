@@ -33,14 +33,14 @@ public class WebSecurityConfig {
       
       @Bean
 	protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
-
+        //! todo : /auth, /accounting /sales /system 지우고, API에 토큰 필수
 		httpSecurity
             .cors().and()
             .csrf().disable()
             .httpBasic().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
-            .antMatchers("/", "/auth/**", "/system/**", "/accounting/**", "/sales/**", "/file/**", "/searchView/**", "/detail-code/**").permitAll()
+            .antMatchers("/", "/auth/**", "/system/**", "/accounting/**", "/file/**", "/searchView/**", "/detail-code/**").permitAll()
             .anyRequest().authenticated().and()
             .oauth2Login()
             .redirectionEndpoint().baseUri("/auth/callback/kakao").and()

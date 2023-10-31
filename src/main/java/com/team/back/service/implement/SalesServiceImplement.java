@@ -1,5 +1,8 @@
 package com.team.back.service.implement;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,11 @@ import com.team.back.dto.response.sales.DeleteSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.GetSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.PutOrderInfoResponseDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
+import com.team.back.dto.response.system.PutCompanyInfoResponseDto;
+import com.team.back.entity.CompanyEntity;
+import com.team.back.entity.OrderInfoEntity;
 import com.team.back.entity.SalesPlanEntity;
+import com.team.back.repository.OrderInfoRepository;
 import com.team.back.repository.SalesPlanRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.repository.UserViewRepository;
@@ -27,6 +34,7 @@ public class SalesServiceImplement implements SalesService {
   private final SalesPlanRepository salesPlanRepository;
   private final UserRepository userRepository;
   private final UserViewRepository userViewRepository;
+  private final OrderInfoRepository orderInfoRepository;
   
   @Override
   public ResponseEntity<? super PutSalesPlanInfoResponseDto> putSalesPlanInfo(String employeeCode, PutSalesPlanInfoRequestDto dto) {
@@ -69,9 +77,26 @@ public class SalesServiceImplement implements SalesService {
 
   @Override
   public ResponseEntity<? super PutOrderInfoResponseDto> putOrderInfo(String employeeCode, PutOrderInfoRequestDto requestBody) {
-    // todo 
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'putOrderInfo'");
+    Integer emCode = Integer.parseInt(employeeCode);
+    try{
+      // description: 존재하는 사원번호인지 확인 //
+      boolean hasUser = userRepository.existsByEmployeeCode(emCode);
+      if(!hasUser) return PutOrderInfoResponseDto.noExistedUser();
+      // description: 권한 //
+      Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
+      if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutOrderInfoResponseDto.noPermission();
+
+      // description: entity 생성 //
+      OrderInfoEntity orderInfoEntity = new OrderInfoEntity(requestBody);
+      
+      // description: 데이터베이스에 저장 //
+      orderInfoRepository.save(orderInfoEntity);
+    } catch(Exception exception){
+          exception.printStackTrace();
+          return ResponseDto.databaseError();
+    }
+
+    return PutOrderInfoResponseDto.success();
   }
 
   @Override

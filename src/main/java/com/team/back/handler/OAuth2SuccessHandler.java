@@ -29,7 +29,5 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
           String token = jwtProvider.create(id);
 
           response.sendRedirect("http://localhost:3000/oauth2/" + token);
-          //? todo : 이건 왜 여기로보낼까
-
      }
 }
