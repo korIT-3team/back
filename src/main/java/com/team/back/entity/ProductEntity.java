@@ -21,14 +21,12 @@ public class ProductEntity {
 
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private int companyCode;
   private int productCode;
   private String productName;
   private int procurementCategory;
   private double productPrice;
 
   public ProductEntity(PutProductInfoRequestDto dto) {
-    this.companyCode = 1;
     this.productCode = dto.getProductCodeInfo();
     this.productName = dto.getProductName();
     this.procurementCategory = dto.getProcurementCategory();

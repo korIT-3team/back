@@ -17,8 +17,11 @@ import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
 import com.team.back.dto.response.sales.DeleteSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.GetSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
+import com.team.back.dto.response.system.GetProductInfoResponseDto;
+import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseDto;
 import com.team.back.dto.response.sales.PutOrderInfoResponseDto;
 import com.team.back.service.SalesService;
+import com.team.back.service.SystemManageService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 public class SalesController {
 
   private final SalesService salesService;
+  private final SystemManageService systemManageService;
   
   // API: salesPlan 정보 등록 메서드 //
   @PutMapping("/sales-plan")
@@ -42,7 +46,7 @@ public class SalesController {
   // API: salesPlan 정보 삭제 메서드 //
   @DeleteMapping("/sales-plan/{salesPlanCode}")
   public ResponseEntity<? super DeleteSalesPlanInfoResponseDto> deleteSalesPlanInfo(
-    @AuthenticationPrincipal Integer employeeCode,
+    @AuthenticationPrincipal String employeeCode,
     @PathVariable(value="salesPlanCode", required = false) Integer deleteSalesPlanCode
   ) {
     ResponseEntity<? super DeleteSalesPlanInfoResponseDto> response = salesService.deleteSalesPlanInfo(employeeCode, deleteSalesPlanCode);
@@ -50,14 +54,32 @@ public class SalesController {
   }
 
   // API: search salesPlan 정보 불러오기 메서드 //
-  @GetMapping(value={"/sales-plan/{salesPlanCode}", "/sales-plan/{projectName}", "/sales-plan/{planDate}" })
+  @GetMapping(value={"/sales-plan/{projectName}", "/sales-plan"})
   public ResponseEntity<? super GetSalesPlanInfoResponseDto> getSalesPlanInfo(
-    @AuthenticationPrincipal Integer employeeCode,
-    @PathVariable(value="salesPlanCode", required=false) Integer salesPlanCode,
-    @PathVariable(value="projectName", required=false) String projectName,
-    @PathVariable(value="planDate", required=false) String planDate
+    @AuthenticationPrincipal String employeeCode,
+    @PathVariable(value="projectName", required=false) String projectName
   ) {
-    ResponseEntity<? super GetSalesPlanInfoResponseDto> response = salesService.getSalesPlanInfo(employeeCode, salesPlanCode, projectName, planDate);
+    ResponseEntity<? super GetSalesPlanInfoResponseDto> response = salesService.getSalesPlanInfo(employeeCode, projectName);
+    return response;
+  }
+
+  // API: salesPlan - 전체 품목 정보 불러오기 메서드 //
+  @GetMapping(value={"/sales-plan/product"})
+  public ResponseEntity<? super GetProductInfoResponseDto> getSalesPlanProductInfo(
+    @AuthenticationPrincipal String employeeCode,
+    @PathVariable(value="", required = false) String productName
+  ) {
+    ResponseEntity<? super GetProductInfoResponseDto> response = systemManageService.getProductInfo(employeeCode, productName);
+    return response;
+  }
+
+  // API: salesPlan - 전체 사원 정보 불러오기 메서드 //
+  @GetMapping(value={"/sales-plan/employee"})
+  public ResponseEntity<? super GetSystemEmployeeInfoResponseDto> getSalesPlanEmployeeInfo(
+    @AuthenticationPrincipal String employeeCode,
+    @PathVariable(value="", required = false) String systemEmployeeName
+  ) {
+    ResponseEntity<? super GetSystemEmployeeInfoResponseDto> response = systemManageService.getSystemEmployeeInfo(employeeCode, systemEmployeeName);
     return response;
   }
 

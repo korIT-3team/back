@@ -18,15 +18,6 @@ public class PutSalesPlanInfoRequestDto {
     @NotBlank
     private String salesPlanProjectName;
 
-    @NotNull
-    private Integer salesPlanDepartmentCodeInfo;
-    
-    @NotNull
-    private Integer salesPlanEmployeeCodeInfo;
-    
-    @NotNull
-    private Integer salesPlanCompanyCodeInfo;
-    
     @NotBlank
     private String salesPlanDate;
 
@@ -39,17 +30,13 @@ public class PutSalesPlanInfoRequestDto {
     @NotBlank
     private Integer salesPlanQuantity;
 
-    @NotNull
-    private Integer salesPlanExchangeRateCode;
-
-    private Double salesPlanExchangeRate;
-
     @NotBlank
     private Double salesPlanExpectPrice;
 
     private Double salesPlanExpectTotalPrice;
     
-    private Double salesPlanExpectKoreanPrice;
+    @NotNull
+    private Integer salesPlanEmployeeCodeInfo;
 
 
 }
