@@ -6,12 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.team.back.common.constants.DepartmentCode;
-import com.team.back.dto.request.sales.PutOrderInfoInfoRequestDto;
+import com.team.back.dto.request.sales.PutOrderInfoRequestDto;
 import com.team.back.dto.request.sales.PutReleaseInfoRequestDto;
 import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
 import com.team.back.dto.response.ResponseDto;
 import com.team.back.dto.response.sales.DeleteSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.GetSalesPlanInfoResponseDto;
+import com.team.back.dto.response.sales.PutOrderInfoResponseDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.SalesPlanListResponseDto;
 import com.team.back.entity.SalesPlanEntity;
@@ -53,7 +54,7 @@ public class SalesServiceImplement implements SalesService {
       if(!hasUser) return PutSalesPlanInfoResponseDto.noExistedUser();
 
       // description: 권한 //
-      Integer dpCode = userViewRepository.getUserDepartMentCode(emCode);
+      Integer dpCode = userViewRepository.getUserDepartmentCode(emCode);
       if(!DepartmentCode.SYSTEM.equals(dpCode)) return PutSalesPlanInfoResponseDto.noPermission();
 
       // description: entity 생성 //
@@ -117,12 +118,6 @@ public class SalesServiceImplement implements SalesService {
   }
 
   @Override
-  public ResponseEntity<?> putOrderInfoInfo(Integer employeeCode, PutOrderInfoInfoRequestDto dto) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'putOrderInfoInfo'");
-  }
-
-  @Override
   public ResponseEntity<?> putReleaseInfoInfo(Integer employeeCode, PutReleaseInfoRequestDto dto) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'putReleaseInfoInfo'");
@@ -138,6 +133,13 @@ public class SalesServiceImplement implements SalesService {
   public ResponseEntity<?> getReleaseInfoInfo(Integer employeeCode, Integer releaseCode, String releaseDate) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'getReleaseInfoInfo'");
+  }
+
+  @Override
+  public ResponseEntity<? super PutOrderInfoResponseDto> putOrderInfo(String employeeCode,
+      PutOrderInfoRequestDto requestBody) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'putOrderInfo'");
   }
 
   

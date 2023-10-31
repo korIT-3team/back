@@ -16,6 +16,7 @@ import com.team.back.dto.request.human.PutHumanDetailInfoRequestDto;
 import com.team.back.dto.response.human.GetEmploymentTypeListResponseDto;
 import com.team.back.dto.response.human.GetHumanDetailInfoResponseDto;
 import com.team.back.dto.response.human.GetHumanListResponseDto;
+import com.team.back.dto.response.human.GetIncentiveListResponseDto;
 import com.team.back.dto.response.human.PutHumanDetailInfoResponseDto;
 import com.team.back.service.HumanService;
 
@@ -32,7 +33,7 @@ public class HumanController {
   // API : 사원 리스트 불러오기 메서드 //
   @GetMapping(value={"/employee-info-detail/{departmentCode}/{employeeCode}/{employmentType}", "employee-info-detail"})
   public ResponseEntity<? super GetHumanListResponseDto> getHumanList(
-    @AuthenticationPrincipal Integer employeeCode,
+    @AuthenticationPrincipal String employeeCode,
     @PathVariable(value="departmentCode", required = false) Integer departmentCode,
     @PathVariable(value="employeeCode", required = false) Integer humanEmployeeCode,
     @PathVariable(value="employmentType", required = false)  Integer employmentType
@@ -61,11 +62,29 @@ public class HumanController {
   // API : 사원Detail정보 등록 메서드 //
   @PutMapping("/employee-info-detail")
   public ResponseEntity<? super PutHumanDetailInfoResponseDto> putHumanDetailInfo (
-       @AuthenticationPrincipal Integer employeeCode,
+       @AuthenticationPrincipal String employeeCode,
        @RequestBody @Valid PutHumanDetailInfoRequestDto requestBody
   ) {
        ResponseEntity<? super PutHumanDetailInfoResponseDto> response = humanService.putHumanDetailInfo(employeeCode, requestBody);
        return response;
+  }
+
+  //! 급/상여정보등록
+  @GetMapping(value= {"/incentive/{humanEmployeeCode}/{humanIncentiveCategory}",  "/incentive"})
+  public ResponseEntity<? super GetIncentiveListResponseDto> getIncentiveList (
+    @AuthenticationPrincipal String employeeCode,
+    @PathVariable(value="humanEmployeeCode", required = false) String incentiveEmployeeCode,
+    @PathVariable(value="humanIncentiveCategory", required = false) String incentiveCategory
+  ) {
+    ResponseEntity<? super GetIncentiveListResponseDto> response = humanService.getIncentiveList(employeeCode, incentiveEmployeeCode, incentiveCategory);
+    return response;
+  }
+
+  @GetMapping("/incentive/employee")
+  public ResponseEntity<? super GetHumanListResponseDto> getIncentiveEmployeeList (
+  ) {
+    ResponseEntity<? super GetHumanListResponseDto> response = humanService.getIncentiveEmployeeList();
+    return response;
   }
   
 }

@@ -12,14 +12,14 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class PutOrderInfoInfoResponseDto extends ResponseDto {
+public class PutOrderInfoResponseDto extends ResponseDto {
 
-  private PutOrderInfoInfoResponseDto (String code, String message) {
+  private PutOrderInfoResponseDto (String code, String message) {
     super(code, message);
   }
 
-  public static ResponseEntity<PutOrderInfoInfoResponseDto> success() {
-    PutOrderInfoInfoResponseDto result = new PutOrderInfoInfoResponseDto(ResponseCode.Success, ResponseMessage.Success);
+  public static ResponseEntity<PutOrderInfoResponseDto> success() {
+    PutOrderInfoResponseDto result = new PutOrderInfoResponseDto(ResponseCode.Success, ResponseMessage.Success);
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
 

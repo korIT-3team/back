@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.team.back.dto.request.sales.PutOrderInfoRequestDto;
 import com.team.back.dto.request.sales.PutSalesPlanInfoRequestDto;
 import com.team.back.dto.response.sales.DeleteSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.GetSalesPlanInfoResponseDto;
 import com.team.back.dto.response.sales.PutSalesPlanInfoResponseDto;
 import com.team.back.dto.response.system.GetProductInfoResponseDto;
 import com.team.back.dto.response.system.Employee.GetSystemEmployeeInfoResponseDto;
+import com.team.back.dto.response.sales.PutOrderInfoResponseDto;
 import com.team.back.service.SalesService;
 import com.team.back.service.SystemManageService;
 
@@ -78,6 +80,16 @@ public class SalesController {
     @PathVariable(value="", required = false) String systemEmployeeName
   ) {
     ResponseEntity<? super GetSystemEmployeeInfoResponseDto> response = systemManageService.getSystemEmployeeInfo(employeeCode, systemEmployeeName);
+    return response;
+  }
+
+  // API: 수주 윗줄 등록 메서드 //
+  @PutMapping("/order-info")
+  public ResponseEntity<? super PutOrderInfoResponseDto> putOrderInfo (
+    @AuthenticationPrincipal String employeeCode,
+    @RequestBody @Valid PutOrderInfoRequestDto requestBody
+  ) {
+    ResponseEntity<? super PutOrderInfoResponseDto> response = salesService.putOrderInfo(employeeCode, requestBody);
     return response;
   }
 
